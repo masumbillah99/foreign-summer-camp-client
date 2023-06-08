@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import { toast, ToastContainer } from "react-toastify";
+import logo from "../../../assets/logo.png";
 
 const Navbar = () => {
   const { user, logOutUser } = useAuth();
@@ -114,7 +115,10 @@ const Navbar = () => {
             {navItems}
           </ul>
         </div>
-        <h3 className="text-3xl font-bold cursor-pointer">Summer Camp</h3>
+        <div className="flex items-center gap-4 cursor-pointer">
+          <img className="w-20 text-white pl-10" src={logo} alt="" />
+          <h3 className="text-2xl font-bold">Summer Camp School</h3>
+        </div>
       </div>
       <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal px-10 text-lg"> {navItems}</ul>
