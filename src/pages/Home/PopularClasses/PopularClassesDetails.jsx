@@ -1,18 +1,17 @@
 import { FaUsers } from "react-icons/fa";
 
 const PopularClassesDetails = ({ classDetails }) => {
-  const { id, image, instructor_name, course_name, seats, price } =
-    classDetails;
+  const { image, instructor_name, course_name, seats, price } = classDetails;
 
   return (
-    <div>
+    <>
       <div className="card w-96 bg-base-100 shadow-xl">
         <figure className="p-5">
           <img src={image} alt="image" />
         </figure>
         <div className="card-body">
           <h2 className="card-title text-2xl">{course_name}</h2>
-          <h1 className="text-lg font-semibold">
+          <h1 className="text-md font-semibold">
             Instructor: {instructor_name}
           </h1>
           <p>
@@ -30,7 +29,7 @@ const PopularClassesDetails = ({ classDetails }) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,18 +1,24 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import PopularClassesDetails from "./PopularClassesDetails";
 
 const PopularClasses = () => {
-  const [classes, setClasses] = useState();
+  const [classes, setClasses] = useState([]);
 
-  fetch("popular-classes.json")
-    .then((res) => res.json())
-    .then((data) => {
-      setClasses(data);
-    });
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/popularClasses`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setClasses(data);
+      });
+  }, []);
 
   return (
     <div className="my-20">
-      <h5 className="text-xl font-bold text-blue-500 underline">Popular Classes</h5>
+      <h5 className="text-xl font-bold text-blue-500 underline">
+        Popular Classes
+      </h5>
       <h2 className="text-4xl font-bold mt-3 mb-5">
         Choose Your Favorite Language
       </h2>
@@ -20,7 +26,7 @@ const PopularClasses = () => {
         {classes &&
           classes?.map((classDetails) => (
             <PopularClassesDetails
-              key={classDetails.id}
+              key={classDetails._id}
               classDetails={classDetails}
             />
           ))}

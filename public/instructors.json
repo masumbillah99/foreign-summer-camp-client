@@ -1,0 +1,72 @@
+[
+    {
+        "name": "Nafees Salim",
+        "image": "https://media.licdn.com/dms/image/D5603AQG1txrvar9ofw/profile-displayphoto-shrink_200_200/0/1669582476428?e=1691625600&v=beta&t=QcevhD7fERz9gxx_qSPr6-ov5NytF8FWJu_o3EFHOHk",
+        "email": "johnsmith@example.com",
+        "num_taken_classes": 10,
+        "taken_classes": [
+            "Beginner French",
+            "Advanced English"
+        ]
+    },
+    {
+        "name": "HM Nayeem",
+        "image": "https://media.licdn.com/dms/image/C5603AQECb8HFBDNXRw/profile-displayphoto-shrink_100_100/0/1641607695089?e=1691625600&v=beta&t=OXo2lsg6W7-yPaFOQPTg2OnMO2uTAxuVpxmxvgGCwP8",
+        "email": "mariagarcia@example.com",
+        "num_taken_classes": 8,
+        "taken_classes": [
+            "Elementary Italian",
+            "Intermediate Spanish"
+        ]
+    },
+    {
+        "name": "Sumit Saha",
+        "image": "https://media.licdn.com/dms/image/D5603AQELBI92zPPCww/profile-displayphoto-shrink_100_100/0/1685482866420?e=1691625600&v=beta&t=9rNMzvwmij5Fdm21GO2162R4dgoY2j6TdMJWoRarD6g",
+        "email": "hiroshit@example.com",
+        "num_taken_classes": 12,
+        "taken_classes": [
+            "Advanced Japanese",
+            "Business Japanese"
+        ]
+    },
+    {
+        "name": "Shahrirar Shuvo",
+        "image": "https://media.licdn.com/dms/image/D5603AQE2NyfXJuT68A/profile-displayphoto-shrink_100_100/0/1675220185122?e=1691625600&v=beta&t=wSsN1URrr_i-sbqDR2sVT5xw8zZ2damQWk5cNvF4sPY",
+        "email": "sophiedubois@example.com",
+        "num_taken_classes": 5,
+        "taken_classes": [
+            "Beginner French",
+            "Intermediate French"
+        ]
+    },
+    {
+        "name": "Gias Uddin",
+        "image": "https://media.licdn.com/dms/image/D5635AQE81MjQ3zV1tA/profile-framedphoto-shrink_100_100/0/1685722726477?e=1686837600&v=beta&t=W0TfRpx-lqgj14Q5eKA5eYPpcqKHUjZSuPIjh7w_ITA",
+        "email": "carlosramirez@example.com",
+        "num_taken_classes": 7,
+        "taken_classes": [
+            "Beginner Spanish",
+            "Spanish Conversation"
+        ]
+    },
+    {
+        "name": "Jhankar Mahbub",
+        "image": "https://media.licdn.com/dms/image/D5603AQEOjP3ON2knRg/profile-displayphoto-shrink_100_100/0/1677507598430?e=1691625600&v=beta&t=_LVgpFp9utOgtZSgQn1lO61xkaugprnYtSyB7yy_KkQ",
+        "email": "yukinakamura@example.com",
+        "num_taken_classes": 9,
+        "taken_classes": [
+            "Japanese for Beginners",
+            "Japanese Culture"
+        ]
+    },
+    {
+        "name": "Anisul Islam",
+        "image": "https://media.licdn.com/dms/image/C4D03AQGTzy57tzyt0w/profile-displayphoto-shrink_100_100/0/1668029477683?e=1691625600&v=beta&t=T4Z3r2mVHXoJyFQLgD3nG8esHRAB-5-Xk1Obk0rylIM",
+        "email": "luisarossi@example.com",
+        "num_taken_classes": 6,
+        "taken_classes": [
+            "Italian Grammar",
+            "Italian Conversation"
+        ]
+    }
+]
