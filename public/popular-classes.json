@@ -1,0 +1,58 @@
+[
+    {
+        "id": 123,
+        "image": "https://templatekit.jegtheme.com/verbalizer/wp-content/uploads/sites/117/elementor/thumbs/positive-black-guy-attending-online-training-from-home-p9f5llzjullenmodxz18o84phr06nhlhaoblbdjes0.jpg",
+        "instructor_name": "John Smith",
+        "course_name": "Beginner French",
+        "seats": 20,
+        "price": 99.99
+    },
+    {
+        "id": 345,
+        "image": "https://templatekit.jegtheme.com/verbalizer/wp-content/uploads/sites/117/elementor/thumbs/happy-arab-guy-student-learning-foreign-language-online-e1625538616107-p9p4nvoqxmol78jslx9uctrijt2gluznhrou35mpao.jpg",
+        "instructor_name": "Maria Garcia",
+        "course_name": "Intermediate Spanish",
+        "seats": 15,
+        "price": 129.99
+    },
+    {
+        "id": 678,
+        "image": "https://templatekit.jegtheme.com/verbalizer/wp-content/uploads/sites/117/elementor/thumbs/student-using-laptop-having-online-class-with-teacher-pov-e1625538594703-p9p4nb0ar9wa3tdtyoc1tyzdhbwdwipk2xc5j2hd3k.jpg",
+        "instructor_name": "Hiroshi Tanaka",
+        "course_name": "Advanced Japanese",
+        "seats": 10,
+        "price": 149.99
+    },
+    {
+        "id": 910,
+        "image": "https://templatekit.jegtheme.com/verbalizer/wp-content/uploads/sites/117/elementor/thumbs/happy-arab-guy-student-learning-foreign-language-online-e1625538616107-p9p4nvoqxmol78jslx9uctrijt2gluznhrou35mpao.jpg",
+        "instructor_name": "Sophie Dubois",
+        "course_name": "Elementary French",
+        "seats": 25,
+        "price": 79.99
+    },
+    {
+        "id": 112,
+        "image": "https://templatekit.jegtheme.com/verbalizer/wp-content/uploads/sites/117/elementor/thumbs/positive-black-guy-attending-online-training-from-home-p9f5llzjullenmodxz18o84phr06nhlhaoblbdjes0.jpg",
+        "instructor_name": "Carlos Ramirez",
+        "course_name": "Spanish Conversation",
+        "seats": 18,
+        "price": 89.99
+    },
+    {
+        "id": 134,
+        "image": "https://templatekit.jegtheme.com/verbalizer/wp-content/uploads/sites/117/elementor/thumbs/happy-arab-guy-student-learning-foreign-language-online-e1625538616107-p9p4nvoqxmol78jslx9uctrijt2gluznhrou35mpao.jpg",
+        "instructor_name": "Yuki Nakamura",
+        "course_name": "Japanese for Travelers",
+        "seats": 12,
+        "price": 109.99
+    },
+    {
+        "id": 156,
+        "image": "https://templatekit.jegtheme.com/verbalizer/wp-content/uploads/sites/117/elementor/thumbs/positive-black-guy-attending-online-training-from-home-p9f5llzjullenmodxz18o84phr06nhlhaoblbdjes0.jpg",
+        "instructor_name": "Luisa Rossi",
+        "course_name": "Italian Grammar",
+        "seats": 15,
+        "price": 79.99
+    }
+]
