@@ -9,7 +9,6 @@ const PopularClasses = () => {
     fetch(`${import.meta.env.VITE_SERVER_URL}/popularClasses`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setClasses(data);
       });
   }, []);

@@ -1,17 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel&display=swap");
 
 /* css start here */
 :root {
-  --primary-font: 'Space Grotesk', sans-serif;
+  --primary-font: "Space Grotesk", sans-serif;
+  --logo-font: "Cinzel", serif;
 }
 
 body {
   font-family: var(--primary-font);
 }
 
-
-
+.logo-font {
+  font-family: var(--logo-font);
+}
 
 /* tailwind directives css */
 
