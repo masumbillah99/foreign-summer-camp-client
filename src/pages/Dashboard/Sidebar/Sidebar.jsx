@@ -21,7 +21,9 @@ const Sidebar = () => {
       {/* Small Screen Navbar */}
       <div className="bg-gray-100 text-gray-800 flex justify-between md:hidden">
         <div>
-          <div className="block cursor-pointer p-4 font-bold">avc</div>
+          <div className="block cursor-pointer p-4 font-bold">
+            Learn_Do School
+          </div>
         </div>
 
         <button
@@ -35,11 +37,11 @@ const Sidebar = () => {
       <div
         className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-orange-300 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
           isActive && "-translate-x-full"
-        }  md:translate-x-0  transition duration-200 ease-in-out`}
+        }  md:translate-x-0 transition duration-200 ease-in-out`}
       >
         <div>
+          <Link to="/">Home</Link> <br />
           <Link to="/dashboard/addClass">Add Class</Link>
-
           {/* Nav Items */}
           {/* <div className='flex flex-col justify-between flex-1 mt-6'>
             <nav>

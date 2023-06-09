@@ -1,16 +1,15 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { getAllClass } from "../../../api/class";
 import PopularClassesDetails from "./PopularClassesDetails";
 
 const PopularClasses = () => {
   const [classes, setClasses] = useState([]);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_SERVER_URL}/popularClasses`)
-      .then((res) => res.json())
-      .then((data) => {
-        setClasses(data);
-      });
+    getAllClass().then((data) => {
+      setClasses(data);
+    });
   }, []);
 
   return (
