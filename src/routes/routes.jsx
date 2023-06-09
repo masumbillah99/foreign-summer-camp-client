@@ -2,7 +2,9 @@ import { createBrowserRouter } from "react-router-dom";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Main from "../layouts/Main";
-import AddClass from "../pages/Dashboard/AddClass/AddClass";
+import AddClass from "../pages/Dashboard/InstructorDashboard/AddClass/AddClass";
+import InstructorHome from "../pages/Dashboard/InstructorDashboard/InstructorHome";
+import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
@@ -24,7 +26,12 @@ const router = createBrowserRouter([
         <DashboardLayout />
       </PrivateRoute>
     ),
-    children: [{ path: "addClass", element: <AddClass /> }],
+    children: [
+      // { path: "dashboard/instructorHome", element: <InstructorHome /> },
+      { path: "instructorHome", element: <InstructorHome /> },
+      { path: "addClass", element: <AddClass /> },
+      { path: "manageUser", element: <ManageUsers /> },
+    ],
   },
 ]);
 

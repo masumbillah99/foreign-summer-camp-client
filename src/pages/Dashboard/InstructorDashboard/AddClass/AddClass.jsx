@@ -1,5 +1,5 @@
-import { addNewClass } from "../../../api/class";
-import { imageUpload } from "../../../api/utils";
+import { addNewClass } from "../../../../api/class";
+import { imageUpload } from "../../../../api/utils";
 import AddClassForm from "./AddClassForm";
 
 const AddClass = () => {

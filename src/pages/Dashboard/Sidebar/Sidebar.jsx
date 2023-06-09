@@ -40,8 +40,52 @@ const Sidebar = () => {
         }  md:translate-x-0 transition duration-200 ease-in-out`}
       >
         <div>
-          <Link to="/">Home</Link> <br />
-          <Link to="/dashboard/addClass">Add Class</Link>
+          <ul className="menu  px-10 text-lg">
+            <li>
+              <NavLink
+                to="/dashboard/instructorHome"
+                className={({ isActive }) =>
+                  isActive ? "text-white" : "text-gray-500"
+                }
+              >
+                Instructor Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/addClass"
+                className={({ isActive }) =>
+                  isActive ? "text-white" : "text-gray-500"
+                }
+              >
+                Add Class
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/instructors"
+                className={({ isActive }) =>
+                  isActive ? "text-white" : "text-gray-500"
+                }
+              >
+                My Classes
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/manageUser"
+                className={({ isActive }) =>
+                  isActive ? "text-white" : "text-gray-500"
+                }
+              >
+                Manage Users
+              </NavLink>
+            </li>
+            <hr className="my-10" />
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+          </ul>
           {/* Nav Items */}
           {/* <div className='flex flex-col justify-between flex-1 mt-6'>
             <nav>
