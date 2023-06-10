@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { HiBars3 } from "react-icons/hi2";
 import useAdmin from "../../../hooks/useAdmin";
 import useInstructor from "../../../hooks/useInstructor";
-import { FaHome } from "react-icons/fa";
+import { FaHome, FaShoppingCart, FaWallet } from "react-icons/fa";
 import { HiMail } from "react-icons/hi";
 const Sidebar = () => {
   const [isAdmin] = useAdmin();
@@ -37,7 +37,7 @@ const Sidebar = () => {
       </div>
       {/* Sidebar */}
       <div
-        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-orange-300 w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
+        className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-orange-300 w-64 space-y-6 py-4 absolute inset-y-0 left-0 transform ${
           isActive && "-translate-x-full"
         }  md:translate-x-0 transition duration-200 ease-in-out`}
       >
@@ -123,7 +123,8 @@ const Sidebar = () => {
                       isActive ? "text-white" : "text-gray-500"
                     }
                   >
-                    My Selected Classes
+                    <FaShoppingCart />
+                    Selected Classes
                   </NavLink>
                 </li>
                 <li>
@@ -133,7 +134,9 @@ const Sidebar = () => {
                       isActive ? "text-white" : "text-gray-500"
                     }
                   >
-                    My Enrolled Classes
+                    {" "}
+                    <FaWallet />
+                    Enrolled Classes
                   </NavLink>
                 </li>
               </>

@@ -1,12 +1,58 @@
 import { FaUsers } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import useAdmin from "../../../hooks/useAdmin";
+import useAuth from "../../../hooks/useAuth";
+import useCart from "../../../hooks/useCart";
 import useInstructor from "../../../hooks/useInstructor";
 
 const PopularClassesDetails = ({ classDetails }) => {
+  const { user } = useAuth();
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
-  const { image, instructor_name, name, available_seat, price, description } =
-    classDetails;
+  const [refetch] = useCart();
+  const navigate = useNavigate();
+  const {
+    _id,
+    image,
+    instructor_name,
+    name,
+    available_seat,
+    price,
+    description,
+  } = classDetails;
+
+  const handleAddToCart = () => {
+    const selectedItem = {
+      classId: _id,
+      name,
+      email: user?.email,
+      image,
+      price,
+      available_seat,
+    };
+    if (user) {
+      // const cartItem = { foodId: _id, name, image, price, email: user.email };
+      fetch(`${import.meta.env.VITE_SERVER_URL}/carts`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(selectedItem),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.insertedId) {
+            toast.success("Class added on the cart");
+            refetch(); // refetch cart to update the number of items in the cart
+          }
+        });
+    } else {
+      toast.warn("Please login to add the class");
+      navigate("/login");
+    }
+  };
+
   return (
     <>
       <div className="card w-96 bg-base-100 shadow-xl">
@@ -29,7 +75,12 @@ const PopularClassesDetails = ({ classDetails }) => {
             </div>
           </div>
           {!isAdmin && !isInstructor && (
-            <button className="btn btn-primary w-full mt-2">Add To Cart</button>
+            <button
+              onClick={() => handleAddToCart(classDetails)}
+              className="btn btn-primary w-full mt-2"
+            >
+              Add To Cart
+            </button>
           )}
         </div>
       </div>

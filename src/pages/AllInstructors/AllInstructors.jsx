@@ -1,12 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 
 const AllInstructors = () => {
-  const { data: users = [] } = useQuery(["users"], async () => {
-    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/users`);
-    return res.json();
+  const { data: users = [] } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const res = await fetch(
+        `${import.meta.env.VITE_SERVER_URL}/users/instructor`
+      );
+      return res.json();
+    },
   });
 
-  const onlyInstructors = users.filter((user) => user?.role === "instructor");
+  // const onlyInstructors = users.filter((user) => user?.role === "instructor");
   //   console.log(onlyInstructors);
 
   return (
@@ -15,8 +20,8 @@ const AllInstructors = () => {
         Hello Teachers / Instructors
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-3">
-        {onlyInstructors &&
-          onlyInstructors?.map((instructor) => (
+        {users &&
+          users?.map((instructor) => (
             <div
               key={instructor._id}
               className="flex items-center px-1 border hover:bg-gray-100"
