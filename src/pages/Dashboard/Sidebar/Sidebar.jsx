@@ -42,7 +42,10 @@ const Sidebar = () => {
         }  md:translate-x-0 transition duration-200 ease-in-out`}
       >
         <div>
-          <ul className="menu text-lg">
+          <h2 className="text-xl font-bold text-center underline">
+            Learn_Do School
+          </h2>
+          <ul className="menu text-lg pt-20">
             {isAdmin && (
               <>
                 <li>

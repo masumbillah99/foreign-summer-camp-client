@@ -1,6 +1,10 @@
 import { FaUsers } from "react-icons/fa";
+import useAdmin from "../../../hooks/useAdmin";
+import useInstructor from "../../../hooks/useInstructor";
 
 const PopularClassesDetails = ({ classDetails }) => {
+  const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
   const { image, instructor_name, name, available_seat, price, description } =
     classDetails;
   return (
@@ -24,7 +28,9 @@ const PopularClassesDetails = ({ classDetails }) => {
               </span>
             </div>
           </div>
-          <button className="btn btn-primary w-full mt-2">Add To Cart</button>
+          {!isAdmin && !isInstructor && (
+            <button className="btn btn-primary w-full mt-2">Add To Cart</button>
+          )}
         </div>
       </div>
     </>

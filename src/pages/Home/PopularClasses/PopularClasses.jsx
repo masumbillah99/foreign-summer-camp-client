@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-// import { getAllClass } from "../../../api/class";
 import PopularClassesDetails from "./PopularClassesDetails";
 
 const PopularClasses = () => {
@@ -13,7 +12,11 @@ const PopularClasses = () => {
     },
   });
 
+  // TODO: based on students show in ui
+
   const approvedClass = classData.filter((data) => data.status === "approved");
+  // const sliceClass = approvedClass.slice(0, 6);
+  // console.log(sliceClass);
   // console.log(approvedClass);
 
   // useEffect(() => {
@@ -32,12 +35,14 @@ const PopularClasses = () => {
       </h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
         {approvedClass &&
-          approvedClass?.map((classDetails) => (
-            <PopularClassesDetails
-              key={classDetails._id}
-              classDetails={classDetails}
-            />
-          ))}
+          approvedClass
+            .slice(0, 6)
+            ?.map((classDetails) => (
+              <PopularClassesDetails
+                key={classDetails._id}
+                classDetails={classDetails}
+              />
+            ))}
       </div>
     </div>
   );

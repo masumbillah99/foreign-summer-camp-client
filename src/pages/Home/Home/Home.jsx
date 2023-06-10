@@ -1,6 +1,6 @@
 import Banner from "../Banner/Banner";
 import PopularClasses from "../PopularClasses/PopularClasses";
-import PopularInstructors from "../PopularInstructors/PopularInstructors";
+import PopularInstructor from "../PopularInstructors/PopularInstructor";
 
 const Home = () => {
   return (
@@ -8,7 +8,7 @@ const Home = () => {
       <Banner />
       <div className="max-w-screen-xl mx-auto">
         <PopularClasses />
-        <PopularInstructors />
+        <PopularInstructor />
       </div>
     </>
   );

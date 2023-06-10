@@ -26,8 +26,8 @@ export const getMyAddClass = async (email) => {
 };
 
 // update class data or status
-export const updateClassData = async (classData) => {
-  const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/classes/:id`, {
+export const updateClassData = async (classData, id) => {
+  const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/classes/${id}`, {
     method: "PUT",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(classData),
@@ -35,3 +35,10 @@ export const updateClassData = async (classData) => {
   const data = await res.json();
   return data;
 };
+
+// fetch(`${import.meta.env.VITE_SERVER_URL}/classes/${id}`, {
+//   method: "PUT",
+//   headers: { "content-type": "application/json" },
+//   body: JSON.stringify(newData),
+// })
+//   .then((res) => res.json())

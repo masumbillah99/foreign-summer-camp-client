@@ -10,6 +10,7 @@ const ManageUsers = () => {
 
   //   handle make admin
   const handleMakeAdmin = (user) => {
+    // const newRole = { role: 'admin' };
     fetch(`${import.meta.env.VITE_SERVER_URL}/users/admin/${user._id}`, {
       method: "PATCH",
     })
@@ -17,6 +18,7 @@ const ManageUsers = () => {
       .then((data) => {
         if (data.modifiedCount) {
           toast.success("Successfully make admin");
+          refetch();
         }
       });
   };
@@ -30,6 +32,7 @@ const ManageUsers = () => {
       .then((data) => {
         if (data.modifiedCount) {
           toast.success("Set role is an instructor");
+          refetch();
         }
       });
   };

@@ -3,6 +3,7 @@ import ErrorPage from "../ErrorPage/ErrorPage";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Main from "../layouts/Main";
 import AllClasses from "../pages/AllClasses/AllClasses";
+import AllInstructors from "../pages/AllInstructors/AllInstructors";
 import ManageClass from "../pages/Dashboard/AdminDashboard/ManageClass/ManageClass";
 import ManageUsers from "../pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers";
 import AddClass from "../pages/Dashboard/InstructorDashboard/AddClass/AddClass";
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/allClasses", element: <AllClasses /> },
+      { path: "/instructors", element: <AllInstructors /> },
     ],
   },
   { path: "/login", element: <Login /> },

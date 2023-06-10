@@ -1,8 +1,17 @@
+import { useForm } from "react-hook-form";
 import { FaUsers } from "react-icons/fa";
 
-const ManageClassForm = ({ classDetails, handleApproved }) => {
+const ManageClassForm = ({
+  classDetails,
+  handleApproved,
+  handleDenyRequest,
+  // handleFeedback,
+}) => {
   const { _id, image, instructor_name, email, name, available_seat, price } =
     classDetails;
+
+  // todo
+  const { register, handleSubmit } = useForm();
 
   return (
     <div className="card w-96 bg-base-100 shadow-xl">
@@ -26,14 +35,17 @@ const ManageClassForm = ({ classDetails, handleApproved }) => {
         </div>
         <div className="flex justify-between mt-3">
           {classDetails.status === "approved" ||
-          classDetails.status === "deny" ? (
+          classDetails.status === "denied" ? (
             <span className="uppercase badge badge-outline text-green-600 font-semibold">
-              {classDetails.status === "approved" ? "approved" : "deny"}
+              {classDetails.status === "approved" ? "approved" : "denied"}
             </span>
           ) : (
             <>
-              <button className="btn bg-red-500 hover:bg-red-700 text-white">
-                Deny
+              <button
+                onClick={() => handleDenyRequest(_id)}
+                className="btn bg-red-500 hover:bg-red-700 text-white"
+              >
+                Denied
               </button>
               <button
                 onClick={() => handleApproved(classDetails, _id)}
@@ -55,12 +67,20 @@ const ManageClassForm = ({ classDetails, handleApproved }) => {
               <h2 className="text-xl font-bold mb-3">
                 Why you want to denied the post
               </h2>
-              <textarea className="input input-bordered w-full h-40"></textarea>
-              <div className="modal-action">
-                <label htmlFor="my_modal_6" className="btn">
-                  Done
-                </label>
-              </div>
+              {/* TODO */}
+              <form
+              // onSubmit={handleSubmit(handleFeedback)}
+              >
+                <textarea
+                  {...register("feedback")}
+                  className="input input-bordered w-full h-40"
+                ></textarea>
+                <div className="modal-action">
+                  <label htmlFor="my_modal_6" className="btn">
+                    <input type="submit" value="Done" className="" />
+                  </label>
+                </div>
+              </form>
             </div>
           </div>
         </div>
