@@ -55,14 +55,12 @@ const AuthProvider = ({ children }) => {
             email: currentUser.email,
           })
           .then((data) => {
-            // console.log(data.data);
             localStorage.setItem("school-token", data.data.token);
+            setLoading(false);
           });
       } else {
         localStorage.removeItem("school-token");
       }
-
-      setLoading(false);
     });
 
     return () => {

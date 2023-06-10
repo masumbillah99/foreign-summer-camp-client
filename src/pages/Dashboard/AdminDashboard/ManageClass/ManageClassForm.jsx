@@ -10,7 +10,7 @@ const ManageClassForm = ({
   const { _id, image, instructor_name, email, name, available_seat, price } =
     classDetails;
 
-  // todo
+  // todo handle feedback
   const { register, handleSubmit } = useForm();
 
   return (
