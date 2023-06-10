@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -24,7 +23,13 @@ const ManageUsers = () => {
 
   //   delete a user
   const handleDelete = (user) => {
-    console.log(user);
+    fetch(`${import.meta.env.VITE_SERVER_URL}/users/${user._id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then(() => {
+        refetch(), toast.error("delete user successfully");
+      });
   };
 
   return (
@@ -34,9 +39,7 @@ const ManageUsers = () => {
           {/* head */}
           <thead>
             <tr>
-              <th>
-                <label>Number</label>
-              </th>
+              <th>Number</th>
               <th>Image</th>
               <th>Email &amp; Name</th>
               <th>User Role</th>
@@ -51,7 +54,11 @@ const ManageUsers = () => {
                   <div className="flex items-center space-x-3">
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
-                        <img src={user.image} alt="user image" />
+                        <img
+                          src={user.image}
+                          alt="user image"
+                          referrerPolicy="no-referrer"
+                        />
                       </div>
                     </div>
                   </div>

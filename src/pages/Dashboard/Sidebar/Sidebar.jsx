@@ -1,20 +1,22 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { FcSettings } from "react-icons/fc";
 import { HiBars3 } from "react-icons/hi2";
-import useAuth from "../../../hooks/useAuth";
+import useAdmin from "../../../hooks/useAdmin";
 const Sidebar = () => {
-  const [toggle, setToggle] = useState(false);
-  const { user, role } = useAuth();
-
+  const [isAdmin] = useAdmin();
+  // const [toggle, setToggle] = useState(false);
   const [isActive, setActive] = useState("false");
-  const toggleHandler = (event) => {
-    setToggle(event.target.checked);
-  };
+  // const toggleHandler = (event) => {
+  //   setToggle(event.target.checked);
+  // };
+
   // Sidebar Responsive Handler
   const handleToggle = () => {
     setActive(!isActive);
   };
+
+  // const isAdmin = true;
+  console.log(isAdmin);
 
   return (
     <>
@@ -41,6 +43,18 @@ const Sidebar = () => {
       >
         <div>
           <ul className="menu  px-10 text-lg">
+            {isAdmin && (
+              <li>
+                <NavLink
+                  to="/dashboard/manageUser"
+                  className={({ isActive }) =>
+                    isActive ? "text-white" : "text-gray-500"
+                  }
+                >
+                  Manage Users
+                </NavLink>
+              </li>
+            )}
             <li>
               <NavLink
                 to="/dashboard/instructorHome"
@@ -71,17 +85,7 @@ const Sidebar = () => {
                 My Classes
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="/dashboard/manageUser"
-                className={({ isActive }) =>
-                  isActive ? "text-white" : "text-gray-500"
-                }
-              >
-                Manage Users
-              </NavLink>
-            </li>
-            <hr className="my-10" />
+            <div className="divider"></div>
             <li>
               <Link to="/">Home</Link>
             </li>

@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -44,9 +45,23 @@ const AuthProvider = ({ children }) => {
   // get the currently signed-in user
   // observer auth state change
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
-      // console.log(loggedUser);
-      setUser(loggedUser);
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+
+      // get and set token
+      if (currentUser) {
+        axios
+          .post(`${import.meta.env.VITE_SERVER_URL}/jwt`, {
+            email: currentUser.email,
+          })
+          .then((data) => {
+            // console.log(data.data);
+            localStorage.setItem("school-token", data.data.token);
+          });
+      } else {
+        localStorage.removeItem("school-token");
+      }
+
       setLoading(false);
     });
 

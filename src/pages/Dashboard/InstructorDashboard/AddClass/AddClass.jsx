@@ -15,6 +15,7 @@ const AddClass = () => {
         price: parseFloat(data.price),
         available_seat: parseFloat(data.available_seat),
         description: data.description,
+        status: "pending",
       };
       // post class data to server
       addNewClass(classData)
