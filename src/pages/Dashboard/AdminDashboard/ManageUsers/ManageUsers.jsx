@@ -21,6 +21,19 @@ const ManageUsers = () => {
       });
   };
 
+  // handle make instructor role
+  const handleMakeInstructor = (user) => {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/users/instructor/${user._id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount) {
+          toast.success("Set role is an instructor");
+        }
+      });
+  };
+
   //   delete a user
   const handleDelete = (user) => {
     fetch(`${import.meta.env.VITE_SERVER_URL}/users/${user._id}`, {
@@ -71,23 +84,38 @@ const ManageUsers = () => {
                   </span>
                 </td>
                 <td>
-                  {user.role === "admin" ? (
+                  {user.role === "admin" || user.role === "instructor" ? (
                     <span className="uppercase badge badge-outline text-green-600 font-semibold">
-                      admin
+                      {user.role === "admin" ? "admin" : "instructor"}
                     </span>
                   ) : (
                     <>
-                      <button className="btn btn-primary btn-xs me-2">
-                        Instructor
-                      </button>
                       <button
                         onClick={() => handleMakeAdmin(user)}
                         className="btn btn-primary btn-xs"
                       >
                         Admin
                       </button>
+                      <button
+                        onClick={() => handleMakeInstructor(user)}
+                        className="btn btn-primary btn-xs me-2"
+                      >
+                        Instructor
+                      </button>
                     </>
                   )}
+                  {/* {user.role === "instructor" ? (
+                    <span className="uppercase badge badge-outline text-green-600 font-semibold">
+                      instructor
+                    </span>
+                  ) : (
+                    <button
+                      onClick={() => handleMakeInstructor(user)}
+                      className="btn btn-primary btn-xs me-2"
+                    >
+                      Instructor
+                    </button>
+                  )} */}
                 </td>
                 <td>
                   <button

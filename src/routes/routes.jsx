@@ -2,9 +2,10 @@ import { createBrowserRouter } from "react-router-dom";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Main from "../layouts/Main";
+import ManageUsers from "../pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers";
 import AddClass from "../pages/Dashboard/InstructorDashboard/AddClass/AddClass";
 import InstructorHome from "../pages/Dashboard/InstructorDashboard/InstructorHome";
-import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
+import MyClasses from "../pages/Dashboard/InstructorDashboard/MyClasses/MyClasses";
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
@@ -27,9 +28,11 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-      // { path: "dashboard/instructorHome", element: <InstructorHome /> },
+      // instructor dashboard
       { path: "instructorHome", element: <InstructorHome /> },
       { path: "addClass", element: <AddClass /> },
+      { path: "myClasses", element: <MyClasses /> },
+      // admin dashboard
       { path: "manageUser", element: <ManageUsers /> },
     ],
   },

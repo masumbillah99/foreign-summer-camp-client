@@ -2,8 +2,10 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { HiBars3 } from "react-icons/hi2";
 import useAdmin from "../../../hooks/useAdmin";
+import useInstructor from "../../../hooks/useInstructor";
 const Sidebar = () => {
   const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
   // const [toggle, setToggle] = useState(false);
   const [isActive, setActive] = useState("false");
   // const toggleHandler = (event) => {
@@ -16,7 +18,7 @@ const Sidebar = () => {
   };
 
   // const isAdmin = true;
-  console.log(isAdmin);
+  // console.log(isAdmin, isInstructor);
 
   return (
     <>
@@ -55,36 +57,41 @@ const Sidebar = () => {
                 </NavLink>
               </li>
             )}
-            <li>
-              <NavLink
-                to="/dashboard/instructorHome"
-                className={({ isActive }) =>
-                  isActive ? "text-white" : "text-gray-500"
-                }
-              >
-                Instructor Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/addClass"
-                className={({ isActive }) =>
-                  isActive ? "text-white" : "text-gray-500"
-                }
-              >
-                Add Class
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/instructors"
-                className={({ isActive }) =>
-                  isActive ? "text-white" : "text-gray-500"
-                }
-              >
-                My Classes
-              </NavLink>
-            </li>
+            {isInstructor && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/instructorHome"
+                    className={({ isActive }) =>
+                      isActive ? "text-white" : "text-gray-500"
+                    }
+                  >
+                    Instructor Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/addClass"
+                    className={({ isActive }) =>
+                      isActive ? "text-white" : "text-gray-500"
+                    }
+                  >
+                    Add Class
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/myClasses"
+                    className={({ isActive }) =>
+                      isActive ? "text-white" : "text-gray-500"
+                    }
+                  >
+                    My Classes
+                  </NavLink>
+                </li>
+              </>
+            )}
+
             <div className="divider"></div>
             <li>
               <Link to="/">Home</Link>

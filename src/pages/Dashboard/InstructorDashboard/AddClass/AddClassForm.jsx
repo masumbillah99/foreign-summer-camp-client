@@ -75,7 +75,7 @@ const AddClassForm = ({ handleAddClass }) => {
           <textarea
             {...register("description")}
             placeholder="description about class"
-            className="textarea textarea-bordered textarea-lg w-full focus:outline-none mb-5"
+            className="textarea textarea-bordered textarea-lg w-full h-40 focus:outline-none mb-5"
           ></textarea>
         </div>
         <input
