@@ -15,3 +15,14 @@ export const getAllClass = async () => {
   const data = await res.json();
   return data;
 };
+
+// update class data or status
+export const updateClassData = async (classData) => {
+  const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/classes/:id`, {
+    method: "PUT",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(classData),
+  });
+  const data = await res.json();
+  return data;
+};

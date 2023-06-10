@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Main from "../layouts/Main";
+import ManageClass from "../pages/Dashboard/AdminDashboard/ManageClass/ManageClass";
 import ManageUsers from "../pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers";
 import AddClass from "../pages/Dashboard/InstructorDashboard/AddClass/AddClass";
 import InstructorHome from "../pages/Dashboard/InstructorDashboard/InstructorHome";
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
       { path: "myClasses", element: <MyClasses /> },
       // admin dashboard
       { path: "manageUser", element: <ManageUsers /> },
+      { path: "manageClass", element: <ManageClass /> },
     ],
   },
 ]);

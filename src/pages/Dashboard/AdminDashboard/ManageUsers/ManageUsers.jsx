@@ -46,7 +46,7 @@ const ManageUsers = () => {
   };
 
   return (
-    <div className="my-20">
+    <div className="my-20 max-w-screen-xl mx-auto">
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}

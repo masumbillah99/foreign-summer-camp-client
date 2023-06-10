@@ -6,11 +6,7 @@ import useInstructor from "../../../hooks/useInstructor";
 const Sidebar = () => {
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
-  // const [toggle, setToggle] = useState(false);
-  const [isActive, setActive] = useState("false");
-  // const toggleHandler = (event) => {
-  //   setToggle(event.target.checked);
-  // };
+  const [isActive, setActive] = useState(false);
 
   // Sidebar Responsive Handler
   const handleToggle = () => {
@@ -23,7 +19,7 @@ const Sidebar = () => {
   return (
     <>
       {/* Small Screen Navbar */}
-      <div className="bg-gray-100 text-gray-800 flex justify-between md:hidden">
+      <div className="bg-gray-100 text-gray-800 flex justify-between :hidden">
         <div>
           <div className="block cursor-pointer p-4 font-bold">
             Learn_Do School
@@ -32,7 +28,7 @@ const Sidebar = () => {
 
         <button
           onClick={handleToggle}
-          className="mobile-menu-button p-4 focus:outline-none focus:bg-gray-200"
+          className="p-4 focus:outline-none focus:bg-gray-200"
         >
           <HiBars3 className="h-5 w-5" />
         </button>
@@ -44,18 +40,40 @@ const Sidebar = () => {
         }  md:translate-x-0 transition duration-200 ease-in-out`}
       >
         <div>
-          <ul className="menu  px-10 text-lg">
+          <ul className="menu px-10 text-lg">
             {isAdmin && (
-              <li>
-                <NavLink
-                  to="/dashboard/manageUser"
-                  className={({ isActive }) =>
-                    isActive ? "text-white" : "text-gray-500"
-                  }
-                >
-                  Manage Users
-                </NavLink>
-              </li>
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/adminHome"
+                    className={({ isActive }) =>
+                      isActive ? "text-white" : "text-gray-500"
+                    }
+                  >
+                    Admin Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/manageUser"
+                    className={({ isActive }) =>
+                      isActive ? "text-white" : "text-gray-500"
+                    }
+                  >
+                    Manage Users
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/manageClass"
+                    className={({ isActive }) =>
+                      isActive ? "text-white" : "text-gray-500"
+                    }
+                  >
+                    Manage Classes
+                  </NavLink>
+                </li>
+              </>
             )}
             {isInstructor && (
               <>
@@ -91,7 +109,30 @@ const Sidebar = () => {
                 </li>
               </>
             )}
-
+            {!isAdmin && !isInstructor && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/selectedClass"
+                    className={({ isActive }) =>
+                      isActive ? "text-white" : "text-gray-500"
+                    }
+                  >
+                    My Selected Classes
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/enrolledClass"
+                    className={({ isActive }) =>
+                      isActive ? "text-white" : "text-gray-500"
+                    }
+                  >
+                    My Enrolled Classes
+                  </NavLink>
+                </li>
+              </>
+            )}
             <div className="divider"></div>
             <li>
               <Link to="/">Home</Link>
