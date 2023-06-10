@@ -3,6 +3,8 @@ import { Link, NavLink } from "react-router-dom";
 import { HiBars3 } from "react-icons/hi2";
 import useAdmin from "../../../hooks/useAdmin";
 import useInstructor from "../../../hooks/useInstructor";
+import { FaHome } from "react-icons/fa";
+import { HiMail } from "react-icons/hi";
 const Sidebar = () => {
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
@@ -40,7 +42,7 @@ const Sidebar = () => {
         }  md:translate-x-0 transition duration-200 ease-in-out`}
       >
         <div>
-          <ul className="menu px-10 text-lg">
+          <ul className="menu text-lg">
             {isAdmin && (
               <>
                 <li>
@@ -135,7 +137,15 @@ const Sidebar = () => {
             )}
             <div className="divider"></div>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/">
+                <FaHome /> Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact">
+                <HiMail />
+                contact
+              </Link>
             </li>
           </ul>
           {/* Nav Items */}

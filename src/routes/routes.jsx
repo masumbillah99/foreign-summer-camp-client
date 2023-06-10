@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Main from "../layouts/Main";
+import AllClasses from "../pages/AllClasses/AllClasses";
 import ManageClass from "../pages/Dashboard/AdminDashboard/ManageClass/ManageClass";
 import ManageUsers from "../pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers";
 import AddClass from "../pages/Dashboard/InstructorDashboard/AddClass/AddClass";
@@ -17,7 +18,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <Main />,
     errorElement: <ErrorPage />,
-    children: [{ path: "/", element: <Home /> }],
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/allClasses", element: <AllClasses /> },
+    ],
   },
   { path: "/login", element: <Login /> },
   { path: "/register", element: <SignUp /> },

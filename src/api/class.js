@@ -16,6 +16,15 @@ export const getAllClass = async () => {
   return data;
 };
 
+// get my add classes
+export const getMyAddClass = async (email) => {
+  const res = await fetch(
+    `${import.meta.env.VITE_SERVER_URL}/classes/${email}`
+  );
+  const data = await res.json();
+  return data;
+};
+
 // update class data or status
 export const updateClassData = async (classData) => {
   const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/classes/:id`, {

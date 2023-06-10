@@ -29,11 +29,10 @@ const ManageClass = () => {
   };
 
   return (
-    <div className="my-10">
-      <h1 className="text-3xl text-center font-bold mb-3 underline">
-        Manage Classes
-      </h1>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-96 xl:gap-3">
+    <div className="">
+      <h1 className="text-3xl text-center font-bold">Manage Classes</h1>
+      <hr className="w-1/2 mx-auto border-2 border-primary mt-3 mb-5" />
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-3 xl:gap-3">
         {classes.map((classDetails) => (
           <ManageClassForm
             key={classDetails._id}

@@ -14,16 +14,7 @@ const PopularClassesDetails = ({ classDetails }) => {
           <h1 className="text-md font-semibold">
             Instructor: {instructor_name}
           </h1>
-          <>
-            {description ? (
-              description
-            ) : (
-              <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Atque
-                ullam ea pariatur perspiciatis officia. Nobis!
-              </p>
-            )}
-          </>
+          <p>{description.slice(0, 75)}...</p>
           <div className="card-actions">
             <div className="text-xl text-primary">${price}</div>
             <div className="flex items-center ms-auto">
@@ -33,6 +24,7 @@ const PopularClassesDetails = ({ classDetails }) => {
               </span>
             </div>
           </div>
+          <button className="btn btn-primary w-full mt-2">Add To Cart</button>
         </div>
       </div>
     </>

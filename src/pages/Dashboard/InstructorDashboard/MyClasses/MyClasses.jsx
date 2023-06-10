@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { getAllClass } from "../../../../api/class";
+import { getMyAddClass } from "../../../../api/class";
+import useAuth from "../../../../hooks/useAuth";
 
 const MyClasses = () => {
   const [myClass, setMyClass] = useState([]);
+  const { user } = useAuth();
 
   useEffect(() => {
-    getAllClass().then((data) => {
+    getMyAddClass(user.email).then((data) => {
       setMyClass(data);
     });
-  }, []);
+  }, [user]);
 
   return (
     <div className="my-10">

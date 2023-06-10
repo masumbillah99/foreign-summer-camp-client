@@ -1,3 +1,4 @@
+import { toast, ToastContainer } from "react-toastify";
 import { addNewClass } from "../../../../api/class";
 import { imageUpload } from "../../../../api/utils";
 import AddClassForm from "./AddClassForm";
@@ -19,8 +20,8 @@ const AddClass = () => {
       };
       // post class data to server
       addNewClass(classData)
-        .then((result) => {
-          console.log(result);
+        .then(() => {
+          toast.success("successfully add a class");
           e.target.reset();
         })
         .catch((err) => console.log(err));
@@ -33,6 +34,7 @@ const AddClass = () => {
         add a new class
       </h1>
       <AddClassForm handleAddClass={handleAddClass} />
+      <ToastContainer />
     </div>
   );
 };
