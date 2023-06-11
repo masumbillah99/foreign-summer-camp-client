@@ -9,6 +9,7 @@ import ManageUsers from "../pages/Dashboard/AdminDashboard/ManageUsers/ManageUse
 import AddClass from "../pages/Dashboard/InstructorDashboard/AddClass/AddClass";
 import InstructorHome from "../pages/Dashboard/InstructorDashboard/InstructorHome";
 import MyClasses from "../pages/Dashboard/InstructorDashboard/MyClasses/MyClasses";
+import History from "../pages/Dashboard/StudentDashboard/History/History";
 import Payment from "../pages/Dashboard/StudentDashboard/Payment/Payment";
 import SelectedClass from "../pages/Dashboard/StudentDashboard/SelectedClass";
 import StudentHome from "../pages/Dashboard/StudentDashboard/StudentHome/StudentHome";
@@ -42,6 +43,7 @@ const router = createBrowserRouter([
       { path: "studentHome", element: <StudentHome /> },
       { path: "selectedClass", element: <SelectedClass /> },
       { path: "payment", element: <Payment /> },
+      { path: "paymentHistory", element: <History /> },
 
       // instructor dashboard
       { path: "instructorHome", element: <InstructorHome /> },

@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { HiBars3 } from "react-icons/hi2";
 import useAdmin from "../../../hooks/useAdmin";
 import useInstructor from "../../../hooks/useInstructor";
-import { FaHome, FaShoppingCart, FaWallet } from "react-icons/fa";
+import { FaHistory, FaHome, FaShoppingCart, FaWallet } from "react-icons/fa";
 import { HiMail } from "react-icons/hi";
 import { AiFillHome } from "react-icons//ai";
 import useCart from "../../../hooks/useCart";
@@ -149,9 +149,19 @@ const Sidebar = () => {
                       isActive ? "text-white" : "text-gray-500"
                     }
                   >
-                    {" "}
                     <FaWallet />
                     Enrolled Classes
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/paymentHistory"
+                    className={({ isActive }) =>
+                      isActive ? "text-white" : "text-gray-500"
+                    }
+                  >
+                    <FaHistory />
+                    Payment History
                   </NavLink>
                 </li>
               </>
