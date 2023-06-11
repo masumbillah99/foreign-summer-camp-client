@@ -9,6 +9,7 @@ import ManageUsers from "../pages/Dashboard/AdminDashboard/ManageUsers/ManageUse
 import AddClass from "../pages/Dashboard/InstructorDashboard/AddClass/AddClass";
 import InstructorHome from "../pages/Dashboard/InstructorDashboard/InstructorHome";
 import MyClasses from "../pages/Dashboard/InstructorDashboard/MyClasses/MyClasses";
+import Payment from "../pages/Dashboard/StudentDashboard/Payment/Payment";
 import SelectedClass from "../pages/Dashboard/StudentDashboard/SelectedClass";
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login";
@@ -38,12 +39,14 @@ const router = createBrowserRouter([
     children: [
       // student dashboard
       { path: "selectedClass", element: <SelectedClass /> },
+      { path: "payment", element: <Payment /> },
 
       // instructor dashboard
       { path: "instructorHome", element: <InstructorHome /> },
       { path: "addClass", element: <AddClass /> },
       { path: "myClasses", element: <MyClasses /> },
 
+      // TODO: admin private route
       // admin dashboard
       { path: "manageUser", element: <ManageUsers /> },
       { path: "manageClass", element: <ManageClass /> },

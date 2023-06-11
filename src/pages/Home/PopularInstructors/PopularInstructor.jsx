@@ -18,10 +18,13 @@ const PopularInstructor = () => {
   // TOD0 : based on students show in ui
 
   return (
-    <div className="max-w-screen-xl mx-auto py-24 px-10 xl:px-0">
-      <h3 className="text-2xl font-bold text-primary underline my-5">
-        Hello Teachers / Instructors
+    <div className="max-w-screen-xl mx-auto mb-10 px-10 xl:px-0">
+      <h3 className="text-xl font-bold text-primary underline">
+        Popular Instructors
       </h3>
+      <h1 className="text-4xl font-bold mt-3 mb-5">
+        Meet Your Favorite Instructors
+      </h1>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 justify-items-center gap-3">
         {users &&
           users.slice(0, 6)?.map((instructor) => (

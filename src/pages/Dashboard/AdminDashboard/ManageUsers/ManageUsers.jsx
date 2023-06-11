@@ -1,11 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { FaTrashAlt } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const ManageUsers = () => {
+  const [axiosSecure] = useAxiosSecure();
   const { data: users = [], refetch } = useQuery(["users"], async () => {
-    const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/users`);
-    return res.json();
+    const res = await axiosSecure.get(
+      `${import.meta.env.VITE_SERVER_URL}/users`
+    );
+    // return res.json();
+    return res.data;
   });
 
   //   handle make admin
@@ -49,7 +54,9 @@ const ManageUsers = () => {
   };
 
   return (
-    <div className="my-20 max-w-screen-xl mx-auto">
+    <div className="my-0 max-w-screen-xl mx-auto">
+      <h1 className="text-4xl text-center font-bold">Manage All Users</h1>
+      <hr className="w-1/2 mx-auto border-2 border-primary mt-3 mb-5" />
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -59,7 +66,7 @@ const ManageUsers = () => {
               <th>Image</th>
               <th>Email &amp; Name</th>
               <th>User Role</th>
-              <th>Delete User</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>

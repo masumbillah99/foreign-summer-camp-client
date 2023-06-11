@@ -9,24 +9,21 @@ const SelectedClass = () => {
   //   console.log(cart);
 
   // reduce total
-  const totalPrice = cart.reduce((sum, item) => item.price + sum, 0);
-  const total = parseInt(totalPrice);
+  const total = cart.reduce((sum, item) => item.price + sum, 0);
+  // console.log(typeof totalPrice);
+  // const total = parseInt(totalPrice);
 
   const handleDelete = (item) => {
-    console.log(item);
-    // fetch(
-    //   `/carts/${item._id}`,
-    //   {
-    //     method: "DELETE",
-    //   }
-    // )
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.deletedCount > 0) {
-    //       toast.success("review cart deleted successfully");
-    //       refetch();
-    //     }
-    //   });
+    fetch(`${import.meta.env.VITE_SERVER_URL}/carts/${item._id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          toast.success("Class cart deleted successfully");
+          refetch();
+        }
+      });
   };
 
   return (
@@ -72,7 +69,7 @@ const SelectedClass = () => {
                     </div>
                   </td>
                   <td className="font-semibold">{item.name}</td>
-                  <td className="text-xl font-semibold">{item.price}</td>
+                  <td className="text-xl font-semibold">$ {item.price}</td>
                   <td>
                     <button
                       onClick={() => handleDelete(item)}

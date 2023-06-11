@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { updateClassData } from "../../../../api/class";
 import ManageClassForm from "./ManageClassForm";
 
 const ManageClass = () => {
+  const [disable, setDisable] = useState(false);
   const { data: allClassData = [], refetch } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
@@ -18,6 +20,7 @@ const ManageClass = () => {
       if (data.modifiedCount > 0) {
         toast.success("successfully approved class");
         refetch();
+        setDisable(true);
       }
     });
   };
@@ -51,6 +54,7 @@ const ManageClass = () => {
             handleApproved={handleApproved}
             handleDenyRequest={handleDenyRequest}
             // handleFeedback={handleFeedback}
+            disable={disable}
           />
         ))}
       </div>
