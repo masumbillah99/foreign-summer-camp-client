@@ -1,10 +1,11 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import "./common.css";
 
-const CheckOutForm = ({ price }) => {
+const CheckOutForm = ({ price, cart }) => {
   const stripe = useStripe();
   const elements = useElements();
   const { user } = useAuth();
@@ -15,9 +16,11 @@ const CheckOutForm = ({ price }) => {
   const [processing, setProcessing] = useState(false);
 
   useEffect(() => {
-    axiosSecure.post("/create-payment-intent", { price }).then((res) => {
-      setClientSecret(res.data.clientSecret);
-    });
+    if (price > 0) {
+      axiosSecure.post("/create-payment-intent", { price }).then((res) => {
+        setClientSecret(res.data.clientSecret);
+      });
+    }
   }, [price, axiosSecure]);
 
   const handlePaymentSubmit = async (event) => {
@@ -65,15 +68,32 @@ const CheckOutForm = ({ price }) => {
 
     if (paymentIntent.status === "succeeded") {
       setTransactionId(paymentIntent.id);
-      toast.success("transaction complete successfully");
       // todo next steps
+      // save payment information to the server
+      const paymentData = {
+        email: user?.email,
+        transactionId: paymentIntent.id,
+        price,
+        quantity: cart.length,
+        cartItems: cart.map((item) => item._id),
+        classItems: cart.map((item) => item.classId),
+        classNames: cart.map((item) => item.name),
+        status: "service pending",
+        data: new Date(),
+      };
+      axiosSecure.post("/payments", paymentData).then((res) => {
+        console.log(res.data);
+        if (res.data.insertResult.insertedId) {
+          toast.success("Transaction complete successfully");
+        }
+      });
     }
   };
 
   return (
     <>
       <form
-        className="lg:w-2/3 xl:w-1/2 mx-5 lg:mx-auto pt-10 text-center"
+        className="lg:w-2/3 xl:w-1/2 mx-5 lg:mx-auto pt-10 text-center form"
         onSubmit={handlePaymentSubmit}
       >
         <CardElement
@@ -94,7 +114,7 @@ const CheckOutForm = ({ price }) => {
         />
         <button
           type="submit"
-          className="btn btn-outline btn-primary w-full px-5 mt-7"
+          className="btn btn-primary w-full px-5 mt-7"
           disabled={!stripe || !clientSecret || processing}
         >
           Payment
@@ -110,6 +130,7 @@ const CheckOutForm = ({ price }) => {
           Your transaction id: {transactionId}
         </p>
       )}
+      <ToastContainer />
     </>
   );
 };

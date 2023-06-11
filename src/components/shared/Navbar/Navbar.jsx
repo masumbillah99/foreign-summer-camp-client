@@ -2,9 +2,13 @@ import { NavLink } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import { toast, ToastContainer } from "react-toastify";
 import logo from "../../../assets/logo.png";
+import useAdmin from "../../../hooks/useAdmin";
+import useInstructor from "../../../hooks/useInstructor";
 
 const Navbar = () => {
   const { user, logOutUser } = useAuth();
+  const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
 
   const handleLogout = () => {
     logOutUser()
@@ -46,7 +50,17 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to={"/dashboard"}
+          to={`${
+            user
+              ? `/dashboard/${
+                  isAdmin
+                    ? "manageUser"
+                    : "studentHome" && isInstructor
+                    ? "myClasses"
+                    : "studentHome"
+                }`
+              : "/login"
+          }`}
           className={({ isActive }) =>
             isActive ? "text-[#EEFF25]" : "text-gray-300"
           }

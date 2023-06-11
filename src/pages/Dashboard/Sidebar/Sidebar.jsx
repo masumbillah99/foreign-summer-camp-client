@@ -5,9 +5,12 @@ import useAdmin from "../../../hooks/useAdmin";
 import useInstructor from "../../../hooks/useInstructor";
 import { FaHome, FaShoppingCart, FaWallet } from "react-icons/fa";
 import { HiMail } from "react-icons/hi";
+import { AiFillHome } from "react-icons//ai";
+import useCart from "../../../hooks/useCart";
 const Sidebar = () => {
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
+  const [cart] = useCart();
   const [isActive, setActive] = useState(false);
 
   // Sidebar Responsive Handler
@@ -118,13 +121,25 @@ const Sidebar = () => {
               <>
                 <li>
                   <NavLink
+                    to="/dashboard/studentHome"
+                    className={({ isActive }) =>
+                      isActive ? "text-white" : "text-gray-500"
+                    }
+                  >
+                    <AiFillHome /> Student Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
                     to="/dashboard/selectedClass"
                     className={({ isActive }) =>
                       isActive ? "text-white" : "text-gray-500"
                     }
                   >
-                    <FaShoppingCart />
-                    Selected Classes
+                    <FaShoppingCart /> Selected Class
+                    <div className="badge badge-secondary ms-0">
+                      {cart.length}
+                    </div>
                   </NavLink>
                 </li>
                 <li>

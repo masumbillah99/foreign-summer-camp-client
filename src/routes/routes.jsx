@@ -11,6 +11,7 @@ import InstructorHome from "../pages/Dashboard/InstructorDashboard/InstructorHom
 import MyClasses from "../pages/Dashboard/InstructorDashboard/MyClasses/MyClasses";
 import Payment from "../pages/Dashboard/StudentDashboard/Payment/Payment";
 import SelectedClass from "../pages/Dashboard/StudentDashboard/SelectedClass";
+import StudentHome from "../pages/Dashboard/StudentDashboard/StudentHome/StudentHome";
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
@@ -38,6 +39,7 @@ const router = createBrowserRouter([
     ),
     children: [
       // student dashboard
+      { path: "studentHome", element: <StudentHome /> },
       { path: "selectedClass", element: <SelectedClass /> },
       { path: "payment", element: <Payment /> },
 
