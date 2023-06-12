@@ -56,7 +56,7 @@ const Navbar = () => {
                   isAdmin
                     ? "manageUser"
                     : "studentHome" && isInstructor
-                    ? "myClasses"
+                    ? "instructorHome"
                     : "studentHome"
                 }`
               : "/login"

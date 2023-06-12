@@ -33,8 +33,8 @@ const History = () => {
                 <thead>
                   <tr className="bg-[#D1A054] text-white uppercase">
                     <th>Email</th>
-                    <th>Class Quantity</th>
                     <th>Total Price</th>
+                    <th>Payment Id</th>
                     <th>Payment date</th>
                   </tr>
                 </thead>
@@ -42,10 +42,9 @@ const History = () => {
                   {payments?.map((item) => (
                     <tr className="hover border" key={item?._id}>
                       <td>{item.email}</td>
-                      <td>{item.quantity}</td>
                       <td className="text-xl font-semibold">$ {item.price}</td>
+                      <td>{item.transactionId}</td>
                       <td className="font-semibold">{item.date}</td>
-                      <td></td>
                     </tr>
                   ))}
                 </tbody>

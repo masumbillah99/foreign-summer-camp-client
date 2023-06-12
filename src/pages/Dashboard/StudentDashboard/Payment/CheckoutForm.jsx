@@ -1,3 +1,4 @@
+import { Button, DialogActions } from "@mui/material";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +7,7 @@ import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import "./CheckoutForm.css";
 
-const CheckOutForm = ({ closeModal, itemInfo }) => {
+const CheckOutForm = ({ handleClose, itemInfo }) => {
   const stripe = useStripe();
   const elements = useElements();
   const { user } = useAuth();
@@ -87,7 +88,7 @@ const CheckOutForm = ({ closeModal, itemInfo }) => {
         if (res.data.insertResult.insertedId) {
           toast.success("Transaction complete successfully");
           navigate("/dashboard/selectedClass");
-          closeModal();
+          handleClose();
         }
       });
     }
@@ -99,7 +100,7 @@ const CheckOutForm = ({ closeModal, itemInfo }) => {
 
   return (
     <>
-      <form onSubmit={handlePaymentSubmit}>
+      <form onSubmit={handlePaymentSubmit} className="pl-10">
         <CardElement
           className="border py-3"
           options={{
@@ -117,7 +118,17 @@ const CheckOutForm = ({ closeModal, itemInfo }) => {
             },
           }}
         />
-        <div className="flex mt-2 justify-around">
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button
+            type="submit"
+            autoFocus
+            disabled={!stripe || !clientSecret || processing}
+          >
+            Done Payment
+          </Button>
+        </DialogActions>
+        {/* <div className="flex mt-2 justify-around">
           <button
             type="button"
             className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
@@ -132,15 +143,15 @@ const CheckOutForm = ({ closeModal, itemInfo }) => {
           >
             Payment
           </button>
-        </div>
+        </div> */}
       </form>
       {cardError && (
-        <p className="bg-red-600 text-white p-3 text-center mt-5 w-1/2 mx-auto rounded-lg">
+        <p className="bg-red-600 text-white p-3 text-center mt-5 mb-10 mx-auto rounded-lg">
           {cardError}
         </p>
       )}
       {transactionId && (
-        <p className="bg-green-700 text-white p-3 text-center mt-5 w-1/2 mx-auto rounded-lg">
+        <p className="bg-green-700 text-white p-3 text-center mt-5 mx-auto rounded-lg">
           Your transaction id: {transactionId}
         </p>
       )}

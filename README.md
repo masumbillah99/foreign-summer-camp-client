@@ -1,14 +1,14 @@
 # Summer Camp Learn_Do School
 
-Summer Camp Learn_Do School is a MERN Stack single page application.
+Summer Camp Learn_Do School is a MERN Stack single page application. It's have some awesome features like authentication & world payment system.
 
 # Best Features
 
-- This websites help you to find various foreign language course for learn.
--
--
--
--
+- This websites help you to find various foreign language course for learn. You can see various foreign class add by their instructors. This project has 3 dashboard based on Admin, Instructor & student.
+- A student can see class, and able to select any class. And he can show how many classes he add in his dashboard. Also he can Enrolled selected classes by payment with Stripe payment system.
+- An Admin can access all users and he can change any user role like admin or instructor. Admin can manage all users & all add classes by instructor. Admin can approved class or decline classes.
+- An Instructor is not able to add class in cart but he can able to add new class. And he can review class in his dashboard.
+- This project I implement Firebase authentication system & also implement international payment system (Stripe). I am using React.js, Tanstack Query, Axios for secure, Awesome React Components, Tailwind CSS, DaisyUi, for front-end and MongoDb, Node.js, Express.js for back-end.
 
 # Technology / Package
 
@@ -24,7 +24,7 @@ Summer Camp Learn_Do School is a MERN Stack single page application.
 - LOTTIE REACT
 - TAILWIND CSS
 - DAISY UI
-- HEADLESS UI
+- MATERIAL UI
 
 # Tools used this application
 
@@ -36,7 +36,7 @@ Summer Camp Learn_Do School is a MERN Stack single page application.
 
 # Live Link
 
-Live side link hosted in Firebase -->
+Live side link hosted in Firebase --> https://summer-camp-ass-12.web.app
 
 Server side code link --> https://github.com/programming-hero-web-course1/b7a12-summer-camp-server_side-masumbillah99
 

@@ -3,12 +3,29 @@ import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import useCart from "../../../hooks/useCart";
 // import { FaDollarSign } from "react-icons/fa";
-import { useState } from "react";
+import React, { useState } from "react";
 import PaymentModal from "./PaymentModal";
+import { Button, Dialog, DialogTitle } from "@mui/material";
+import CheckOutForm from "./Payment/CheckoutForm";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
 
 const SelectedClass = () => {
   const [cart, refetch] = useCart();
   let [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [fullWidth, setFullWidth] = React.useState(true);
+  const [maxWidth, setMaxWidth] = React.useState("sm");
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const closeModal = () => {
     setIsOpen(false);
@@ -78,7 +95,7 @@ const SelectedClass = () => {
                       </td>
                       <td className="font-semibold">{item.name}</td>
                       <td className="text-xl font-semibold">$ {item.price}</td>
-                      <td>
+                      {/* <td>
                         <button
                           type="button"
                           onClick={() => setIsOpen(true)}
@@ -91,14 +108,36 @@ const SelectedClass = () => {
                         isOpen={isOpen}
                         closeModal={closeModal}
                         itemInfo={item}
-                      />
-                      {/* <td>
-                        <Link to="/dashboard/payment">
-                          <button className="btn btn-warning">
-                            <FaDollarSign /> payment
-                          </button>
-                        </Link>
-                      </td> */}
+                      /> */}
+
+                      <Button
+                        variant="outlined"
+                        onClick={handleClickOpen}
+                        className="top-5"
+                      >
+                        Open Modal
+                      </Button>
+
+                      <Dialog
+                        fullWidth={fullWidth}
+                        maxWidth={maxWidth}
+                        open={open}
+                        onClose={handleClose}
+                        className="text-center"
+                        aria-labelledby="alert-dialog-title"
+                        aria-describedby="alert-dialog-description"
+                      >
+                        <DialogTitle id="alert-dialog-title">
+                          {"Ready for payment"}
+                        </DialogTitle>
+                        <Elements stripe={stripePromise}>
+                          <CheckOutForm
+                            handleClose={handleClose}
+                            itemInfo={item}
+                          />
+                        </Elements>
+                      </Dialog>
+
                       <td>
                         <button
                           onClick={() => handleDelete(item)}
