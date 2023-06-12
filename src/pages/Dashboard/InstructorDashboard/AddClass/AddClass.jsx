@@ -24,7 +24,7 @@ const AddClass = () => {
           toast.success("successfully add a class");
           e.target.reset();
         })
-        .catch((err) => console.log(err));
+        .catch((err) => toast.error(err.message));
     });
   };
 

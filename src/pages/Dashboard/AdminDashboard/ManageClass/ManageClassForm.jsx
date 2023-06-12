@@ -14,13 +14,13 @@ const ManageClassForm = ({
   const { register, handleSubmit } = useForm();
 
   return (
-    <div className="card w-96 bg-base-100 shadow-xl">
+    <div className="card bg-base-100 shadow-xl">
       <figure className="p-5">
         <img src={image} alt="image" />
       </figure>
       <div className="card-body">
-        <h2 className="card-title text-2xl">{name}</h2>
-        <h1 className="text-md font-semibold">
+        <h2 className="card-title font-bold">{name}</h2>
+        <h1 className="font-semibold">
           Instructor: {instructor_name}
           <small className="font-normal ms-3">({email})</small>
         </h1>

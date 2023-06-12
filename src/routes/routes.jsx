@@ -9,6 +9,7 @@ import ManageUsers from "../pages/Dashboard/AdminDashboard/ManageUsers/ManageUse
 import AddClass from "../pages/Dashboard/InstructorDashboard/AddClass/AddClass";
 import InstructorHome from "../pages/Dashboard/InstructorDashboard/InstructorHome";
 import MyClasses from "../pages/Dashboard/InstructorDashboard/MyClasses/MyClasses";
+import EnrolledClass from "../pages/Dashboard/StudentDashboard/EnrolledClass/EnrolledClass";
 import History from "../pages/Dashboard/StudentDashboard/History/History";
 import Payment from "../pages/Dashboard/StudentDashboard/Payment/Payment";
 import SelectedClass from "../pages/Dashboard/StudentDashboard/SelectedClass";
@@ -16,6 +17,8 @@ import StudentHome from "../pages/Dashboard/StudentDashboard/StudentHome/Student
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
+import AdminRoute from "./AdminRoute";
+import InstructorRoute from "./InstructorRoute";
 import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
@@ -42,18 +45,54 @@ const router = createBrowserRouter([
       // student dashboard
       { path: "studentHome", element: <StudentHome /> },
       { path: "selectedClass", element: <SelectedClass /> },
-      { path: "payment", element: <Payment /> },
+      { path: "enrolledClass", element: <EnrolledClass /> },
+      // { path: "payment", element: <Payment /> },
       { path: "paymentHistory", element: <History /> },
 
       // instructor dashboard
-      { path: "instructorHome", element: <InstructorHome /> },
-      { path: "addClass", element: <AddClass /> },
-      { path: "myClasses", element: <MyClasses /> },
+      {
+        path: "instructorHome",
+        element: (
+          <InstructorRoute>
+            <InstructorHome />
+          </InstructorRoute>
+        ),
+      },
+      {
+        path: "addClass",
+        element: (
+          <InstructorRoute>
+            <AddClass />
+          </InstructorRoute>
+        ),
+      },
+      {
+        path: "myClasses",
+        element: (
+          <InstructorRoute>
+            <MyClasses />
+          </InstructorRoute>
+        ),
+      },
 
       // TODO: admin private route
       // admin dashboard
-      { path: "manageUser", element: <ManageUsers /> },
-      { path: "manageClass", element: <ManageClass /> },
+      {
+        path: "manageUser",
+        element: (
+          <AdminRoute>
+            <ManageUsers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manageClass",
+        element: (
+          <AdminRoute>
+            <ManageClass />
+          </AdminRoute>
+        ),
+      },
     ],
   },
 ]);

@@ -57,7 +57,11 @@ const PopularClassesDetails = ({ classDetails }) => {
     <>
       <div className="card w-96 bg-base-100 shadow-xl">
         <figure className="p-5">
-          <img src={image} alt="image" />
+          <img
+            className="hover:scale-125 transition-all"
+            src={image}
+            alt="image"
+          />
         </figure>
         <div className="card-body">
           <h2 className="card-title text-2xl">{name}</h2>

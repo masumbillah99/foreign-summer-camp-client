@@ -1,17 +1,30 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import { getMyAddClass } from "../../../../api/class";
+import { useQuery } from "@tanstack/react-query";
+// import { useState, useEffect } from "react";
+// import { getMyAddClass } from "../../../../api/class";
 import useAuth from "../../../../hooks/useAuth";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const MyClasses = () => {
-  const [myClass, setMyClass] = useState([]);
+  // const [myClass, setMyClass] = useState([]);
   const { user } = useAuth();
+  const [axiosSecure] = useAxiosSecure();
 
-  useEffect(() => {
-    getMyAddClass(user.email).then((data) => {
-      setMyClass(data);
-    });
-  }, [user]);
+  const { data: classesData = [] } = useQuery({
+    queryKey: ["classes"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/classes/${user?.email}`);
+      //   console.log("is admin response", res);
+      return res.data;
+    },
+  });
+
+  // useEffect(() => {
+  //   getMyAddClass(user.email).then((data) => {
+  //     setMyClass(data);
+  //   });
+  // }, [user]);
+
+  // TODO: enrolled students
 
   return (
     <div className="my-10">
@@ -21,7 +34,7 @@ const MyClasses = () => {
       <div className="overflow-x-auto">
         <table className="table">
           <tbody>
-            {myClass.map((mc, index) => (
+            {classesData.map((mc, index) => (
               <tr key={mc._id} className="border">
                 <td>{index + 1}.</td>
                 <td>
