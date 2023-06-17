@@ -3,7 +3,7 @@ import { Typewriter } from "react-simple-typewriter";
 import banner1 from "../../../assets/banner/banner-1.jpg";
 import banner2 from "../../../assets/banner/banner-2.jpg";
 import banner3 from "../../../assets/banner/banner-3.png";
-import banner4 from "../../../assets/banner/banner-4.jpg";
+import banner4 from "../../../assets/banner/banner-4.jpeg";
 
 const Banner = () => {
   return (

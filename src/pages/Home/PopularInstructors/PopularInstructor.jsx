@@ -20,7 +20,7 @@ const PopularInstructor = () => {
 
   return (
     <div className="max-w-screen-xl mx-5 lg:mx-auto mb-10 lg:px-0">
-      <Slide>
+      <Slide className="text-center">
         <h3 className="text-xl font-bold text-primary underline">
           Popular Instructors
         </h3>
@@ -29,17 +29,17 @@ const PopularInstructor = () => {
         </h1>
       </Slide>
       <Fade delay={1e3} cascade damping={1e-1}>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 justify-items-center gap-3">
           {users &&
             users.slice(0, 6)?.map((instructor) => (
               <div
                 key={instructor._id}
-                className="flex items-center w-96 gap-3 px-1 border hover:bg-gray-100 rounded-lg"
+                className="flex items-center w-full gap-3 px-1 border hover:bg-gray-100 rounded-lg"
               >
                 <figure>
                   <img
                     src={instructor.image}
-                    className="w-24 h-24 rounded-full"
+                    className="w-28 h-28 rounded-full"
                     alt="instructor image"
                     referrerPolicy="no referrer"
                   />

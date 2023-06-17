@@ -28,7 +28,7 @@ const PopularClasses = () => {
 
   return (
     <div className="my-20 mx-5 lg:mx-20 xl:mx-0">
-      <Slide>
+      <Slide className="text-center">
         <h5 className="text-xl font-bold text-blue-500 underline">
           Popular Classes
         </h5>
