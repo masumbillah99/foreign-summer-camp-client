@@ -21,7 +21,7 @@ const PopularInstructor = () => {
   return (
     <div className="max-w-screen-xl mx-5 lg:mx-auto mb-10 lg:px-0">
       <Slide className="text-center">
-        <h3 className="text-xl font-bold text-primary underline">
+        <h3 className="text-2xl font-bold text-primary underline">
           Popular Instructors
         </h3>
         <h1 className="text-4xl font-bold mt-3 mb-5">
