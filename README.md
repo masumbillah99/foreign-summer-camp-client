@@ -1,6 +1,6 @@
-# Summer Camp Learn_Do School
+# Summer Camp Foreign Lab
 
-Summer Camp Learn_Do School is a MERN Stack single page application. It's have some awesome features like authentication & world payment system.
+Summer Camp Foreign Lab is a MERN Stack single page application. It's have some awesome features like authentication & world payment system.
 
 # Best Features
 

@@ -132,7 +132,7 @@ const Navbar = () => {
         </div>
         <div className="flex items-center gap-4 cursor-pointer">
           <img className="w-20 text-white pl-10" src={logo} alt="" />
-          <h3 className="text-2xl font-bold logo-font">Learn_Do School</h3>
+          <h3 className="text-2xl font-bold logo-font">Foreign Lab</h3>
         </div>
       </div>
       <div className="navbar-end hidden lg:flex">

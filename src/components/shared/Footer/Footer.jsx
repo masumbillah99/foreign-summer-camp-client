@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="footer max-w-screen-xl mx-auto p-10">
         <div>
           <img src={logo} className="w-20" alt="" />
-          <h3 className="text-bold text-2xl ">Learn_Do School</h3>
+          <h3 className="text-bold text-2xl ">Foreign Lab</h3>
         </div>
         <div>
           <span className="footer-title">Services</span>

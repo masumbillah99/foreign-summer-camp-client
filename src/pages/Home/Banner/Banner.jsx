@@ -2,7 +2,8 @@ import { Carousel } from "react-responsive-carousel";
 import { Typewriter } from "react-simple-typewriter";
 import banner1 from "../../../assets/banner/banner-1.jpg";
 import banner2 from "../../../assets/banner/banner-2.jpg";
-import banner3 from "../../../assets/banner/banner-3.jpg";
+import banner3 from "../../../assets/banner/banner-3.png";
+import banner4 from "../../../assets/banner/banner-4.jpg";
 
 const Banner = () => {
   return (
@@ -18,10 +19,10 @@ const Banner = () => {
       <div className="relative">
         <img
           className="h-[500px] md:h-[700px] xl:h-[951px]"
-          src={banner1}
+          src={banner4}
           alt="slider img"
         />
-        <div className="absolute flex flex-col items-center justify-center text-white top-1/3">
+        {/* <div className="absolute flex flex-col items-center justify-center text-white top-1/3">
           <h3 className="font-4xl text-green-500">
             Welcome to Language Learning Platform
           </h3>
@@ -47,7 +48,7 @@ const Banner = () => {
             laboriosam numquam iste cupiditate saepe expedita? Laboriosam?
           </p>
           <button className="btn btn-primary px-5">Learn More</button>
-        </div>
+        </div> */}
       </div>
       <div className="relative">
         <img
@@ -55,7 +56,7 @@ const Banner = () => {
           src={banner2}
           alt="slider img"
         />
-        <div className="absolute flex flex-col items-center justify-center text-white top-1/3">
+        {/* <div className="absolute flex flex-col items-center justify-center text-white top-1/3">
           <h3 className="font-4xl text-green-500">
             Welcome to Language Learning Platform
           </h3>
@@ -81,7 +82,7 @@ const Banner = () => {
             laboriosam numquam iste cupiditate saepe expedita? Laboriosam?
           </p>
           <button className="btn btn-primary px-5">Learn More</button>
-        </div>
+        </div> */}
       </div>
       <div className="relative">
         <img
@@ -90,7 +91,7 @@ const Banner = () => {
           alt="slider img"
         />
         <div className="absolute flex flex-col items-center justify-center text-white top-1/3">
-          <h3 className="font-4xl text-green-500">
+          {/* <h3 className="font-4xl text-green-500">
             Welcome to Language Learning Platform
           </h3>
           <h2 className="text-5xl text-orange-600 font-bold my-3">
@@ -114,7 +115,7 @@ const Banner = () => {
             consectetur adipisicing elit. Odio dolor placeat beatae dolorem
             laboriosam numquam iste cupiditate saepe expedita? Laboriosam?
           </p>
-          <button className="btn btn-primary px-5">Learn More</button>
+          <button className="btn btn-primary px-5">Learn More</button> */}
         </div>
       </div>
     </Carousel>

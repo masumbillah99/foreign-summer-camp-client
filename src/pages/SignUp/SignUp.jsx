@@ -65,7 +65,7 @@ const SignUp = () => {
   return (
     <div className="max-w-screen-xl mx-auto my-20">
       <h1 className="mb-5 text-2xl font-bold text-center underline">
-        Register Learn_Do School
+        Register Foreign Lab
       </h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-items-center">
         <img src={loginImg} className="w-3/4 lg:w-full" alt="" />
@@ -205,7 +205,7 @@ const SignUp = () => {
           </form>
           <div className="text-center mt-3">
             <p className="text-lg">
-              Already registered Learn_Do School? Please
+              Already registered Foreign Lab? Please
               <Link
                 className="text-orange-500 ms-1 hover:underline"
                 to="/login"

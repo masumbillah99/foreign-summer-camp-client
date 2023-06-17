@@ -30,7 +30,7 @@ const DashboardLayout = () => {
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 h-full bg-[#2C2C2C] text-lg">
           <h3 className="text-white pb-24 flex items-center justify-evenly">
-            <img src={logo} className="w-10" alt="logo" /> Learn_Do School
+            <img src={logo} className="w-10" alt="logo" /> Foreign Lab
           </h3>
           {/* Sidebar content here */}
           {isAdmin && (
