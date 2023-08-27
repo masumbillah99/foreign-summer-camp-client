@@ -11,14 +11,11 @@ const History = () => {
     const res = await axiosSecure.get(
       `${import.meta.env.VITE_SERVER_URL}/payments?email=${user?.email}`
     );
-    // return res.json();
     return res.data;
   });
 
-  // console.log(payments);
-
   return (
-    <div className="max-w-screen-xl mx-auto">
+    <div className="max-w-screen-xl mx-auto my-5">
       <h1 className="text-3xl text-center font-bold">Payment History</h1>
       <hr className="border-2 border-primary my-5 mx-auto w-1/2" />
       <div className="bg-gray-100 rounded-lg p-5">
@@ -52,8 +49,8 @@ const History = () => {
             </div>
           ) : (
             <div className="w-2/3 py-10 mx-auto text-center">
-              <p className="text-xl font-bold mb-3">
-                You don&amp;t have any payment history
+              <p className="text-xl font-bold mb-5">
+                You don&apos;t have any payment history
               </p>
               <Link className="btn btn-primary" to={"/dashboard/selectedClass"}>
                 My Selected Class

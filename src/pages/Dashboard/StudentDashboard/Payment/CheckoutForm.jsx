@@ -18,9 +18,6 @@ const CheckOutForm = ({ handleClose, itemInfo }) => {
   const [processing, setProcessing] = useState(false);
   const navigate = useNavigate();
 
-  // const price = cart.map((item) => item.price);
-  // console.log(typeof price);
-
   useEffect(() => {
     if (itemInfo?.price > 0) {
       axiosSecure
@@ -128,22 +125,6 @@ const CheckOutForm = ({ handleClose, itemInfo }) => {
             Done Payment
           </Button>
         </DialogActions>
-        {/* <div className="flex mt-2 justify-around">
-          <button
-            type="button"
-            className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-            onClick={closeModal}
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            disabled={!stripe || !clientSecret || processing}
-            className="inline-flex justify-center rounded-md border border-transparent bg-green-300 px-4 py-2 text-sm font-medium text-green-900 hover:bg-green-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2"
-          >
-            Payment
-          </button>
-        </div> */}
       </form>
       {cardError && (
         <p className="bg-red-600 text-white p-3 text-center mt-5 mb-10 mx-auto rounded-lg">
@@ -151,7 +132,7 @@ const CheckOutForm = ({ handleClose, itemInfo }) => {
         </p>
       )}
       {transactionId && (
-        <p className="bg-green-700 text-white p-3 text-center mt-5 mx-auto rounded-lg">
+        <p className="bg-green-700 text-white p-3 text-center mt-5 mx-auto rounded-lg pb-10">
           Your transaction id: {transactionId}
         </p>
       )}

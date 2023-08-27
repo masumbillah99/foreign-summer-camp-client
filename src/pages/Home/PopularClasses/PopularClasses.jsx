@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import PopularClassesDetails from "./PopularClassesDetails";
 import { Fade, Slide } from "react-awesome-reveal";
+import { Link } from "react-router-dom";
 
 const PopularClasses = () => {
   // const [classes, setClasses] = useState([]);
@@ -27,8 +28,8 @@ const PopularClasses = () => {
   // }, []);
 
   return (
-    <div className="my-20 mx-5 lg:mx-20 xl:mx-0">
-      <Slide className="text-center">
+    <div className="my-20 mx-5 lg:mx-10 xl:mx-0">
+      <Slide>
         <h5 className="text-2xl font-bold text-primary underline">
           Popular Classes
         </h5>
@@ -47,6 +48,11 @@ const PopularClasses = () => {
                   classDetails={classDetails}
                 />
               ))}
+        </div>
+        <div className="text-center mt-10">
+          <Link to="/allClasses" className="btn btn-primary">
+            Explore All Classes
+          </Link>
         </div>
       </Fade>
     </div>

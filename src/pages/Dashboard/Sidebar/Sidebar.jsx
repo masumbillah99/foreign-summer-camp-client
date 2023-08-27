@@ -6,10 +6,12 @@ import { FaHistory, FaHome, FaShoppingCart, FaWallet } from "react-icons/fa";
 import { HiMail, HiShoppingCart } from "react-icons/hi";
 import { AiFillFileAdd, AiFillHome } from "react-icons/ai";
 import useCart from "../../../hooks/useCart";
+import useAuth from "../../../hooks/useAuth";
 const Sidebar = () => {
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
   const [cart] = useCart();
+  const { user } = useAuth();
   // const [isActive, setActive] = useState(false);
 
   // Sidebar Responsive Handler

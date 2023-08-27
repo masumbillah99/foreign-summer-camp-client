@@ -2,9 +2,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import useCart from "../../../hooks/useCart";
-// import { FaDollarSign } from "react-icons/fa";
-import React, { useState } from "react";
-import PaymentModal from "./PaymentModal";
+import React from "react";
 import { Button, Dialog, DialogTitle } from "@mui/material";
 import CheckOutForm from "./Payment/CheckoutForm";
 import { Elements } from "@stripe/react-stripe-js";
@@ -14,7 +12,6 @@ const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
 
 const SelectedClass = () => {
   const [cart, refetch] = useCart();
-  let [isOpen, setIsOpen] = useState(false);
   const [open, setOpen] = React.useState(false);
   const [fullWidth, setFullWidth] = React.useState(true);
   const [maxWidth, setMaxWidth] = React.useState("sm");
@@ -25,10 +22,6 @@ const SelectedClass = () => {
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
   };
 
   // const openModal = () => {
@@ -95,27 +88,12 @@ const SelectedClass = () => {
                       </td>
                       <td className="font-semibold">{item.name}</td>
                       <td className="text-xl font-semibold">$ {item.price}</td>
-                      {/* <td>
-                        <button
-                          type="button"
-                          onClick={() => setIsOpen(true)}
-                          className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-                        >
-                          PAYMENT
-                        </button>
-                      </td>
-                      <PaymentModal
-                        isOpen={isOpen}
-                        closeModal={closeModal}
-                        itemInfo={item}
-                      /> */}
-
                       <Button
                         variant="outlined"
                         onClick={handleClickOpen}
                         className="top-5"
                       >
-                        Open Modal
+                        Payment
                       </Button>
 
                       <Dialog

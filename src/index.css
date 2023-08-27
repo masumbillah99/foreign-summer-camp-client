@@ -1,10 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Cinzel&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans&display=swap");
 
 /* css start here */
 :root {
   --primary-font: "Space Grotesk", sans-serif;
   --logo-font: "Cinzel", serif;
+  --student-font: "Work Sans", sans-serif;
 }
 
 body {
@@ -13,6 +15,10 @@ body {
 
 .logo-font {
   font-family: var(--logo-font);
+}
+
+.student-font {
+  font-family: var(--student-font);
 }
 
 /* tailwind directives css */
