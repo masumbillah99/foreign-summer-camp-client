@@ -66,9 +66,10 @@ const SelectedClass = () => {
                     <th>#</th>
                     <th>Class Image</th>
                     <th>Class Name</th>
+                    <th>Available Seat</th>
                     <th>Price</th>
-                    <th>Enrolled</th>
-                    <th>Action</th>
+                    <th>Enroll</th>
+                    <th>Remove</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -87,6 +88,7 @@ const SelectedClass = () => {
                         </div>
                       </td>
                       <td className="font-semibold">{item.name}</td>
+                      <td className="font-semibold">{item.available_seat}</td>
                       <td className="text-xl font-semibold">$ {item.price}</td>
                       <Button
                         variant="outlined"
@@ -135,7 +137,7 @@ const SelectedClass = () => {
                 No selected class data found
               </p>
               <Link className="btn btn-primary" to={"/allClasses"}>
-                Add Class
+                Select Class
               </Link>
             </div>
           )}

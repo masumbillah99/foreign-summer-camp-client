@@ -17,8 +17,8 @@ const EnrolledClass = () => {
   });
 
   // console.log(payments);
-  const getClassId = payments.map((item) => item);
-  console.log({ getClassId });
+  // const getClassId = payments.map((item) => item);
+  // console.log({ getClassId });
 
   // const { data: enrolledClass = [] } = useQuery(
   //   ["enrolled-class"],
@@ -30,7 +30,7 @@ const EnrolledClass = () => {
   //   }
   // );
 
-  console.log(payments);
+  // console.log(payments);
 
   return (
     <div className="my-20 md:my-10">

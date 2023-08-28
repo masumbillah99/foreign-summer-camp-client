@@ -1,8 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+// import { useQuery } from "@tanstack/react-query";
+// import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const EnrollClass = ({ singleClass }) => {
-  const [axiosSecure] = useAxiosSecure();
+  // const [axiosSecure] = useAxiosSecure();
   //   console.log(singleClass.classId);
 
   // const { data: enrolledClass = [] } = useQuery(

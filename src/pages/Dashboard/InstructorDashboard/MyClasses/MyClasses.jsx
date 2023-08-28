@@ -18,6 +18,10 @@ const MyClasses = () => {
     },
   });
 
+  // if (isLoading) {
+  //   return <span className="loading loading-bars loading-lg"></span>;
+  // }
+
   // useEffect(() => {
   //   getMyAddClass(user.email).then((data) => {
   //     setMyClass(data);

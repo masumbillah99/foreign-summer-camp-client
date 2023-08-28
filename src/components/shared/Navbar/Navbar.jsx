@@ -48,7 +48,8 @@ const Navbar = () => {
           Instructors
         </NavLink>
       </li>
-      <li>
+
+      {/* <li>
         <NavLink
           to={`${
             user
@@ -67,9 +68,35 @@ const Navbar = () => {
         >
           dashboard
         </NavLink>
-      </li>
+      </li> */}
+
       {user ? (
         <>
+          <li>
+            <NavLink
+              to={`${
+                user
+                  ? `/dashboard/${
+                      isAdmin
+                        ? "manageUser"
+                        : isInstructor
+                        ? "instructorHome"
+                        : !isAdmin && !isInstructor
+                        ? "studentHome"
+                        : "studentHome"
+                      // : "studentHome" && isInstructor
+                      // ? "instructorHome"
+                      // : "studentHome"
+                    }`
+                  : "/login"
+              }`}
+              className={({ isActive }) =>
+                isActive ? "text-[#EEFF25]" : "text-gray-300"
+              }
+            >
+              dashboard
+            </NavLink>
+          </li>
           <li>
             <img
               className="w-20 rounded-full"

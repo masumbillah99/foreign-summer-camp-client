@@ -2,13 +2,16 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import { FaHistory, FaHome, FaShoppingCart, FaWallet } from "react-icons/fa";
 import { HiMail, HiShoppingCart } from "react-icons/hi";
 import { HiBars3 } from "react-icons//hi2";
+import { MdSettings } from "react-icons/md";
 import { AiFillFileAdd, AiFillHome } from "react-icons/ai";
 import useAdmin from "../hooks/useAdmin";
 import useInstructor from "../hooks/useInstructor";
 import useCart from "../hooks/useCart";
 import logo from "../assets/logo.png";
+import useAuth from "../hooks/useAuth";
 
 const DashboardLayout = () => {
+  const { user } = useAuth();
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
   const [cart] = useCart();
@@ -166,6 +169,16 @@ const DashboardLayout = () => {
               contact
             </Link>
           </li>
+          <div className="absolute bottom-14 left-8">
+            <div className="text-4xl lg:ml-3">
+              <MdSettings className="text-yellow-500 cursor-pointer" />
+            </div>
+            <div className="avatar top-6">
+              <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                <img src={user?.photoURL} alt="" referrerPolicy="no-referrer" />
+              </div>
+            </div>
+          </div>
         </ul>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { updateClassData } from "../../../../api/class";
+import { updateClassData } from "../../../../api/Class";
 import ManageClassForm from "./ManageClassForm";
 
 const ManageClass = () => {

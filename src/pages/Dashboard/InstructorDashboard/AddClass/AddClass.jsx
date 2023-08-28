@@ -1,5 +1,5 @@
 import { toast, ToastContainer } from "react-toastify";
-import { addNewClass } from "../../../../api/class";
+import { addNewClass } from "../../../../api/Class";
 import { imageUpload } from "../../../../api/utils";
 import AddClassForm from "./AddClassForm";
 

@@ -1,13 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-import { MdNumbers, MdPending } from "react-icons/md";
+import { MdNumbers } from "react-icons/md";
 import { HiBadgeCheck, HiShoppingCart } from "react-icons/hi";
 import useCart from "../../../../hooks/useCart";
+// import PieDash from "../../../../components/PieChart/PieDash";
+import Loader from "../../../../components/Loader";
+import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 
 const StudentHome = () => {
   const { user } = useAuth();
-  const [cart, refetch] = useCart();
+  const [cart] = useCart();
   const [axiosSecure] = useAxiosSecure();
 
   const {
@@ -22,17 +25,47 @@ const StudentHome = () => {
     return res.data;
   });
 
-  if (isLoading) return "Loading.................";
-
+  if (isLoading) return <Loader />;
   if (isError) return "Error......." + error.message;
 
-  // console.log(cart);
+  // console.log(payments);
+
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+  const RADIAN = Math.PI / 180;
+  const renderCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+  }) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor={x > cx ? "start" : "end"}
+        dominantBaseline="central"
+      >
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  };
 
   return (
     <div className="student-font">
-      <div className="flex flex-col lg:flex-row gap-5 lg:gap-0 justify-between items-center my-4">
-        <h3 className="text-3xl font-bold">Hello, {user.displayName}</h3>
-        <div className="dropdown dropdown-end">
+      <div className="text-center mt-5 mb-10">
+        <h3 className="text-3xl font-bold mb-2">
+          Welcome, {user.displayName} Dashboard
+        </h3>
+        <p className="underline">Here you can see your all information</p>
+
+        {/* <div className="dropdown dropdown-end">
           <label tabIndex={0} className="avatar cursor-pointer">
             <div className="w-20 rounded-full">
               <img
@@ -54,14 +87,14 @@ const StudentHome = () => {
               <a className="justify-between">Settings</a>
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-3 xl:w-4/5">
         <div className="card w-96 bg-base-100 shadow-xl shadow-slate-300">
           <div className="card-body">
             <span>
-              <HiBadgeCheck className="text-2xl" />
+              <HiBadgeCheck className="text-2xl text-green-600" />
             </span>
             <h2 className="card-title text-purple-600">Enrolled Class</h2>
             <p>You enrolled some classes by payment with stripe</p>
@@ -75,7 +108,7 @@ const StudentHome = () => {
         <div className="card w-96 h-60 bg-base-100 shadow-xl shadow-slate-300">
           <div className="card-body">
             <span>
-              <HiShoppingCart className="text-2xl" />
+              <HiShoppingCart className="text-2xl text-blue-500" />
             </span>
             <h2 className="card-title text-purple-600">Pending Class</h2>
             <p>
@@ -102,6 +135,30 @@ const StudentHome = () => {
             </p>
           </div>
         </div>
+      </div>
+
+      <div className="my-10 w-60 mx-auto lg:mx-0">
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart width={400} height={400}>
+            <Pie
+              data={payments}
+              cx="50%"
+              cy="50%"
+              labelLine={false}
+              label={renderCustomizedLabel}
+              outerRadius={80}
+              fill="#8884d8"
+              dataKey="price"
+            >
+              {payments.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
+          </PieChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );

@@ -18,6 +18,8 @@ const CheckOutForm = ({ handleClose, itemInfo }) => {
   const [processing, setProcessing] = useState(false);
   const navigate = useNavigate();
 
+  // console.log(itemInfo);
+
   useEffect(() => {
     if (itemInfo?.price > 0) {
       axiosSecure
@@ -76,9 +78,10 @@ const CheckOutForm = ({ handleClose, itemInfo }) => {
       // save payment information to the server
       const paymentData = {
         ...itemInfo,
+        available_seat: itemInfo?.available_seat - 1,
         transactionId: paymentIntent.id,
         status: "service pending",
-        date: new Date(),
+        date: new Date().toLocaleDateString(),
       };
       axiosSecure.post("/payments", paymentData).then((res) => {
         console.log("response", res.data);
@@ -86,6 +89,7 @@ const CheckOutForm = ({ handleClose, itemInfo }) => {
           toast.success("Transaction complete successfully");
           navigate("/dashboard/selectedClass");
           handleClose();
+          console.log(paymentData);
         }
       });
     }
@@ -132,7 +136,7 @@ const CheckOutForm = ({ handleClose, itemInfo }) => {
         </p>
       )}
       {transactionId && (
-        <p className="bg-green-700 text-white p-3 text-center mt-5 mx-auto rounded-lg pb-10">
+        <p className="bg-green-700 text-white p-3 text-center mt-5 mx-auto rounded-lg mb-10">
           Your transaction id: {transactionId}
         </p>
       )}
