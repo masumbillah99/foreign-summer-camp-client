@@ -170,8 +170,13 @@ const DashboardLayout = () => {
             </Link>
           </li>
           <div className="absolute bottom-14 left-8">
-            <div className="text-4xl lg:ml-3">
-              <MdSettings className="text-yellow-500 cursor-pointer" />
+            <div className="text-4xl lg:ml-1">
+              <NavLink to={"/dashboard/settings"}>
+                <MdSettings
+                  className="text-yellow-500 cursor-pointer"
+                  title="settings"
+                />
+              </NavLink>
             </div>
             <div className="avatar top-6">
               <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">

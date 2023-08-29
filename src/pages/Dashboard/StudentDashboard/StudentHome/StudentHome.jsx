@@ -90,7 +90,7 @@ const StudentHome = () => {
         </div> */}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-3 xl:w-4/5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1  xl:grid-cols-2 2xl:grid-cols-3 justify-items-center gap-3 xl:w-full">
         <div className="card w-96 bg-base-100 shadow-xl shadow-slate-300">
           <div className="card-body">
             <span>

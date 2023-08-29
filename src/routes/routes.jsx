@@ -9,9 +9,10 @@ import ManageUsers from "../pages/Dashboard/AdminDashboard/ManageUsers/ManageUse
 import AddClass from "../pages/Dashboard/InstructorDashboard/AddClass/AddClass";
 import InstructorHome from "../pages/Dashboard/InstructorDashboard/InstructorHome";
 import MyClasses from "../pages/Dashboard/InstructorDashboard/MyClasses/MyClasses";
+import Settings from "../pages/Dashboard/Settings/Settings";
 import EnrolledClass from "../pages/Dashboard/StudentDashboard/EnrolledClass/EnrolledClass";
 import History from "../pages/Dashboard/StudentDashboard/History/History";
-import Payment from "../pages/Dashboard/StudentDashboard/Payment/Payment";
+// import Payment from "../pages/Dashboard/StudentDashboard/Payment/Payment";
 import SelectedClass from "../pages/Dashboard/StudentDashboard/SelectedClass";
 import StudentHome from "../pages/Dashboard/StudentDashboard/StudentHome/StudentHome";
 import Home from "../pages/Home/Home/Home";
@@ -92,6 +93,11 @@ const router = createBrowserRouter([
             <ManageClass />
           </AdminRoute>
         ),
+      },
+      // user settings - dashboard
+      {
+        path: "settings",
+        element: <Settings />,
       },
     ],
   },

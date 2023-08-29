@@ -10,6 +10,7 @@ import {
   signOut,
   updateEmail,
   updateProfile,
+  updatePassword,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import app from "../firebase/firebase.config";
@@ -69,16 +70,29 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   // update user data
-  const updateUserProfile = (name, photo) => {
+  const updateUserProfile = (name, img) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
-      photoURL: photo,
+      photoURL: img,
     });
   };
+
+  // const updateUserProfile = (name, photo, phoneNumber) => {
+  //   return updateProfile(auth.currentUser, {
+  //     displayName: name,
+  //     photoURL: photo,
+  //     phoneNumber: phoneNumber,
+  //   });
+  // };
 
   // update user's email address
   const updateUserEmail = (authUser, email) => {
     return updateEmail(authUser, email);
+  };
+
+  // update user's password
+  const updateUserPassword = (newPassword) => {
+    return updatePassword(user, newPassword);
   };
 
   // google sign in
@@ -99,6 +113,7 @@ const AuthProvider = ({ children }) => {
     logOutUser,
     updateUserProfile,
     updateUserEmail,
+    updateUserPassword,
     googleSignIn,
     resetPassword,
   };

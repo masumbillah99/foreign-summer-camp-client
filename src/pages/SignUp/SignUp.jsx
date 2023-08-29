@@ -16,6 +16,7 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
   const { registerUser, updateUserProfile } = useAuth();
+  const [imgUrl, setImgUrl] = useState("");
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -38,28 +39,34 @@ const SignUp = () => {
       .then((res) => res.json())
       .then((imageData) => {
         if (imageData.success) {
-          const imgURL = imageData.data.display_url;
+          // const imgURL = imageData.data.display_url;
           // console.log(imgURL);
-          if (data.password !== data.confirm) {
-            setError("your password does not match");
-            return;
-          }
-          registerUser(data.email, data.password).then((result) => {
-            updateUserProfile(data.name, imgURL)
-              .then(() => {
-                console.log(result.user);
-                toast.success("Sign up successful");
-                // save user to db
-                saveUser(result.user);
-                navigate("/login");
-              })
-              .catch((err) => {
-                console.log(err.message);
-                toast.error(err.message);
-              });
-          });
+          setImgUrl(imageData?.data.display_url);
         }
       });
+
+    if (data.password !== data.confirm) {
+      setError("your password does not match");
+      return;
+    }
+
+    // const userData = { displayName: data.name, photoURL: imgUrl };
+
+    registerUser(data.email, data.password).then((result) => {
+      updateUserProfile(data.name, imgUrl)
+        .then(() => {
+          console.log(result.user);
+          toast.success("Sign up successful");
+
+          // save user to db
+          saveUser(result.user);
+          navigate("/login");
+        })
+        .catch((err) => {
+          console.log(err.message);
+          toast.error(err.message);
+        });
+    });
   };
 
   return (
@@ -88,7 +95,7 @@ const SignUp = () => {
             <div className="relative z-0 mb-6 mx-auto group">
               <input
                 className="file-input file-input-bordered w-full"
-                {...register("image", { required: true })}
+                {...register("image")}
                 type="file"
               />
             </div>
@@ -222,7 +229,6 @@ const SignUp = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 };
