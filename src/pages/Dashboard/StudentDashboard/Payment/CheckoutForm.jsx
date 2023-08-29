@@ -3,6 +3,8 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { updateClassData } from "../../../../api/Class";
+import ClassCompo from "../../../../components/reusable/classCompo";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import "./CheckoutForm.css";
@@ -17,6 +19,7 @@ const CheckOutForm = ({ handleClose, itemInfo }) => {
   const [cardError, setCardError] = useState("");
   const [processing, setProcessing] = useState(false);
   const navigate = useNavigate();
+  const [approved, refetch] = ClassCompo();
 
   // console.log(itemInfo);
 
@@ -76,19 +79,34 @@ const CheckOutForm = ({ handleClose, itemInfo }) => {
       setTransactionId(paymentIntent.id);
       // TODO: next steps
       // save payment information to the server
+      const seatClass = approved.find((sId) => sId._id === itemInfo.classId);
+
       const paymentData = {
         ...itemInfo,
-        available_seat: itemInfo?.available_seat - 1,
+        available_seat: seatClass?.available_seat - 1,
         transactionId: paymentIntent.id,
-        status: "service pending",
+        course_status: "service pending",
         date: new Date().toLocaleDateString(),
       };
+
+      const newData = {
+        ...itemInfo,
+        status: seatClass?.status,
+        available_seat: seatClass?.available_seat - 1,
+      };
+
       axiosSecure.post("/payments", paymentData).then((res) => {
-        console.log("response", res.data);
+        // console.log("response", res.data);
         if (res.data.insertResult.insertedId) {
-          toast.success("Transaction complete successfully");
+          updateClassData(newData, seatClass?._id).then((data) => {
+            if (data.modifiedCount > 0) {
+              refetch();
+            }
+          });
+          toast.success("transaction complete successfully");
           navigate("/dashboard/selectedClass");
           handleClose();
+          refetch();
           console.log(paymentData);
         }
       });

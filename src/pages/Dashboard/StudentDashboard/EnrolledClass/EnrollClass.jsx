@@ -18,7 +18,7 @@ const EnrollClass = ({ singleClass }) => {
   // );
 
   // console.log({ enrolledClass });
-  const { name, price, date, classId, status } = singleClass;
+  const { name, price, date, classId, course_status } = singleClass;
 
   return (
     <div className="card w-96 bg-base-100 shadow-xl shadow-gray-300">
@@ -37,7 +37,8 @@ const EnrollClass = ({ singleClass }) => {
           <span className="badge badge-warning ml-2">{classId}</span>
         </p>
         <p>
-          Status: <span className="badge badge-warning ml-2">{status}</span>
+          Status:{" "}
+          <span className="badge badge-warning ml-2">{course_status}</span>
         </p>
       </div>
     </div>

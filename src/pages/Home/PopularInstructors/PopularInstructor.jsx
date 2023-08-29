@@ -21,7 +21,7 @@ const PopularInstructor = () => {
   // TOD0 : based on students show in ui
 
   return (
-    <div className="max-w-screen-xl mx-5 lg:mx-10 xl:mx-0 mb-10">
+    <div className="my-20 mx-5 lg:mx-10 xl:mx-0">
       <Slide>
         <h3 className="text-2xl font-bold text-primary underline">
           Popular Instructors
@@ -31,7 +31,7 @@ const PopularInstructor = () => {
         </h1>
       </Slide>
       <Fade delay={1e3} cascade damping={1e-1}>
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 justify-items-center gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-3">
           {users &&
             users.slice(0, 6)?.map((instructor) => (
               <div

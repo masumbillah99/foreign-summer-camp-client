@@ -28,7 +28,7 @@ const ManageClass = () => {
   const handleDenyRequest = (id) => {
     const newData = { status: "denied" };
     updateClassData(newData, id).then((data) => {
-      if (data.modifiedCount > 0) {
+      if (data.modifiedCount < 0) {
         toast.success("Class approved request canceled");
         refetch();
       }

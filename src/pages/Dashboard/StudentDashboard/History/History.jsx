@@ -60,7 +60,7 @@ const History = () => {
                   </td>
                   <td className="py-3 px-6 text-left ">
                     <div className="flex items-center badge badge-warning">
-                      <span className="font-medium">{item.status}</span>
+                      <span className="font-medium">{item.course_status}</span>
                     </div>
                   </td>
                 </Row>

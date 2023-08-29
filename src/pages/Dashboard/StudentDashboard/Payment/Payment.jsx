@@ -12,10 +12,10 @@ const Payment = () => {
   return (
     <div className="max-w-screen-xl mx-auto my-10">
       <h1 className="text-4xl font-bold text-center">PAYMENT</h1>
-      <hr className="w-1/2 mx-auto border-2 border-primary my-5" />
+      {/* <hr className="w-1/2 mx-auto border-2 border-primary my-5" />
       <Elements stripe={stripePromise}>
         <CheckoutForm cart={cart} price={totalPrice} />
-      </Elements>
+      </Elements> */}
     </div>
   );
 };
