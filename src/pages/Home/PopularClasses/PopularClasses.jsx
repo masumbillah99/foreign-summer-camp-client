@@ -21,7 +21,6 @@ const PopularClasses = () => {
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-3">
           {approvedClass &&
             approvedClass
-              ?.sort((a, b) => a - b)
               .slice(0, 6)
               ?.map((classDetails) => (
                 <PopularClassesDetails

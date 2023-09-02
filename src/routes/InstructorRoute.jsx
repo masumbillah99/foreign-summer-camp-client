@@ -9,7 +9,7 @@ const InstructorRoute = ({ children }) => {
   const location = useLocation();
 
   if (isInstructorLoading) {
-    console.log("instructor-route");
+    console.log("ins-load");
     return <Loader />;
   }
 

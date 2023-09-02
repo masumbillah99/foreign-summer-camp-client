@@ -21,7 +21,6 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
   const { registerUser, updateUserProfile } = useAuth();
-  const [imgUrl, setImgUrl] = useState("");
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
   const [role, setRole] = useState("");
@@ -46,48 +45,44 @@ const SignUp = () => {
       .then((res) => res.json())
       .then((imageData) => {
         if (imageData.success) {
-          setImgUrl(imageData?.data.display_url);
+          const imgUrl = imageData?.data.display_url;
+
+          if (data.password !== data.confirm) {
+            setError("your password does not match");
+            return;
+          }
+
+          if (!role) {
+            setError("role is required");
+            return;
+          }
+
+          registerUser(data.email, data.password).then((result) => {
+            updateUserProfile(data.name, imgUrl)
+              .then(() => {
+                // console.log(result.user);
+                toast.success("Sign up successful");
+
+                // save user to db
+                saveUser(result.user, role);
+                navigate("/login");
+              })
+              .catch((err) => {
+                console.log(err.message);
+                toast.error(err.message);
+              });
+          });
         }
       });
-
-    if (data.password !== data.confirm) {
-      setError("your password does not match");
-      return;
-    }
-
-    if (!role) {
-      setError("role is required");
-      return;
-    }
-
-    registerUser(data.email, data.password).then((result) => {
-      updateUserProfile(data.name, imgUrl)
-        .then(() => {
-          console.log(result.user);
-          toast.success("Sign up successful");
-
-          // save user to db
-          saveUser(result.user, role);
-          navigate("/login");
-        })
-        .catch((err) => {
-          console.log(err.message);
-          toast.error(err.message);
-        });
-    });
   };
-
-  // const options = [
-  //   { value: "student", label: "student" },
-  //   { value: "instructor", label: "instructor" },
-  // ];
 
   return (
     <div className="max-w-screen-xl mx-auto my-20">
       <h1 className="mb-5 text-2xl font-bold text-center underline">
-        Register Foreign Lab
+        Register Foreign Language School Camp
       </h1>
-      <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-items-center">
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 items-center lg:justify-items-center mx-5 md:mx-20 lg:mx-0">
         <img src={loginImg} className="w-3/4 lg:w-full" alt="" />
         <div>
           <form onSubmit={handleSubmit(handleRegistration)}>
@@ -105,6 +100,7 @@ const SignUp = () => {
                 Your Name
               </label>
             </div>
+
             <div className="relative z-0 mb-6 mx-auto group">
               <input
                 className="file-input file-input-bordered w-full"
@@ -112,6 +108,7 @@ const SignUp = () => {
                 type="file"
               />
             </div>
+
             <div className="relative z-0 mb-6 mx-auto group">
               <input
                 type="email"
@@ -132,6 +129,7 @@ const SignUp = () => {
                 </p>
               )}
             </div>
+
             <div className="relative z-0 mb-6 mx-auto group">
               <div className="flex items-center relative">
                 <input
@@ -181,6 +179,7 @@ const SignUp = () => {
                 </p>
               )}
             </div>
+
             <div className="relative z-0 mb-6 mx-auto group">
               <div className="flex items-center relative">
                 <input
@@ -217,6 +216,7 @@ const SignUp = () => {
               </label>
               {error && <span className="text-red-500">{error}</span>}
             </div>
+
             <div className="relative z-0 mt-5 mb-5 mx-auto group">
               {/* <label
                 htmlFor="name"
@@ -284,6 +284,7 @@ const SignUp = () => {
                 </RadioGroup>
               </FormControl>
             </div>
+
             <input
               type="submit"
               className="w-full text-white cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 disabled:bg-gray-400 disabled:cursor-none"
@@ -293,7 +294,7 @@ const SignUp = () => {
           </form>
           <div className="text-center mt-3">
             <p className="text-lg">
-              Already registered Foreign Lab? Please
+              Already registered Foreign Language School Camp? Please
               <Link
                 className="text-orange-500 ms-1 hover:underline"
                 to="/login"

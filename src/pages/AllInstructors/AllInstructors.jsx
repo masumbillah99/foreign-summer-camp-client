@@ -30,7 +30,7 @@ const AllInstructors = () => {
               <figure>
                 <img
                   src={instructor.image}
-                  className="h-[200px] w-80"
+                  className="w-40 rounded-full"
                   alt="instructor image"
                   referrerPolicy="no referrer"
                 />

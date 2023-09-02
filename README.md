@@ -1,6 +1,6 @@
-# Summer Camp Foreign Lab
+# Summer Camp Foreign Language School Camp
 
-Summer Camp Foreign Lab is a MERN Stack single page application. It's have some awesome features like authentication & world payment system.
+Summer Camp Foreign Language School Camp is a MERN Stack single page application. It's have some awesome features like authentication & world payment system.
 
 # Best Features
 

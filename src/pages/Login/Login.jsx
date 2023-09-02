@@ -28,9 +28,9 @@ const Login = () => {
   return (
     <div className="max-w-screen-xl mx-auto my-20 pb-7">
       <h1 className="mb-5 text-2xl font-bold text-center underline">
-        Login Foreign Lab
+        Login Foreign Language School Camp
       </h1>
-      <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-2 items-center lg:justify-items-center mx-5 md:mx-20 lg:mx-0">
         <img src={loginImg} className="w-3/4 lg:w-full" alt="" />
         <div>
           <form onSubmit={handleLogin}>
@@ -83,7 +83,7 @@ const Login = () => {
               </Link>
             </p>
             <p className="text-lg mt-5">
-              New to Foreign Lab? Please
+              New to Foreign Language School Camp? Please
               <Link
                 className="text-orange-500 hover:underline ms-1"
                 to="/register"

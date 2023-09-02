@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { useForm } from "react-hook-form";
 // import { BiError } from "react-icons/bi";
 // import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
@@ -8,7 +8,7 @@ import useAuth from "../../../hooks/useAuth";
 
 const Settings = () => {
   const { user, updateUserProfile } = useAuth();
-  const [imgUrl, setImgUrl] = useState("");
+  // const [imgUrl, setImgUrl] = useState("");
   // const [password, setPassword] = useState("");
   // const [confirmPassword, setConfirmPassword] = useState("");
   // const [passError, setPassError] = useState("");
@@ -24,19 +24,18 @@ const Settings = () => {
     imageUpload(data.photoURL[0]).then((imageData) => {
       if (imageData.success) {
         const imgURL = imageData.data.display_url;
-        setImgUrl(imgURL);
+
+        updateUserProfile(data.displayName, imgURL)
+          .then(() => {
+            toast.success("profile info update successfully");
+            reset();
+          })
+          .catch((err) => {
+            // console.log(err.message);
+            toast.error(err.message);
+          });
       }
     });
-
-    updateUserProfile(data.displayName, imgUrl)
-      .then(() => {
-        toast.success("profile info update successfully");
-        reset();
-      })
-      .catch((err) => {
-        // console.log(err.message);
-        toast.error(err.message);
-      });
   };
 
   // const handleUpdatePrivacy = () => {

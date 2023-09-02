@@ -22,6 +22,7 @@ const AddClass = () => {
       addNewClass(classData)
         .then(() => {
           toast.success("successfully add a class");
+          toast.info("wait for admin approval");
           e.target.reset();
         })
         .catch((err) => toast.error(err.message));

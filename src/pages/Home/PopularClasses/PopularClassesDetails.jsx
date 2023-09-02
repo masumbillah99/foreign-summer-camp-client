@@ -22,6 +22,8 @@ const PopularClassesDetails = ({ classDetails }) => {
     description,
   } = classDetails;
 
+  // console.log(isInstructor);
+
   const handleAddToCart = () => {
     const selectedItem = {
       classId: _id,
@@ -77,15 +79,17 @@ const PopularClassesDetails = ({ classDetails }) => {
                 {available_seat} seats
               </span>
             </div>
+            {!isAdmin && !isInstructor ? (
+              <button
+                onClick={() => handleAddToCart(classDetails)}
+                className="btn btn-primary w-full mt-2"
+              >
+                add to cart
+              </button>
+            ) : (
+              ""
+            )}
           </div>
-          {!isAdmin && !isInstructor && (
-            <button
-              onClick={() => handleAddToCart(classDetails)}
-              className="btn btn-primary w-full mt-2"
-            >
-              Add To Cart
-            </button>
-          )}
         </div>
       </div>
     </>

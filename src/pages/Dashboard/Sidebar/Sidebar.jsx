@@ -174,7 +174,7 @@ const Sidebar = () => {
       {/* <div className="bg-gray-100 text-gray-800 flex justify-between :hidden">
         <div>
           <div className="block cursor-pointer p-4 font-bold">
-            Foreign Lab
+            Foreign Language School Camp
           </div>
         </div>
 
@@ -192,7 +192,7 @@ const Sidebar = () => {
       >
         <div>
           <h2 className="text-xl font-bold text-center underline">
-            Foreign Lab
+            Foreign Language School Camp
           </h2>
           <ul className="menu text-lg pt-20">
             {isAdmin && (

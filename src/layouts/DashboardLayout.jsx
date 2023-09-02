@@ -32,9 +32,10 @@ const DashboardLayout = () => {
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 h-full bg-[#2C2C2C] text-lg">
-          <h3 className="text-white pb-24 flex items-center justify-evenly">
-            <img src={logo} className="w-10" alt="logo" /> Foreign Lab
-          </h3>
+          <div className="text-white pb-24 flex items-center justify-evenly">
+            <img src={logo} className="w-10" alt="logo" />{" "}
+            <span className="text-sm">Foreign Language School Camp</span>
+          </div>
           {/* Sidebar content here */}
           {isAdmin && (
             <>
