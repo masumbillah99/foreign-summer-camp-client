@@ -180,7 +180,12 @@ const DashboardLayout = () => {
             </div>
             <div className="avatar top-6">
               <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                <img src={user?.photoURL} alt="" referrerPolicy="no-referrer" />
+                <img
+                  src={user?.photoURL}
+                  alt=""
+                  title={user?.displayName}
+                  referrerPolicy="no-referrer"
+                />
               </div>
             </div>
           </div>

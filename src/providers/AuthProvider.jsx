@@ -11,6 +11,7 @@ import {
   updateEmail,
   updateProfile,
   updatePassword,
+  reauthenticateWithCredential,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import app from "../firebase/firebase.config";
@@ -92,7 +93,12 @@ const AuthProvider = ({ children }) => {
 
   // update user's password
   const updateUserPassword = (newPassword) => {
-    return updatePassword(user, newPassword);
+    return updatePassword(auth.currentUser, newPassword);
+  };
+
+  // re-authenticate a user
+  const reauthenticateUser = (credential) => {
+    return reauthenticateWithCredential(auth.currentUser, credential);
   };
 
   // google sign in
@@ -114,6 +120,7 @@ const AuthProvider = ({ children }) => {
     updateUserProfile,
     updateUserEmail,
     updateUserPassword,
+    reauthenticateUser,
     googleSignIn,
     resetPassword,
   };

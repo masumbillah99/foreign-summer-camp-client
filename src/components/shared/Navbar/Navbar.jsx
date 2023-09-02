@@ -4,7 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import logo from "../../../assets/logo.png";
 import useAdmin from "../../../hooks/useAdmin";
 import useInstructor from "../../../hooks/useInstructor";
-import { FaUserCircle } from "react-icons/fa";
+// import { FaUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, logOutUser } = useAuth();
@@ -101,7 +101,7 @@ const Navbar = () => {
           <li>
             <img
               className="w-20 rounded-full"
-              src={user.photoURL}
+              src={user?.photoURL}
               referrerPolicy={"no-referrer"}
               title={user?.email}
             />

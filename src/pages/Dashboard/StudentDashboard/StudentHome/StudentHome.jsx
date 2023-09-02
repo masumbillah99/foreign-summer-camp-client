@@ -3,10 +3,9 @@ import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { MdNumbers } from "react-icons/md";
 import { HiBadgeCheck, HiShoppingCart } from "react-icons/hi";
+import { FcFeedback } from "react-icons/fc";
 import useCart from "../../../../hooks/useCart";
-// import PieDash from "../../../../components/PieChart/PieDash";
 import Loader from "../../../../components/Loader";
-import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 
 const StudentHome = () => {
   const { user } = useAuth();
@@ -29,33 +28,6 @@ const StudentHome = () => {
   if (isError) return "Error......." + error.message;
 
   // console.log(payments);
-
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
-  const RADIAN = Math.PI / 180;
-  const renderCustomizedLabel = ({
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    percent,
-  }) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-    return (
-      <text
-        x={x}
-        y={y}
-        fill="white"
-        textAnchor={x > cx ? "start" : "end"}
-        dominantBaseline="central"
-      >
-        {`${(percent * 100).toFixed(0)}%`}
-      </text>
-    );
-  };
 
   return (
     <div className="student-font">
@@ -125,40 +97,16 @@ const StudentHome = () => {
         <div className="card w-96 bg-base-100 shadow-xl shadow-slate-300">
           <div className="card-body">
             <span>
-              <HiBadgeCheck className="text-2xl" />
+              <FcFeedback className="text-2xl" />
             </span>
-            <h2 className="card-title text-purple-600">Enrolled Class</h2>
-            <p>You enrolled some classes by payment with stripe</p>
-            <p className="badge badge-warning font-bold text-2xl p-5 absolute right-5 bottom-5">
+            <h2 className="card-title text-purple-600">Student Feedback</h2>
+            <p>Your feedback is very important for company</p>
+            {/* <p className="badge badge-warning font-bold text-2xl p-5 absolute right-5 bottom-5">
               <MdNumbers className="mr-1" />
               {payments?.length}
-            </p>
+            </p> */}
           </div>
         </div>
-      </div>
-
-      <div className="my-10 w-60 mx-auto lg:mx-0">
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart width={400} height={400}>
-            <Pie
-              data={payments}
-              cx="50%"
-              cy="50%"
-              labelLine={false}
-              label={renderCustomizedLabel}
-              outerRadius={80}
-              fill="#8884d8"
-              dataKey="price"
-            >
-              {payments.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                />
-              ))}
-            </Pie>
-          </PieChart>
-        </ResponsiveContainer>
       </div>
     </div>
   );
