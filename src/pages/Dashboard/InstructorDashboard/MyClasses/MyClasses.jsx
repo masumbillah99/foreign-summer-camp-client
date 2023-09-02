@@ -1,32 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
-// import { useState, useEffect } from "react";
-// import { getMyAddClass } from "../../../../api/class";
+import { Link } from "react-router-dom";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const MyClasses = () => {
-  // const [myClass, setMyClass] = useState([]);
   const { user } = useAuth();
   const [axiosSecure] = useAxiosSecure();
 
-  const { data: classesData = [] } = useQuery({
+  const { data: myClassData = [] } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/classes/${user?.email}`);
-      //   console.log("is admin response", res);
       return res.data;
     },
   });
-
-  // if (isLoading) {
-  //   return <span className="loading loading-bars loading-lg"></span>;
-  // }
-
-  // useEffect(() => {
-  //   getMyAddClass(user.email).then((data) => {
-  //     setMyClass(data);
-  //   });
-  // }, [user]);
 
   // TODO: enrolled students
 
@@ -36,36 +23,47 @@ const MyClasses = () => {
         Review My Classes
       </h1>
       <div className="overflow-x-auto">
-        <table className="table">
-          <tbody>
-            {classesData.map((mc, index) => (
-              <tr key={mc._id} className="border">
-                <td>{index + 1}.</td>
-                <td>
-                  <div className="flex items-center space-x-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle w-12 h-12">
-                        <img src={mc.image} alt="class img" />
+        {myClassData && myClassData.length > 0 ? (
+          <table className="table">
+            <tbody>
+              {myClassData.map((mc, index) => (
+                <tr key={mc._id} className="border">
+                  <td>{index + 1}.</td>
+                  <td>
+                    <div className="flex items-center space-x-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle w-12 h-12">
+                          <img src={mc.image} alt="class img" />
+                        </div>
                       </div>
+                      <div className="text-xl font-semibold">{mc.name}</div>
                     </div>
-                    <div className="text-xl font-semibold">{mc.name}</div>
-                  </div>
-                </td>
-                <td>Total Enrolled: {0}</td>
-                <td>
-                  <span className="uppercase badge badge-outline text-primary font-semibold">
-                    {mc.status}
-                  </span>
-                </td>
-                <td>
-                  <button className="btn btn-outline btn-ghost btn-xs">
-                    Update
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                  </td>
+                  <td>Total Enrolled: {0}</td>
+                  <td>
+                    <span className="uppercase badge badge-outline text-primary font-semibold">
+                      {mc.status}
+                    </span>
+                  </td>
+                  <td>
+                    <button className="btn btn-outline btn-ghost btn-xs">
+                      Update
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <div className="my-10 w-3/4 mx-auto text-center bg-gray-200 p-10 rounded-lg">
+            <p className="text-base font-bold mb-5">
+              You don&apos;t add any classes. Please go to -
+            </p>
+            <Link className="btn btn-primary" to="/dashboard/addClass">
+              Add New Class
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

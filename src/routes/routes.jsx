@@ -4,6 +4,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import Main from "../layouts/Main";
 import AllClasses from "../pages/AllClasses/AllClasses";
 import AllInstructors from "../pages/AllInstructors/AllInstructors";
+import AdminHome from "../pages/Dashboard/AdminDashboard/AdminHome/AdminHome";
 import ManageClass from "../pages/Dashboard/AdminDashboard/ManageClass/ManageClass";
 import ManageUsers from "../pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers";
 import AddClass from "../pages/Dashboard/InstructorDashboard/AddClass/AddClass";
@@ -12,8 +13,7 @@ import MyClasses from "../pages/Dashboard/InstructorDashboard/MyClasses/MyClasse
 import Settings from "../pages/Dashboard/Settings/Settings";
 import EnrolledClass from "../pages/Dashboard/StudentDashboard/EnrolledClass/EnrolledClass";
 import History from "../pages/Dashboard/StudentDashboard/History/History";
-// import Payment from "../pages/Dashboard/StudentDashboard/Payment/Payment";
-import SelectedClass from "../pages/Dashboard/StudentDashboard/SelectedClass";
+import SelectedClass from "../pages/Dashboard/StudentDashboard/SelectedClass/SelectedClass";
 import StudentHome from "../pages/Dashboard/StudentDashboard/StudentHome/StudentHome";
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login";
@@ -78,6 +78,14 @@ const router = createBrowserRouter([
 
       // TODO: admin private route
       // admin dashboard
+      {
+        path: "adminHome",
+        element: (
+          <AdminRoute>
+            <AdminHome />
+          </AdminRoute>
+        ),
+      },
       {
         path: "manageUser",
         element: (

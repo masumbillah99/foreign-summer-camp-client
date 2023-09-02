@@ -5,7 +5,7 @@ import { MdNumbers } from "react-icons/md";
 import { HiBadgeCheck, HiShoppingCart } from "react-icons/hi";
 import { FcFeedback } from "react-icons/fc";
 import useCart from "../../../../hooks/useCart";
-import Loader from "../../../../components/Loader";
+import Loader from "../../../../components/Loader/Loader";
 
 const StudentHome = () => {
   const { user } = useAuth();
@@ -30,36 +30,12 @@ const StudentHome = () => {
   // console.log(payments);
 
   return (
-    <div className="student-font">
+    <div className="dashboard-font">
       <div className="text-center mt-5 mb-10">
         <h3 className="text-3xl font-bold mb-2">
           Welcome, {user.displayName} Dashboard
         </h3>
         <p className="underline">Here you can see your all information</p>
-
-        {/* <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="avatar cursor-pointer">
-            <div className="w-20 rounded-full">
-              <img
-                src={user?.photoURL}
-                className="w-20"
-                alt="user img"
-                referrerPolicy="no-referrer"
-              />
-            </div>
-          </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-slate-700 text-white rounded-box w-32"
-          >
-            <li>
-              <a className="justify-between">Edit</a>
-            </li>
-            <li>
-              <a className="justify-between">Settings</a>
-            </li>
-          </ul>
-        </div> */}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1  xl:grid-cols-2 2xl:grid-cols-3 justify-items-center gap-3 xl:w-full">

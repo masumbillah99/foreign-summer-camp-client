@@ -9,7 +9,6 @@ const ManageUsers = () => {
     const res = await axiosSecure.get(
       `${import.meta.env.VITE_SERVER_URL}/users`
     );
-    // return res.json();
     return res.data;
   });
 
@@ -56,12 +55,11 @@ const ManageUsers = () => {
   return (
     <div className="my-10 max-w-screen-xl mx-auto">
       <h1 className="text-4xl text-center font-bold">Manage All Users</h1>
-      <hr className="w-1/2 mx-auto border-2 border-primary mt-3 mb-5" />
-      <div className="overflow-x-auto">
+      <hr className="w-1/2 mx-auto border-2 border-primary mt-3" />
+      <div className="overflow-x-auto my-7">
         <table className="table">
-          {/* head */}
           <thead>
-            <tr>
+            <tr className="bg-warning">
               <th>Number</th>
               <th>Image</th>
               <th>Email &amp; Name</th>

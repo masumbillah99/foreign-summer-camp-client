@@ -29,6 +29,7 @@
     "react-icons": "^4.9.0",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.11.2",
+    "react-select": "^5.7.4",
     "react-simple-typewriter": "^5.0.1",
     "react-spinners": "^0.13.8",
     "react-toastify": "^9.1.3",

@@ -49,8 +49,7 @@ const EnrolledClass = () => {
         ) : (
           <div className="w-2/3 py-10 mx-auto text-center">
             <p className="text-xl font-bold mb-5">
-              You don&apos;t Enroll any class yet. Please go selectedClass page
-              and then enroll selected class by payment with stripe.js
+              You don&apos;t Enroll any class yet. Please go to -
             </p>
             <Link className="btn btn-primary" to={"/dashboard/selectedClass"}>
               My Selected Class

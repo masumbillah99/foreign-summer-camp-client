@@ -1,14 +1,15 @@
 import { Navigate, useLocation } from "react-router-dom";
-import Loader from "../components/Loader";
+import Loader from "../components/Loader/Loader";
 import useAuth from "../hooks/useAuth";
 import useInstructor from "../hooks/useInstructor";
 
 const InstructorRoute = ({ children }) => {
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
   const [isInstructor, isInstructorLoading] = useInstructor();
   const location = useLocation();
 
-  if (loading || isInstructorLoading) {
+  if (isInstructorLoading) {
+    console.log("instructor-route");
     return <Loader />;
   }
 

@@ -8,6 +8,11 @@ import useAuth from "../../hooks/useAuth";
 import loginImg from "../../assets/login.jpg";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
 import { saveUser } from "../../api/auth";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
 
 const SignUp = () => {
   const {
@@ -19,13 +24,15 @@ const SignUp = () => {
   const [imgUrl, setImgUrl] = useState("");
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
+  const [role, setRole] = useState("");
+
   const navigate = useNavigate();
 
   // handle user registration
-  const handleRegistration = (data, e) => {
-    e.preventDefault();
-    // const confirmPassword = e.target.confirm.value;
-    // console.log(data, confirmPassword);
+  const handleRegistration = (data) => {
+    event.preventDefault();
+    data["role"] = role;
+
     const formData = new FormData();
     formData.append("image", data.image[0]);
     const img_hosting_url = `https://api.imgbb.com/1/upload?key=${
@@ -39,8 +46,6 @@ const SignUp = () => {
       .then((res) => res.json())
       .then((imageData) => {
         if (imageData.success) {
-          // const imgURL = imageData.data.display_url;
-          // console.log(imgURL);
           setImgUrl(imageData?.data.display_url);
         }
       });
@@ -50,7 +55,10 @@ const SignUp = () => {
       return;
     }
 
-    // const userData = { displayName: data.name, photoURL: imgUrl };
+    if (!role) {
+      setError("role is required");
+      return;
+    }
 
     registerUser(data.email, data.password).then((result) => {
       updateUserProfile(data.name, imgUrl)
@@ -59,7 +67,7 @@ const SignUp = () => {
           toast.success("Sign up successful");
 
           // save user to db
-          saveUser(result.user);
+          saveUser(result.user, role);
           navigate("/login");
         })
         .catch((err) => {
@@ -68,6 +76,11 @@ const SignUp = () => {
         });
     });
   };
+
+  // const options = [
+  //   { value: "student", label: "student" },
+  //   { value: "instructor", label: "instructor" },
+  // ];
 
   return (
     <div className="max-w-screen-xl mx-auto my-20">
@@ -204,10 +217,78 @@ const SignUp = () => {
               </label>
               {error && <span className="text-red-500">{error}</span>}
             </div>
+            <div className="relative z-0 mt-5 mb-5 mx-auto group">
+              {/* <label
+                htmlFor="name"
+                className="text-xl font-bold -mt-5 peer-focus:font-medium absolute text-black dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+              >
+                Continue as a
+              </label> */}
+
+              {/* <div className="flex items-center gap-7">
+                <div className="flex items-center">
+                  <input
+                    onClick={(e) => setRole(e.target.value)}
+                    type="radio"
+                    name="radio-1"
+                    className="radio"
+                    checked
+                  />
+                  <label
+                    htmlFor="student"
+                    className="text-base font-semibold text-black ml-3"
+                  >
+                    Student
+                  </label>
+                </div>
+                <div className="flex items-center">
+                  <input
+                    onClick={(e) => setRole(e.target.value)}
+                    type="radio"
+                    name="radio-1"
+                    className="radio"
+                  />
+                  <label
+                    htmlFor="instructor"
+                    className="text-base font-semibold text-black ml-3"
+                  >
+                    Instructor
+                  </label>
+                </div>
+              </div> */}
+
+              <FormControl>
+                <FormLabel
+                  id="demo-row-radio-buttons-group-label"
+                  sx={{ fontSize: "17px", fontWeight: "600", color: "black" }}
+                >
+                  Continue as a
+                </FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                >
+                  <FormControlLabel
+                    value="student"
+                    control={<Radio />}
+                    label="student"
+                    onClick={(e) => setRole(e.target.value)}
+                  />
+                  <FormControlLabel
+                    value="instructor"
+                    control={<Radio />}
+                    label="instructor"
+                    onClick={(e) => setRole(e.target.value)}
+                  />
+                </RadioGroup>
+              </FormControl>
+            </div>
             <input
               type="submit"
-              className="w-full text-white cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="w-full text-white cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 disabled:bg-gray-400 disabled:cursor-none"
               value="Register"
+              disabled={!role}
             />
           </form>
           <div className="text-center mt-3">

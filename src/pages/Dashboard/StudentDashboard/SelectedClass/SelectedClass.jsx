@@ -1,10 +1,10 @@
 import { FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import useCart from "../../../hooks/useCart";
+import useCart from "../../../../hooks/useCart";
 import React from "react";
 import { Button, Dialog, DialogTitle } from "@mui/material";
-import CheckOutForm from "./Payment/CheckoutForm";
+import CheckOutForm from "../Payment/CheckoutForm";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 

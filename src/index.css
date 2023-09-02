@@ -6,7 +6,7 @@
 :root {
   --primary-font: "Space Grotesk", sans-serif;
   --logo-font: "Cinzel", serif;
-  --student-font: "Work Sans", sans-serif;
+  --dashboard-font: "Work Sans", sans-serif;
 }
 
 body {
@@ -17,8 +17,8 @@ body {
   font-family: var(--logo-font);
 }
 
-.student-font {
-  font-family: var(--student-font);
+.dashboard-font {
+  font-family: var(--dashboard-font);
 }
 
 /* tailwind directives css */
