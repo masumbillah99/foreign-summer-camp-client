@@ -1,7 +1,7 @@
 import { FaGoogle } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import { saveUser } from "../../api/auth";
+import { saveUserDb } from "../../api/utils";
 import useAuth from "../../hooks/useAuth";
 
 const SocialLogin = () => {
@@ -13,11 +13,10 @@ const SocialLogin = () => {
   const handleGoogleSign = () => {
     googleSignIn()
       .then((result) => {
-        // console.log(result.user);
-        // save user to db
-        saveUser(result.user);
-        toast.success("sign in with google successful");
-        navigate(from, { replace: true });
+        saveUserDb(result.user).then(() => {
+          toast.success("sign in with google successful");
+          navigate(from, { replace: true });
+        });
       })
       .catch((error) => toast.error(error.message));
   };

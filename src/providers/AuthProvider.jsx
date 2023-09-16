@@ -14,6 +14,7 @@ import {
   reauthenticateWithCredential,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
+import { getUserRole } from "../api/utils";
 import app from "../firebase/firebase.config";
 
 export const AuthContext = createContext(null);
@@ -24,7 +25,14 @@ const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (user) {
+      getUserRole(user.email).then((data) => setRole(data));
+    }
+  }, [user]);
 
   // sign up new users
   const registerUser = (email, password) => {
@@ -49,20 +57,21 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setLoading(false);
 
       // get and set token
-      if (currentUser) {
-        axios
-          .post(`${import.meta.env.VITE_SERVER_URL}/jwt`, {
-            email: currentUser.email,
-          })
-          .then((data) => {
-            localStorage.setItem("school-token", data.data.token);
-            setLoading(false);
-          });
-      } else {
-        localStorage.removeItem("school-token");
-      }
+      // if (currentUser) {
+      //   axios
+      //     .post(`${import.meta.env.VITE_SERVER_URL}/jwt`, {
+      //       email: currentUser.email,
+      //     })
+      //     .then((data) => {
+      //       localStorage.setItem("school-token", data.data.token);
+      //       setLoading(false);
+      //     });
+      // } else {
+      //   localStorage.removeItem("school-token");
+      // }
     });
 
     return () => {
@@ -113,6 +122,8 @@ const AuthProvider = ({ children }) => {
 
   const authInfo = {
     user,
+    role,
+    setRole,
     loading,
     registerUser,
     signInUser,

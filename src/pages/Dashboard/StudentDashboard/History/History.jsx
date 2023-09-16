@@ -71,8 +71,8 @@ const History = () => {
               <p className="text-xl font-bold mb-5">
                 You don&apos;t have any payment history
               </p>
-              <Link className="btn btn-primary" to={"/dashboard/selectedClass"}>
-                My Selected Class
+              <Link className="btn btn-primary" to={"/dashboard/enrolledClass"}>
+                My Enrolled Classes
               </Link>
             </div>
           )}

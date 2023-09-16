@@ -8,7 +8,7 @@ import AdminHome from "../pages/Dashboard/AdminDashboard/AdminHome/AdminHome";
 import ManageClass from "../pages/Dashboard/AdminDashboard/ManageClass/ManageClass";
 import ManageUsers from "../pages/Dashboard/AdminDashboard/ManageUsers/ManageUsers";
 import AddClass from "../pages/Dashboard/InstructorDashboard/AddClass/AddClass";
-import InstructorHome from "../pages/Dashboard/InstructorDashboard/InstructorHome";
+import InstructorHome from "../pages/Dashboard/InstructorDashboard/InstructorHome/InstructorHome";
 import MyClasses from "../pages/Dashboard/InstructorDashboard/MyClasses/MyClasses";
 import Settings from "../pages/Dashboard/Settings/Settings";
 import EnrolledClass from "../pages/Dashboard/StudentDashboard/EnrolledClass/EnrolledClass";
@@ -53,27 +53,15 @@ const router = createBrowserRouter([
       // instructor dashboard
       {
         path: "instructorHome",
-        element: (
-          <InstructorRoute>
-            <InstructorHome />
-          </InstructorRoute>
-        ),
+        element: <InstructorHome />,
       },
       {
         path: "addClass",
-        element: (
-          <InstructorRoute>
-            <AddClass />
-          </InstructorRoute>
-        ),
+        element: <AddClass />,
       },
       {
         path: "myClasses",
-        element: (
-          <InstructorRoute>
-            <MyClasses />
-          </InstructorRoute>
-        ),
+        element: <MyClasses />,
       },
 
       // TODO: admin private route
@@ -102,6 +90,7 @@ const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
+
       // user settings - dashboard
       {
         path: "settings",

@@ -18,7 +18,7 @@ const PopularClasses = () => {
         </h2>
       </Slide>
       <Fade delay={1e3} cascade damping={1e-1}>
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-3">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-3">
           {approvedClass &&
             approvedClass
               .slice(0, 6)

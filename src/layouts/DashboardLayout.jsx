@@ -11,10 +11,12 @@ import logo from "../assets/logo.png";
 import useAuth from "../hooks/useAuth";
 
 const DashboardLayout = () => {
-  const { user } = useAuth();
+  const { user, role } = useAuth();
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
   const [cart] = useCart();
+
+  // console.log(role);
 
   return (
     <div className="drawer lg:drawer-open">
@@ -71,7 +73,8 @@ const DashboardLayout = () => {
               </li>
             </>
           )}
-          {isInstructor && (
+
+          {role === "instructor" && (
             <>
               <li>
                 <NavLink
@@ -109,7 +112,8 @@ const DashboardLayout = () => {
               </li>
             </>
           )}
-          {!isAdmin && !isInstructor && (
+
+          {role === "student" && (
             <>
               <li>
                 <NavLink

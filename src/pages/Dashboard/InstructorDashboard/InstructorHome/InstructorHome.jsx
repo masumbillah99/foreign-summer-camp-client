@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { MdNumbers } from "react-icons/md";
-import useAuth from "../../../hooks/useAuth";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAuth from "../../../../hooks/useAuth";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 // import {
 //   CartesianGrid,
 //   Legend,
@@ -17,12 +17,14 @@ const InstructorHome = () => {
   const [axiosSecure] = useAxiosSecure();
 
   const { data: myClassData = [] } = useQuery({
-    queryKey: ["classes"],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/classes/${user?.email}`);
-      return res.data;
-    },
+    queryKey: ["classesData"],
+    queryFn: () =>
+      fetch(`${import.meta.env.VITE_SERVER_URL}/classes/${user.email}`).then(
+        (res) => res.json()
+      ),
   });
+
+  // console.log(myClassData);
 
   const approved = myClassData.filter((data) => data.status === "approved");
   const pending = myClassData.filter((data) => data.status === "pending");
@@ -47,8 +49,7 @@ const InstructorHome = () => {
               class.
             </p>
             <p className="badge badge-warning font-bold text-2xl p-5 absolute right-5 bottom-5">
-              <MdNumbers className="mr-1" />
-              {myClassData?.length}
+              <MdNumbers className="mr-1" /> {myClassData?.length || 0}
             </p>
           </div>
         </div>
@@ -61,8 +62,7 @@ const InstructorHome = () => {
             <h2 className="card-title">Approved Class</h2>
             <p>Here your all approved class number</p>
             <p className="badge badge-info font-bold text-2xl p-5 absolute right-5 bottom-5">
-              <MdNumbers className="mr-1" />
-              {approved?.length}
+              <MdNumbers className="mr-1" /> {approved?.length || 0}
             </p>
           </div>
         </div>
@@ -75,11 +75,29 @@ const InstructorHome = () => {
             <h2 className="card-title">Pending Class</h2>
             <p>Here your all pending class number</p>
             <p className="badge badge-warning font-bold text-2xl p-5 absolute right-5 bottom-5">
-              <MdNumbers className="mr-1" />
-              {pending?.length}
+              <MdNumbers className="mr-1" /> {pending?.length || 0}
             </p>
           </div>
         </div>
+      </div>
+
+      <div className="bg-slate-500 text-white mt-20 mx-10 p-10 py-20">
+        <p>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex eos,
+          nihil illo autem quos quis mollitia a distinctio impedit, repudiandae
+          omnis fuga dolores odio vitae. Aperiam quam nobis tempora in! Lorem
+          ipsum dolor sit amet consectetur, adipisicing elit. Libero et aperiam
+          id incidunt placeat nesciunt, inventore vero ipsa delectus odio
+          veritatis, sunt accusantium dolore recusandae velit suscipit? Aliquid
+          sapiente ipsa earum nostrum quo modi magni harum, atque obcaecati
+          totam, tenetur veritatis incidunt sint quas at fugit laudantium dolore
+          quos suscipit. Eveniet, molestias? Repudiandae, magnam. Eius saepe
+          excepturi voluptate corporis animi sapiente cupiditate ratione
+          assumenda quaerat. Suscipit, minus omnis voluptates iusto cupiditate
+          quasi hic aut velit harum ex in repellat praesentium assumenda quod
+          similique nesciunt ducimus! Fugit ab, quos, odit et architecto,
+          expedita odio suscipit amet velit minima aliquid accusamus neque?
+        </p>
       </div>
 
       {/* <div className="hidden lg:block my-14">

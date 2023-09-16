@@ -3,7 +3,7 @@ import { FaQuoteLeft } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation } from "swiper";
+import { Navigation, Autoplay } from "swiper";
 import { Fade, Slide } from "react-awesome-reveal";
 
 const Testimonial = () => {
@@ -19,7 +19,7 @@ const Testimonial = () => {
 
   return (
     <Fade delay={1e3} cascade damping={1e-1}>
-      <div className="my-20 mx-3 md:mx-10 lg:mx-10 xl:mx-0">
+      <div className="my-20 mx-5 md:mx-10 lg:mx-10 xl:mx-0">
         <Slide>
           <h3 className="text-2xl font-bold text-primary underline">
             Testimonials
@@ -30,8 +30,13 @@ const Testimonial = () => {
         </Slide>
         <Swiper
           navigation={true}
-          modules={[Navigation]}
-          className="mySwiper bg-slate-700 text-white p-5 rounded-lg"
+          modules={[Navigation, Autoplay]}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          loop={true}
+          className="mySwiper bg-slate-700 text-white p-5 rounded-xl"
         >
           {reviews?.map((review) => (
             <SwiperSlide key={review?._id}>
@@ -42,7 +47,7 @@ const Testimonial = () => {
                   <h3 className="text-2xl uppercase text-orange-400">
                     {review?.student_name}
                   </h3>
-                  <p>{review.title}</p>
+                  <p className="badge badge-warning">{review.title}</p>
                 </div>
               </div>
             </SwiperSlide>

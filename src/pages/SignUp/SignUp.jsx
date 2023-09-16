@@ -7,31 +7,31 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import useAuth from "../../hooks/useAuth";
 import loginImg from "../../assets/login.jpg";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
-import { saveUser } from "../../api/auth";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
+import { imageUpload, saveUserDb } from "../../api/utils";
+// import Radio from "@mui/material/Radio";
+// import RadioGroup from "@mui/material/RadioGroup";
+// import FormControlLabel from "@mui/material/FormControlLabel";
+// import FormControl from "@mui/material/FormControl";
+// import FormLabel from "@mui/material/FormLabel";
 
 const SignUp = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
   const { registerUser, updateUserProfile } = useAuth();
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
-  const [role, setRole] = useState("");
-
+  // const [role, setRole] = useState("");
   const navigate = useNavigate();
 
   // handle user registration
   const handleRegistration = (data) => {
     event.preventDefault();
-    data["role"] = role;
 
+    /** 
     const formData = new FormData();
     formData.append("image", data.image[0]);
     const img_hosting_url = `https://api.imgbb.com/1/upload?key=${
@@ -46,32 +46,54 @@ const SignUp = () => {
       .then((imageData) => {
         if (imageData.success) {
           const imgUrl = imageData?.data.display_url;
+        }
+        
+    */
 
-          if (data.password !== data.confirm) {
-            setError("your password does not match");
-            return;
-          }
+    if (data.password !== data.confirm) {
+      setError("your password does not match");
+      return;
+    }
 
-          if (!role) {
-            setError("role is required");
-            return;
-          }
-
-          registerUser(data.email, data.password).then((result) => {
-            updateUserProfile(data.name, imgUrl)
-              .then(() => {
+    registerUser(data.email, data.password)
+      .then((result) => {
+        if (result.user) {
+          imageUpload(data.image[0]).then((imgResponse) => {
+            updateUserProfile(data.name, imgResponse?.data?.display_url).then(
+              () => {
                 // console.log(result.user);
-                toast.success("Sign up successful");
+                toast.success("sign up successful");
 
                 // save user to db
-                saveUser(result.user, role);
-                navigate("/login");
-              })
-              .catch((err) => {
-                console.log(err.message);
-                toast.error(err.message);
-              });
+                saveUserDb(result.user).then(() => {
+                  reset();
+                  navigate("/");
+                });
+
+                // axios
+                //   .put(
+                //     `${import.meta.env.VITE_SERVER_URL}/users/${
+                //       result?.user?.email
+                //     }`,
+                //     savedUser
+                //   )
+                //   .then((res) => {
+                //     console.log(res);
+                //     if (res.data.modifiedCount > 0) {
+                //       reset();
+                //       navigate("/");
+                //     }
+                //   });
+              }
+            );
           });
+        }
+      })
+      .catch((err) => {
+        if (err.message.includes("email-already-in-use")) {
+          toast.error("User already exists. Try to login");
+        } else {
+          toast.error(err.message);
         }
       });
   };
@@ -217,46 +239,7 @@ const SignUp = () => {
               {error && <span className="text-red-500">{error}</span>}
             </div>
 
-            <div className="relative z-0 mt-5 mb-5 mx-auto group">
-              {/* <label
-                htmlFor="name"
-                className="text-xl font-bold -mt-5 peer-focus:font-medium absolute text-black dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-              >
-                Continue as a
-              </label> */}
-
-              {/* <div className="flex items-center gap-7">
-                <div className="flex items-center">
-                  <input
-                    onClick={(e) => setRole(e.target.value)}
-                    type="radio"
-                    name="radio-1"
-                    className="radio"
-                    checked
-                  />
-                  <label
-                    htmlFor="student"
-                    className="text-base font-semibold text-black ml-3"
-                  >
-                    Student
-                  </label>
-                </div>
-                <div className="flex items-center">
-                  <input
-                    onClick={(e) => setRole(e.target.value)}
-                    type="radio"
-                    name="radio-1"
-                    className="radio"
-                  />
-                  <label
-                    htmlFor="instructor"
-                    className="text-base font-semibold text-black ml-3"
-                  >
-                    Instructor
-                  </label>
-                </div>
-              </div> */}
-
+            {/* <div className="relative z-0 mt-5 mb-5 mx-auto group">
               <FormControl>
                 <FormLabel
                   id="demo-row-radio-buttons-group-label"
@@ -283,13 +266,13 @@ const SignUp = () => {
                   />
                 </RadioGroup>
               </FormControl>
-            </div>
+            </div> */}
 
             <input
               type="submit"
               className="w-full text-white cursor-pointer bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 disabled:bg-gray-400 disabled:cursor-none"
               value="Register"
-              disabled={!role}
+              // disabled={!role}
             />
           </form>
           <div className="text-center mt-3">
