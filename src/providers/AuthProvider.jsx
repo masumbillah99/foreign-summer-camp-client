@@ -60,18 +60,18 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
 
       // get and set token
-      // if (currentUser) {
-      //   axios
-      //     .post(`${import.meta.env.VITE_SERVER_URL}/jwt`, {
-      //       email: currentUser.email,
-      //     })
-      //     .then((data) => {
-      //       localStorage.setItem("school-token", data.data.token);
-      //       setLoading(false);
-      //     });
-      // } else {
-      //   localStorage.removeItem("school-token");
-      // }
+      if (currentUser) {
+        axios
+          .post(`${import.meta.env.VITE_SERVER_URL}/jwt`, {
+            email: currentUser.email,
+          })
+          .then((data) => {
+            localStorage.setItem("school-token", data.data.token);
+            setLoading(false);
+          });
+      } else {
+        localStorage.removeItem("school-token");
+      }
     });
 
     return () => {

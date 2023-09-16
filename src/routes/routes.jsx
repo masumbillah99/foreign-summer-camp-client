@@ -19,7 +19,7 @@ import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import AdminRoute from "./AdminRoute";
-import InstructorRoute from "./InstructorRoute";
+// import InstructorRoute from "./InstructorRoute";
 import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
@@ -47,7 +47,6 @@ const router = createBrowserRouter([
       { path: "studentHome", element: <StudentHome /> },
       { path: "selectedClass", element: <SelectedClass /> },
       { path: "enrolledClass", element: <EnrolledClass /> },
-      // { path: "payment", element: <Payment /> },
       { path: "paymentHistory", element: <History /> },
 
       // instructor dashboard

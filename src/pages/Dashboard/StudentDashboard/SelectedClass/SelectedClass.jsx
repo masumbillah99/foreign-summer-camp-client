@@ -29,7 +29,8 @@ const SelectedClass = () => {
   // }
 
   // reduce total
-  const total = cart.reduce((sum, item) => item.price + sum, 0);
+  console.log(cart);
+  const total = cart?.reduce((sum, item) => item.price + sum, 0);
   // console.log(typeof totalPrice);
   // const total = parseInt(totalPrice);
 

@@ -19,7 +19,7 @@ const Navbar = () => {
       .catch((error) => toast.success(error.message));
   };
 
-  // console.log(role);
+  // console.log(user);
 
   // handle student role & dashboard
   const handleStudentDashboard = () => {
@@ -136,16 +136,20 @@ const Navbar = () => {
           {/* Open the modal using document.getElementById('ID').showModal() method */}
           <li>
             <button
-              className="w-20 rounded-full disabled:cursor-auto"
+              className="disabled:cursor-auto"
               onClick={() => window.my_modal_3.showModal()}
               disabled={role === "student" || role === "instructor" || isAdmin}
             >
-              <img
-                className="w-20 rounded-full"
-                src={user?.photoURL}
-                referrerPolicy={"no-referrer"}
-                title={user?.email}
-              />
+              <div className="avatar">
+                <div className="w-12 rounded">
+                  <img
+                    className="w-8 rounded"
+                    src={user?.photoURL}
+                    referrerPolicy={"no-referrer"}
+                    title={user?.email}
+                  />
+                </div>
+              </div>
             </button>
           </li>
           <li>
@@ -224,27 +228,27 @@ const Navbar = () => {
       {/* modal */}
       <div className="ml-0">
         <dialog id="my_modal_3" className="modal">
-          <div className="modal-box bg-slate-500">
+          <div className="modal-box bg-gradient-to-r from-[#3DB5F8] to-[#5D73F2]">
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
               <button
                 onClick={closeModal3}
-                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                className="btn btn-sm btn-circle btn-ghost hover:btn-info absolute right-2 top-2"
               >
                 ✕
               </button>
             </form>
-            <h3 className="font-bold text-lg">Continue as a</h3>
+            <h3 className="font-bold text-lg">Continue As A</h3>
             <div className="my-10 flex items-center justify-center gap-10">
               <button
                 onClick={handleStudentDashboard}
-                className="btn btn-accent"
+                className="btn btn-accent hover:text-white"
               >
                 Student
               </button>
               <button
                 onClick={handleInstructorDashboard}
-                className="btn btn-info"
+                className="btn btn-primary"
               >
                 Instructor
               </button>

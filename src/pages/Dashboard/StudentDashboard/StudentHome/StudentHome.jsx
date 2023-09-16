@@ -67,12 +67,14 @@ const StudentHome = () => {
     <div className="dashboard-font">
       <div className="text-center mt-5 pb-3 mb-10 shadow-lg rounded-lg">
         <h3 className="text-3xl font-bold mb-2">
-          Welcome, {user.displayName || "User"} Dashboard
+          Welcome,{" "}
+          <span className="uppercase">{user.displayName || "User"}</span>{" "}
+          Dashboard
         </h3>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1  xl:grid-cols-2 2xl:grid-cols-3 justify-items-center gap-3 xl:w-full">
-        <div className="card w-96  bg-gradient-to-r from-[#4568DC] to-[#B06AB3] text-white">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1  xl:grid-cols-2 2xl:grid-cols-3 justify-items-center gap-5">
+        <div className="card w-full  bg-gradient-to-r from-[#4568DC] to-[#B06AB3] text-white">
           <div className="card-body">
             <span>
               <HiBadgeCheck className="text-2xl text-green-600" />
@@ -86,7 +88,7 @@ const StudentHome = () => {
           </div>
         </div>
 
-        <div className="card w-96 h-60 bg-gradient-to-r from-[#F2994A] to-[#F2C94C] text-white">
+        <div className="card w-full h-60 bg-gradient-to-r from-[#F2994A] to-[#F2C94C] text-white">
           <div className="card-body">
             <span>
               <HiShoppingCart className="text-2xl text-blue-500" />
@@ -103,7 +105,7 @@ const StudentHome = () => {
           </div>
         </div>
 
-        <div className="card w-96 bg-gradient-to-r from-[#EF3B36] to-[#F69794] text-white">
+        <div className="card w-full bg-gradient-to-r from-[#EF3B36] to-[#F69794] text-white">
           <div className="card-body">
             <span>
               <FcFeedback className="text-2xl" />
@@ -118,30 +120,53 @@ const StudentHome = () => {
         </div>
       </div>
 
-      <div className="my-10 w-1/2 mx-16">
-        <h3 className="text-xl font-bold mb-5 underline">
-          Your Class Data Analytics
-        </h3>
-        <PieChart width={200} height={200}>
-          <Pie
-            data={data}
-            cx="50%"
-            cy="50%"
-            labelLine={false}
-            label={renderCustomizedLabel}
-            outerRadius={80}
-            fill="#8884d8"
-            dataKey="value"
-          >
-            {data.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
-          </Pie>
-          <Tooltip />
-        </PieChart>
+      <div className="my-10 grid grid-cols-1 lg:grid-cols-2 justify-items-center">
+        <div className="bg-gray-300 p-10 rounded-md">
+          <h3 className="text-xl font-bold mb-5">
+            Your Class Data Analytics
+          </h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis
+            aspernatur saepe unde officia ab dolores ipsam nam vel eum esse.
+            Doloribus, distinctio quis deserunt eligendi veniam aliquam harum
+            ipsum suscipit?
+          </p>
+        </div>
+        <div className="">
+          <h1 className="text-xl font-semibold">
+            Your information in Pie-Chart
+          </h1>
+          <PieChart width={200} height={200}>
+            <Pie
+              data={data}
+              cx="50%"
+              cy="50%"
+              labelLine={false}
+              label={renderCustomizedLabel}
+              outerRadius={80}
+              fill="#8884d8"
+              dataKey="value"
+            >
+              {data.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
+            <Tooltip />
+          </PieChart>
+        </div>
+      </div>
+
+      <div className="bg-gray-300 p-10 rounded-md mb-5">
+        <h3 className="text-xl font-semibold mb-3">Personal Feedback</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium
+          unde nobis et quod, eaque odio ratione eligendi ut officiis,
+          praesentium omnis repellendus minus asperiores aliquid. Explicabo
+          quasi totam aliquam incidunt!
+        </p>
       </div>
     </div>
   );

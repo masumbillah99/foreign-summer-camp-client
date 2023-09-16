@@ -1,23 +1,4 @@
-// import { useQuery } from "@tanstack/react-query";
-// import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-
 const EnrollClass = ({ singleClass }) => {
-  // const [axiosSecure] = useAxiosSecure();
-  //   console.log(singleClass.classId);
-
-  // const { data: enrolledClass = [] } = useQuery(
-  //   ["enrolled-class"],
-  //   async () => {
-  //     const res = await axiosSecure.get(
-  //       `${import.meta.env.VITE_SERVER_URL}/enrolled-class/${
-  //         singleClass.classId
-  //       }`
-  //     );
-  //     return res.data;
-  //   }
-  // );
-
-  // console.log({ enrolledClass });
   const { name, price, date, classId, course_status } = singleClass;
 
   return (
