@@ -30,7 +30,7 @@ const Login = () => {
       <h1 className="mb-5 text-2xl font-bold text-center underline">
         Login Foreign Language School Camp
       </h1>
-      <div className="grid grid-cols-1 lg:grid-cols-2 items-center lg:justify-items-center mx-5 md:mx-20 lg:mx-0">
+      <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-items-center mx-5 md:mx-20 lg:mx-0 gap-10">
         <img src={loginImg} className="w-3/4 lg:w-full" alt="" />
         <div>
           <form onSubmit={handleLogin}>

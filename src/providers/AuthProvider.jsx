@@ -30,7 +30,10 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      getUserRole(user.email).then((data) => setRole(data));
+      getUserRole(user.email).then((data) => {
+        // console.log(data);
+        setRole(data);
+      });
     }
   }, [user]);
 
@@ -57,7 +60,6 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
 
       // get and set token
       if (currentUser) {

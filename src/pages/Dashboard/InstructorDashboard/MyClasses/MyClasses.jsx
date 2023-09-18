@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
@@ -18,11 +17,33 @@ const MyClasses = () => {
   // TODO: enrolled students
 
   return (
-    <div className="my-10">
-      <h1 className="text-3xl font-bold text-center underline mb-5">
-        Review My Classes
-      </h1>
-      <div className="overflow-x-auto">
+    <div className="mb-10">
+      <div className="text-center mt-5 pb-3 mb-10 shadow-lg rounded-lg">
+        <h1 className="text-3xl font-bold text-center">
+          My Add Classes
+        </h1>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 justify-items-center gap-3">
+        {myClassData && myClassData.length > 0
+          ? myClassData.map((detail) => (
+              <div
+                className="card w-96 bg-[#2C72E5] text-neutral-content"
+                key={detail._id}
+              >
+                <div className="card-body">
+                  <h2 className="card-title font-bold">{detail.name}</h2>
+                  <p className="">Email: {detail.email}</p>
+                  <p className="">Available Seats: {detail.available_seat}</p>
+                  <p className="">Price: ${detail.price}</p>
+                  <p className="badge badge-warning mb-5">Status: {detail.status}</p>
+                  <button className="btn btn-success">update class</button>
+                </div>
+              </div>
+            ))
+          : "p"}
+      </div>
+
+      {/* <div className="overflow-x-auto">
         {myClassData && myClassData.length > 0 ? (
           <table className="table">
             <tbody>
@@ -64,7 +85,7 @@ const MyClasses = () => {
             </Link>
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };

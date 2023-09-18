@@ -10,7 +10,6 @@ import ManageUsers from "../pages/Dashboard/AdminDashboard/ManageUsers/ManageUse
 import AddClass from "../pages/Dashboard/InstructorDashboard/AddClass/AddClass";
 import InstructorHome from "../pages/Dashboard/InstructorDashboard/InstructorHome/InstructorHome";
 import MyClasses from "../pages/Dashboard/InstructorDashboard/MyClasses/MyClasses";
-import Settings from "../pages/Dashboard/Settings/Settings";
 import EnrolledClass from "../pages/Dashboard/StudentDashboard/EnrolledClass/EnrolledClass";
 import History from "../pages/Dashboard/StudentDashboard/History/History";
 import SelectedClass from "../pages/Dashboard/StudentDashboard/SelectedClass/SelectedClass";
@@ -19,8 +18,9 @@ import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import AdminRoute from "./AdminRoute";
-// import InstructorRoute from "./InstructorRoute";
 import PrivateRoute from "./PrivateRoute";
+import Reviews from "../pages/Dashboard/SubPages/Reviews/Reviews";
+import Settings from "../pages/Dashboard/SubPages/Settings/Settings";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "myClasses",
         element: <MyClasses />,
+      },
+      {
+        path: "reviews",
+        element: <Reviews />,
       },
 
       // TODO: admin private route

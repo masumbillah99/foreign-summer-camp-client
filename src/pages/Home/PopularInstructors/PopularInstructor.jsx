@@ -4,19 +4,15 @@ import { IoMail } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 const PopularInstructor = () => {
-  const { data: users = [] } = useQuery({
-    queryKey: ["users"],
+  const { data: instructors = [] } = useQuery({
+    queryKey: ["instructors"],
     queryFn: async () => {
       const res = await fetch(
-        `${import.meta.env.VITE_SERVER_URL}/users/instructor`
+        `${import.meta.env.VITE_SERVER_URL}/all-instructors`
       );
       return res.json();
     },
   });
-
-  // console.log("users", users);
-  // const onlyInstructors = users?.filter((user) => user?.email === user?.email);
-  // console.log(onlyInstructors);
 
   // TOD0 : based on students show in ui
 
@@ -31,12 +27,12 @@ const PopularInstructor = () => {
         </h1>
       </Slide>
       <Fade delay={1e3} cascade damping={1e-1}>
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-3">
-          {users &&
-            users.slice(0, 6)?.map((instructor) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-3 mt-10">
+          {instructors &&
+            instructors.slice(0, 6)?.map((instructor) => (
               <div
                 key={instructor._id}
-                className="card w-96 gap-3 bg-base-100 shadow-xl p-5 hover:bg-gray-100 rounded-lg"
+                className="card w-96 gap-3 border hover:border-indigo-500 p-5 rounded-lg"
               >
                 <figure>
                   <img

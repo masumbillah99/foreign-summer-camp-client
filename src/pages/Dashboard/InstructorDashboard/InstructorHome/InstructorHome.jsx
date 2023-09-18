@@ -17,11 +17,11 @@ const InstructorHome = () => {
   const [axiosSecure] = useAxiosSecure();
 
   const { data: myClassData = [] } = useQuery({
-    queryKey: ["classesData"],
-    queryFn: () =>
-      fetch(`${import.meta.env.VITE_SERVER_URL}/classes/${user.email}`).then(
-        (res) => res.json()
-      ),
+    queryKey: ["classes"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/classes/${user?.email}`);
+      return res.data;
+    },
   });
 
   // console.log(myClassData);
@@ -30,7 +30,7 @@ const InstructorHome = () => {
   const pending = myClassData.filter((data) => data.status === "pending");
 
   return (
-    <div className="dashboard-font">
+    <div className="dashboard-font mb-7">
       <div className="text-center mt-5 pb-3 mb-10 shadow-lg rounded-lg">
         <h3 className="text-3xl font-bold mb-2">
           Welcome, {user.displayName || "User"} Dashboard
@@ -81,7 +81,7 @@ const InstructorHome = () => {
         </div>
       </div>
 
-      <div className="bg-slate-500 text-white mt-20 mx-10 p-10 py-20">
+      <div className="bg-slate-500 text-white mt-20 mx-10 p-10 py-20 rounded-lg">
         <p>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex eos,
           nihil illo autem quos quis mollitia a distinctio impedit, repudiandae

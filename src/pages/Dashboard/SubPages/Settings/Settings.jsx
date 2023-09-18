@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 // import { BiError } from "react-icons/bi";
 // import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
-import { imageUpload } from "../../../api/utils";
-import useAuth from "../../../hooks/useAuth";
+import { imageUpload } from "../../../../api/utils";
+import useAuth from "../../../../hooks/useAuth";
 
 const Settings = () => {
   const { user, updateUserProfile } = useAuth();

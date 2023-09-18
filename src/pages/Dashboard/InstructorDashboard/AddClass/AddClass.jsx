@@ -40,10 +40,12 @@ const AddClass = () => {
   };
 
   return (
-    <div className="my-10">
-      <h1 className="font-bold text-2xl mb-5 text-center uppercase underline">
-        add a new class
-      </h1>
+    <div className="mb-10">
+      <div className="text-center mt-5 pb-3 mb-10 shadow-lg rounded-lg">
+        <h1 className="text-3xl font-bold text-center">
+          Add A New Class
+        </h1>
+      </div>
       <AddClassForm
         handleAddClass={handleAddClass}
         handleSubmit={handleSubmit}

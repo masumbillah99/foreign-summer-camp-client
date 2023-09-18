@@ -14,7 +14,7 @@ const PopularClasses = () => {
           Popular Classes
         </h5>
         <h2 className="text-4xl font-bold mt-3 mb-5">
-          Choose Your Favorite Language
+          Choose Your Favorite Language Course
         </h2>
       </Slide>
       <Fade delay={1e3} cascade damping={1e-1}>

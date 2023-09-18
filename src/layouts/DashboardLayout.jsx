@@ -1,11 +1,10 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { FaHistory, FaHome, FaShoppingCart, FaWallet } from "react-icons/fa";
 import { HiMail, HiShoppingCart } from "react-icons/hi";
-import { HiBars3 } from "react-icons//hi2";
-import { MdSettings } from "react-icons/md";
+import { HiBars3 } from "react-icons/hi2";
+import { MdSettings, MdReviews } from "react-icons/md";
 import { AiFillFileAdd, AiFillHome } from "react-icons/ai";
 import useAdmin from "../hooks/useAdmin";
-import useInstructor from "../hooks/useInstructor";
 import useCart from "../hooks/useCart";
 import logo from "../assets/logo.png";
 import useAuth from "../hooks/useAuth";
@@ -13,10 +12,7 @@ import useAuth from "../hooks/useAuth";
 const DashboardLayout = () => {
   const { user, role } = useAuth();
   const [isAdmin] = useAdmin();
-  const [isInstructor] = useInstructor();
   const [cart] = useCart();
-
-  // console.log(role);
 
   return (
     <div className="drawer lg:drawer-open">
@@ -162,6 +158,17 @@ const DashboardLayout = () => {
               </li>
             </>
           )}
+          <li>
+            <NavLink
+              to="/dashboard/reviews"
+              className={({ isActive }) =>
+                isActive ? "text-white" : "text-gray-400"
+              }
+            >
+              <MdReviews />
+              Give Review
+            </NavLink>
+          </li>
           <hr className="px-5 my-7" />
           <li>
             <Link to="/" className="text-gray-400">

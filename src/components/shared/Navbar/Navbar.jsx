@@ -4,7 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import logo from "../../../assets/logo.png";
 import useAdmin from "../../../hooks/useAdmin";
 // import useInstructor from "../../../hooks/useInstructor";
-import { becomeUserRole } from "../../../api/utils";
+import { becomeInstructorRole, becomeStudentRole } from "../../../api/utils";
 // import { FaUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
@@ -19,11 +19,15 @@ const Navbar = () => {
       .catch((error) => toast.success(error.message));
   };
 
-  // console.log(user);
+  const closeModal3 = () => {
+    document.getElementById("my_modal_3").close();
+  };
+
+  // console.log(role);
 
   // handle student role & dashboard
   const handleStudentDashboard = () => {
-    becomeUserRole(user.email, "student").then(() => {
+    becomeStudentRole(user.email, "student").then(() => {
       toast.success("You are student now, Enroll a class");
       setRole("student");
       closeModal3();
@@ -32,7 +36,7 @@ const Navbar = () => {
 
   // handle instructor role & dashboard
   const handleInstructorDashboard = () => {
-    becomeUserRole(user.email, "instructor").then(() => {
+    becomeInstructorRole(user.email, "instructor").then(() => {
       toast.success("You are instructor now, Add class");
       setRole("instructor");
       closeModal3();
@@ -138,7 +142,7 @@ const Navbar = () => {
             <button
               className="disabled:cursor-auto"
               onClick={() => window.my_modal_3.showModal()}
-              disabled={role === "student" || role === "instructor" || isAdmin}
+              disabled={role || isAdmin}
             >
               <div className="avatar">
                 <div className="w-12 rounded">
@@ -175,10 +179,6 @@ const Navbar = () => {
       )}
     </>
   );
-
-  const closeModal3 = () => {
-    document.getElementById("my_modal_3").close();
-  };
 
   return (
     <div className="navbar fixed z-10 px-0 lg:px-10 bg-opacity-50 bg-black text-white">

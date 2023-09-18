@@ -22,7 +22,6 @@ export const saveUserDb = (user) => {
     email: user.email,
     name: user.displayName,
     image: user.photoURL,
-    role: "",
   };
 
   return fetch(`${import.meta.env.VITE_SERVER_URL}/users/${user?.email}`, {
@@ -34,11 +33,25 @@ export const saveUserDb = (user) => {
   }).then((res) => res.json());
 };
 
-/** role save for user */
-export const becomeUserRole = (email, role) => {
+/** role save for instructor */
+export const becomeInstructorRole = (email) => {
   const currentUser = {
-    role: role,
-    // role: "instructor",
+    role: "instructor",
+  };
+
+  return fetch(`${import.meta.env.VITE_SERVER_URL}/users/${email}`, {
+    method: "PUT",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(currentUser),
+  }).then((res) => res.json());
+};
+
+/** role save for student */
+export const becomeStudentRole = (email) => {
+  const currentUser = {
+    role: "student",
   };
 
   return fetch(`${import.meta.env.VITE_SERVER_URL}/users/${email}`, {
@@ -52,9 +65,9 @@ export const becomeUserRole = (email, role) => {
 
 /** get role */
 export const getUserRole = async (email) => {
-  const response = await fetch(
-    `${import.meta.env.VITE_SERVER_URL}/users/${email}`
+  const res = await fetch(
+    `${import.meta.env.VITE_SERVER_URL}/single-user/${email}`
   );
-  const user = await response.json();
-  return user?.role;
+  const data = await res.json();
+  return data?.role;
 };
