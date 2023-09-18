@@ -29,10 +29,7 @@ const SelectedClass = () => {
   // }
 
   // reduce total
-  // console.log(cart);
   const total = cart?.reduce((sum, item) => item.price + sum, 0);
-  // console.log(typeof totalPrice);
-  // const total = parseInt(totalPrice);
 
   const handleDelete = (item) => {
     fetch(`${import.meta.env.VITE_SERVER_URL}/carts/${item._id}`, {
@@ -48,10 +45,12 @@ const SelectedClass = () => {
   };
 
   return (
-    <section className="w-full max-w-screen-xl mx-auto my-10">
-      <h1 className="text-2xl font-bold text-center underline">
-        My Selected Class
-      </h1>
+    <section className="mb-10">
+      <div className="text-center mt-5 pb-5 mb-10 shadow-lg rounded-lg">
+        <h1 className="text-2xl font-bold text-center underline">
+          My Selected Class
+        </h1>
+      </div>
       <div className="bg-gray-100 rounded-lg pb-5 px-5">
         <div className="uppercase font-semibold my-10 py-10 flex items-center justify-evenly">
           <h3>Total Classes: {cart.length}</h3>

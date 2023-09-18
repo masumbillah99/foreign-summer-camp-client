@@ -34,11 +34,12 @@ const EnrolledClass = () => {
   // console.log(payments);
 
   return (
-    <div className="max-w-screen-xl mx-auto my-20 md:my-10">
-      <h1 className="text-3xl text-center font-bold">
-        My Total Enrolled Class - {payments?.length}
-      </h1>
-      <hr className="border-2 border-primary mt-5 mb-16 mx-auto w-1/2" />
+    <div className="mb-10">
+      <div className="text-center mt-5 pb-5 mb-10 shadow-lg rounded-lg">
+        <h1 className="text-3xl text-center font-bold">
+          My Total Enrolled Class - {payments?.length}
+        </h1>
+      </div>
       <div className="bg-gray-100 rounded-lg p-5">
         {payments && payments.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-3">

@@ -26,9 +26,10 @@ const History = () => {
   // console.log(payments);
 
   return (
-    <div className="max-w-screen-xl mx-auto my-5">
-      <h1 className="text-3xl text-center font-bold">Payment History</h1>
-      <hr className="border-2 border-primary my-5 mx-auto w-1/2" />
+    <div className="mb-10">
+      <div className="text-center mt-5 pb-5 mb-10 shadow-lg rounded-lg">
+        <h1 className="text-3xl text-center font-bold">Payment History</h1>
+      </div>
       <div className="bg-gray-100 rounded-lg p-5">
         <h3 className="text-2xl font-bold mb-5">
           Total Payments: {payments.length}

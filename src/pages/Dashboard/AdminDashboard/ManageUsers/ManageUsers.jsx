@@ -1,21 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 import { FaTrashAlt } from "react-icons/fa";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const ManageUsers = () => {
   const [axiosSecure] = useAxiosSecure();
-  const { data: users = [], refetch } = useQuery(["users"], async () => {
+  const { data: allUsers = [], refetch } = useQuery(["users"], async () => {
     const res = await axiosSecure.get(
-      `${import.meta.env.VITE_SERVER_URL}/users`
+      `${import.meta.env.VITE_SERVER_URL}/all-users`
     );
     return res.data;
   });
 
   //   handle make admin
   const handleMakeAdmin = (user) => {
-    // const newRole = { role: 'admin' };
-    fetch(`${import.meta.env.VITE_SERVER_URL}/users/admin/${user._id}`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/make-admin/${user._id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -29,7 +28,7 @@ const ManageUsers = () => {
 
   // handle make instructor role
   const handleMakeInstructor = (user) => {
-    fetch(`${import.meta.env.VITE_SERVER_URL}/users/instructor/${user._id}`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/make-instructor/${user._id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -43,12 +42,12 @@ const ManageUsers = () => {
 
   //   delete a user
   const handleDelete = (user) => {
-    fetch(`${import.meta.env.VITE_SERVER_URL}/users/${user._id}`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/delete-user/${user._id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
       .then(() => {
-        refetch(), toast.error("delete user successfully");
+        refetch(), toast.error("delete user successfully!");
       });
   };
 
@@ -68,15 +67,15 @@ const ManageUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
-              <tr key={user._id}>
+            {allUsers.map((singleUser, index) => (
+              <tr key={singleUser._id}>
                 <th>{index + 1}</th>
                 <td>
                   <div className="flex items-center space-x-3">
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
                         <img
-                          src={user.image}
+                          src={singleUser.image}
                           alt="user image"
                           referrerPolicy="no-referrer"
                         />
@@ -85,49 +84,38 @@ const ManageUsers = () => {
                   </div>
                 </td>
                 <td>
-                  {user.email}
+                  {singleUser.email}
                   <br />
                   <span className="badge badge-ghost badge-sm">
-                    {user.name}
+                    {singleUser.name}
                   </span>
                 </td>
                 <td>
-                  {user.role === "admin" || user.role === "instructor" ? (
+                  {singleUser.role === "admin" ||
+                  singleUser.role === "instructor" ? (
                     <span className="uppercase badge badge-outline text-green-600 font-semibold">
-                      {user.role === "admin" ? "admin" : "instructor"}
+                      {singleUser.role === "admin" ? "admin" : "instructor"}
                     </span>
                   ) : (
                     <>
                       <button
-                        onClick={() => handleMakeAdmin(user)}
+                        onClick={() => handleMakeAdmin(singleUser)}
                         className="btn btn-primary btn-xs"
                       >
                         Admin
                       </button>
                       <button
-                        onClick={() => handleMakeInstructor(user)}
-                        className="btn btn-primary btn-xs me-2"
+                        onClick={() => handleMakeInstructor(singleUser)}
+                        className="btn btn-primary btn-xs ms-2"
                       >
                         Instructor
                       </button>
                     </>
                   )}
-                  {/* {user.role === "instructor" ? (
-                    <span className="uppercase badge badge-outline text-green-600 font-semibold">
-                      instructor
-                    </span>
-                  ) : (
-                    <button
-                      onClick={() => handleMakeInstructor(user)}
-                      className="btn btn-primary btn-xs me-2"
-                    >
-                      Instructor
-                    </button>
-                  )} */}
                 </td>
                 <td>
                   <button
-                    onClick={() => handleDelete(user)}
+                    onClick={() => handleDelete(singleUser)}
                     className="btn btn-ghost text-white btn-sm bg-red-500"
                   >
                     <FaTrashAlt />
@@ -138,7 +126,6 @@ const ManageUsers = () => {
           </tbody>
         </table>
       </div>
-      <ToastContainer />
     </div>
   );
 };

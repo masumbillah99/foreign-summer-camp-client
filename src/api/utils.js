@@ -22,6 +22,7 @@ export const saveUserDb = (user) => {
     email: user.email,
     name: user.displayName,
     image: user.photoURL,
+    role: "",
   };
 
   return fetch(`${import.meta.env.VITE_SERVER_URL}/users/${user?.email}`, {
@@ -69,5 +70,5 @@ export const getUserRole = async (email) => {
     `${import.meta.env.VITE_SERVER_URL}/single-user/${email}`
   );
   const data = await res.json();
-  return data?.role;
+  return data;
 };

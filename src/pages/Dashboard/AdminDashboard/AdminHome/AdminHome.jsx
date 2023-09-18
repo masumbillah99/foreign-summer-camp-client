@@ -18,7 +18,7 @@ const AdminHome = () => {
   const [axiosSecure] = useAxiosSecure();
   const { data: allUsers = [] } = useQuery(["all-users"], async () => {
     const res = await axiosSecure.get(
-      `${import.meta.env.VITE_SERVER_URL}/users`
+      `${import.meta.env.VITE_SERVER_URL}/all-users`
     );
     return res.data;
   });
@@ -85,13 +85,13 @@ const AdminHome = () => {
         </div>
       </div>
 
-      <div className="hidden lg:block my-14">
-        <h3 className="text-xl font-bold mb-5">User Analytics</h3>
+      <div className="hidden lg:block my-14 bg-gray-100 p-5 rounded-lg">
+        <h3 className="text-xl font-bold mb-5 ml-10">User Analytics</h3>
         <LineChart
           width={730}
           height={250}
           data={data}
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+          margin={{ top: 5, right: 30, left: 0, bottom: 5 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />

@@ -1,103 +1,55 @@
-// import { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-// import { BiError } from "react-icons/bi";
-// import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { imageUpload } from "../../../../api/utils";
 import useAuth from "../../../../hooks/useAuth";
 
 const Settings = () => {
-  const { user, updateUserProfile } = useAuth();
-  // const [imgUrl, setImgUrl] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [confirmPassword, setConfirmPassword] = useState("");
-  // const [passError, setPassError] = useState("");
-  // const [confirmError, setConfirmError] = useState("");
-  // const [show, setShow] = useState(false);
-
+  const { user, updateUserProfile, updateUserPassword } = useAuth();
+  const [show, setShow] = useState(false);
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const { register, handleSubmit, reset } = useForm();
 
   const handleUpdateInfo = (data) => {
     event.preventDefault();
-    // console.log(data);
-
-    imageUpload(data.photoURL[0]).then((imageData) => {
-      if (imageData.success) {
-        const imgURL = imageData.data.display_url;
-
-        updateUserProfile(data.displayName, imgURL)
-          .then(() => {
-            toast.success("profile info update successfully");
-            reset();
-          })
-          .catch((err) => {
-            // console.log(err.message);
-            toast.error(err.message);
-          });
-      }
+    imageUpload(data.image[0]).then((imgResponse) => {
+      console.log(imgResponse);
+      updateUserProfile(data.name, imgResponse?.data?.display_url)
+        .then(() => {
+          toast.success("information updated successfully");
+          reset();
+        })
+        .catch((error) => toast.error(error.message));
     });
   };
 
-  // const handleUpdatePrivacy = () => {
-  //   event.preventDefault();
-  //   console.log(password, confirmPassword);
+  // console.log(user);
 
-  //   if (
-  //     !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(
-  //       password
-  //     )
-  //   ) {
-  //     setPassError(
-  //       "password must be at least one letter, one number and one special character"
-  //     );
-  //   }
+  const handleUpdatePrivacy = () => {
+    event.preventDefault();
+    console.log(password, confirmPassword);
 
-  //   if (password !== confirmPassword) {
-  //     setConfirmError("password does not match");
-  //     return;
-  //   }
+    if (password !== confirmPassword) {
+      return toast.error("password does not match");
+    }
 
-  //   // if (user) {
-  //   // const email = user.email;
-  //   // const pass = prompt("Please enter your current password");
-
-  //   updateUserPassword(password)
-  //     .then(() => {
-  //       toast.success("update password successfully");
-  //       event.target.reset();
-  //     })
-  //     .catch((err) => console.log(err));
-
-  //   // Create an EmailAuthProvider credential
-  //   // const credential = { email, pass };
-
-  //   //   reauthenticateUser(credential)
-  //   //     .then(() => {
-  //   //       updateUserPassword(password)
-  //   //         .then(() => {
-  //   //           toast.success("update password successfully");
-  //   //           event.target.reset();
-  //   //         })
-  //   //         .catch((err) => console.log(err));
-  //   //     })
-  //   //     .catch((error) => console.log(error));
-  //   // } else {
-  //   //   console.log("no user");
-  //   // }
-  // };
+    updateUserPassword(password)
+      .then(() => {
+        toast.success("update successful");
+        event.target.reset();
+      })
+      .catch((error) => toast.error(error.message));
+  };
 
   return (
     <div className="">
-      <div className="mt-5 mb-10">
+      <div className="text-center mt-5 pb-5 mb-10 shadow-lg rounded-lg">
         <h3 className="text-3xl font-bold mb-2">Edit Your Profile</h3>
-        <p>
-          Here you can edit your profile by change your username, your email
-          password etc.
-        </p>
-        <hr className="border-indigo-500 border-2 w-1/2 lg:w-1/3 xl:w-1/4 my-1" />
       </div>
 
-      <div className="my-10 md:w-3/4 xl:w-1/2 mx-auto ">
+      <div className="my-10 md:w-3/4 2xl:w-1/2 mx-auto ">
         <h3 className="text-xl font-bold">Update Your Profile Info</h3>
         <form
           onSubmit={handleSubmit(handleUpdateInfo)}
@@ -115,26 +67,26 @@ const Settings = () => {
               readOnly
             />
           </div>
-          <div className="mb-5">
+          <div className="my-5  ">
             <label htmlFor="name" className="text-lg font-bold">
-              Your Name
+              Your Display Name
             </label>{" "}
             <br />
             <input
               type="text"
-              {...register("displayName")}
+              {...register("name", { required: true })}
               placeholder="your user name"
               className="input input-bordered input-error w-full mt-2 focus:outline-none"
             />
           </div>
           <div className="mb-5">
-            <label htmlFor="photoURL" className="text-lg font-bold">
+            <label htmlFor="image" className="text-lg font-bold">
               Your Profile Image
             </label>{" "}
             <br />
             <input
               type="file"
-              {...register("photoURL")}
+              {...register("image", { required: true })}
               placeholder="your profile picture"
               className="file-input file-input-bordered file-input-info w-full mt-2 focus:outline-none"
             />
@@ -150,13 +102,14 @@ const Settings = () => {
         </form>
       </div>
 
-      {/* <div className="my-10 md:w-3/4 xl:w-1/2 mx-auto">
+      {/* update privacy */}
+      <div className="my-10 md:w-3/4 2xl:w-1/2 mx-auto">
         <h3 className="text-xl font-bold">Update your Privacy</h3>
         <form
           onSubmit={handleUpdatePrivacy}
           className="my-5 p-5 rounded-lg border border-indigo-600 "
         >
-          <div>
+          {/* <div>
             <label htmlFor="email" className="text-lg font-bold">
               Your Email Address
             </label>{" "}
@@ -167,7 +120,7 @@ const Settings = () => {
               defaultValue={user?.email}
               readOnly
             />
-          </div>
+          </div> */}
           <div className="my-5">
             <label htmlFor="password" className="text-lg font-bold">
               New Password
@@ -197,11 +150,6 @@ const Settings = () => {
                 </small>
               </p>
             </div>
-            {passError && (
-              <p className="flex items-center gap-2 text-red-600">
-                <BiError /> {passError}
-              </p>
-            )}
           </div>
           <div className="my-5">
             <label htmlFor="confirm" className="text-lg font-bold">
@@ -215,11 +163,6 @@ const Settings = () => {
               className="input input-bordered input-error w-full mt-2 focus:outline-none"
               required
             />
-            {confirmError && (
-              <p className="flex items-center gap-2 text-red-600">
-                <BiError /> {confirmError}
-              </p>
-            )}
           </div>
 
           <div className="relative mb-20">
@@ -231,11 +174,7 @@ const Settings = () => {
             </button>
           </div>
         </form>
-      </div> */}
-
-      {/* <p className="bg-error p-1 absolute bottom-0 w-1/2 mx-auto text-center">
-        &copy; copyright from summer-camp authorization
-      </p> */}
+      </div>
     </div>
   );
 };

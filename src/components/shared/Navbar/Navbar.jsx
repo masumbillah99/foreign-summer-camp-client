@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import logo from "../../../assets/logo.png";
 import useAdmin from "../../../hooks/useAdmin";
 // import useInstructor from "../../../hooks/useInstructor";
@@ -23,7 +23,7 @@ const Navbar = () => {
     document.getElementById("my_modal_3").close();
   };
 
-  // console.log(role);
+  console.log(role);
 
   // handle student role & dashboard
   const handleStudentDashboard = () => {
@@ -150,6 +150,7 @@ const Navbar = () => {
                     className="w-8 rounded"
                     src={user?.photoURL}
                     referrerPolicy={"no-referrer"}
+                    alt="none"
                     title={user?.email}
                   />
                 </div>
@@ -256,8 +257,6 @@ const Navbar = () => {
           </div>
         </dialog>
       </div>
-
-      <ToastContainer />
     </div>
   );
 };

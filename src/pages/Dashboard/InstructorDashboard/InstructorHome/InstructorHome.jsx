@@ -19,7 +19,7 @@ const InstructorHome = () => {
   const { data: myClassData = [] } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/classes/${user?.email}`);
+      const res = await axiosSecure.get(`/my-classes/${user?.email}`);
       return res.data;
     },
   });

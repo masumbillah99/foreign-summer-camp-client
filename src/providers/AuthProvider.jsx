@@ -32,7 +32,7 @@ const AuthProvider = ({ children }) => {
     if (user) {
       getUserRole(user.email).then((data) => {
         // console.log(data);
-        setRole(data);
+        setRole(data?.role);
       });
     }
   }, [user]);
@@ -88,14 +88,6 @@ const AuthProvider = ({ children }) => {
       photoURL: img,
     });
   };
-
-  // const updateUserProfile = (name, photo, phoneNumber) => {
-  //   return updateProfile(auth.currentUser, {
-  //     displayName: name,
-  //     photoURL: photo,
-  //     phoneNumber: phoneNumber,
-  //   });
-  // };
 
   // update user's email address
   const updateUserEmail = (authUser, email) => {

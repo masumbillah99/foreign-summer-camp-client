@@ -1,8 +1,14 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
-import { FaHistory, FaHome, FaShoppingCart, FaWallet } from "react-icons/fa";
+import {
+  FaHistory,
+  FaHome,
+  FaShoppingCart,
+  FaWallet,
+  FaUsers,
+} from "react-icons/fa";
 import { HiMail, HiShoppingCart } from "react-icons/hi";
 import { HiBars3 } from "react-icons/hi2";
-import { MdSettings, MdReviews } from "react-icons/md";
+import { MdSettings, MdReviews, MdOutlineBookmark } from "react-icons/md";
 import { AiFillFileAdd, AiFillHome } from "react-icons/ai";
 import useAdmin from "../hooks/useAdmin";
 import useCart from "../hooks/useCart";
@@ -44,6 +50,7 @@ const DashboardLayout = () => {
                     isActive ? "text-white" : "text-gray-400"
                   }
                 >
+                  <AiFillHome />
                   Admin Home
                 </NavLink>
               </li>
@@ -54,6 +61,7 @@ const DashboardLayout = () => {
                     isActive ? "text-white" : "text-gray-400"
                   }
                 >
+                  <FaUsers />
                   Manage Users
                 </NavLink>
               </li>
@@ -64,6 +72,7 @@ const DashboardLayout = () => {
                     isActive ? "text-white" : "text-gray-400"
                   }
                 >
+                  <MdOutlineBookmark />
                   Manage Classes
                 </NavLink>
               </li>

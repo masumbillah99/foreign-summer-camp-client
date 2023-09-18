@@ -3,10 +3,11 @@ import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import loginImg from "../../assets/login.jpg";
 import useAuth from "../../hooks/useAuth";
-import SocialLogin from "../../components/SocialLogin/SocialLogin";
+// import SocialLogin from "../../components/SocialLogin/SocialLogin";
+import { FaGoogle } from "react-icons/fa";
 
 const Login = () => {
-  const { signInUser } = useAuth();
+  const { signInUser, googleSignIn } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -20,6 +21,15 @@ const Login = () => {
       .then(() => {
         toast.success("successfully logged in");
         e.target.reset();
+        navigate(from, { replace: true });
+      })
+      .catch((error) => toast.error(error.message));
+  };
+
+  const handleGoogleSign = () => {
+    googleSignIn()
+      .then(() => {
+        toast.success("sign in with google successful");
         navigate(from, { replace: true });
       })
       .catch((error) => toast.error(error.message));
@@ -96,7 +106,14 @@ const Login = () => {
               <span className="mx-3">OR</span>
               <hr className="border-gray-500 border w-1/5" />
             </div>
-            <SocialLogin />
+            <button
+              onClick={handleGoogleSign}
+              type="button"
+              className="hover:text-white border border-gray-500 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 text-center mr-2 mb-2"
+            >
+              <FaGoogle className="inline me-2" />
+              Continue with Google
+            </button>
           </div>
         </div>
       </div>
