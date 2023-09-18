@@ -23,7 +23,7 @@ const Navbar = () => {
     document.getElementById("my_modal_3").close();
   };
 
-  console.log(role);
+  // console.log(role);
 
   // handle student role & dashboard
   const handleStudentDashboard = () => {

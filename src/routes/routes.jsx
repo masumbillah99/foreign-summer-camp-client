@@ -62,10 +62,6 @@ const router = createBrowserRouter([
         path: "myClasses",
         element: <MyClasses />,
       },
-      {
-        path: "reviews",
-        element: <Reviews />,
-      },
 
       // TODO: admin private route
       // admin dashboard
@@ -93,8 +89,11 @@ const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
-
-      // user settings - dashboard
+      // common pages - dashboard
+      {
+        path: "reviews",
+        element: <Reviews />,
+      },
       {
         path: "settings",
         element: <Settings />,

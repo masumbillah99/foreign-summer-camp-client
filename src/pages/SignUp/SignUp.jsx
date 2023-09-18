@@ -8,11 +8,6 @@ import useAuth from "../../hooks/useAuth";
 import loginImg from "../../assets/login.jpg";
 import SocialLogin from "../../components/SocialLogin/SocialLogin";
 import { imageUpload, saveUserDb } from "../../api/utils";
-// import Radio from "@mui/material/Radio";
-// import RadioGroup from "@mui/material/RadioGroup";
-// import FormControlLabel from "@mui/material/FormControlLabel";
-// import FormControl from "@mui/material/FormControl";
-// import FormLabel from "@mui/material/FormLabel";
 
 const SignUp = () => {
   const {
@@ -24,31 +19,11 @@ const SignUp = () => {
   const { registerUser, updateUserProfile } = useAuth();
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
-  // const [role, setRole] = useState("");
   const navigate = useNavigate();
 
   // handle user registration
   const handleRegistration = (data) => {
     event.preventDefault();
-
-    /** 
-    const formData = new FormData();
-    formData.append("image", data.image[0]);
-    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${
-      import.meta.env.VITE_IMAGE_UPLOAD_TOKEN
-    }`;
-
-    fetch(img_hosting_url, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((imageData) => {
-        if (imageData.success) {
-          const imgUrl = imageData?.data.display_url;
-        }
-        
-    */
 
     if (data.password !== data.confirm) {
       setError("your password does not match");
@@ -61,7 +36,6 @@ const SignUp = () => {
           imageUpload(data.image[0]).then((imgResponse) => {
             updateUserProfile(data.name, imgResponse?.data?.display_url).then(
               () => {
-                // console.log(result.user);
                 toast.success("sign up successful");
 
                 // save user to db
@@ -69,21 +43,6 @@ const SignUp = () => {
                   reset();
                   navigate("/");
                 });
-
-                // axios
-                //   .put(
-                //     `${import.meta.env.VITE_SERVER_URL}/users/${
-                //       result?.user?.email
-                //     }`,
-                //     savedUser
-                //   )
-                //   .then((res) => {
-                //     console.log(res);
-                //     if (res.data.modifiedCount > 0) {
-                //       reset();
-                //       navigate("/");
-                //     }
-                //   });
               }
             );
           });
@@ -275,6 +234,7 @@ const SignUp = () => {
               // disabled={!role}
             />
           </form>
+
           <div className="text-center mt-3">
             <p className="text-lg">
               Already registered Foreign Language School Camp? Please
