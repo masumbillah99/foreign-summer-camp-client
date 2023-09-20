@@ -8,7 +8,7 @@ const useCart = () => {
     enabled: !loading,
     queryFn: async () => {
       const res = await fetch(
-        `${import.meta.env.VITE_SERVER_URL}/carts?email=${user?.email}`
+        `${import.meta.env.VITE_SERVER_URL}/get-carts?email=${user?.email}`
       );
       return res.json();
     },

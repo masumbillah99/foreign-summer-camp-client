@@ -14,7 +14,7 @@ export const updateClassData = async (classData, id) => {
   const res = await fetch(
     `${import.meta.env.VITE_SERVER_URL}/update-class/${id}`,
     {
-      method: "PUT",
+      method: "PATCH",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(classData),
     }
@@ -27,6 +27,15 @@ export const updateClassData = async (classData, id) => {
 export const getAllClass = async () => {
   const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/classes`);
   const data = await res.json();
+  return data;
+};
+
+// get single cart item
+export const getSingleCartItem = async (id) => {
+  const response = await fetch(
+    `${import.meta.env.VITE_SERVER_URL}/cart-item/${id}`
+  );
+  const data = await response.json();
   return data;
 };
 

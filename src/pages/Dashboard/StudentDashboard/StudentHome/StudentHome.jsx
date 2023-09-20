@@ -6,7 +6,18 @@ import { HiBadgeCheck, HiShoppingCart } from "react-icons/hi";
 import { FcFeedback } from "react-icons/fc";
 import useCart from "../../../../hooks/useCart";
 import Loader from "../../../../components/Loader/Loader";
-import { PieChart, Pie, Cell, Tooltip } from "recharts";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 const StudentHome = () => {
   const { user } = useAuth();
@@ -19,20 +30,26 @@ const StudentHome = () => {
     isError,
     error,
   } = useQuery(["payments"], async () => {
-    const res = await axiosSecure.get(
-      `${import.meta.env.VITE_SERVER_URL}/payments?email=${user?.email}`
-    );
+    const res = await axiosSecure.get(`/my-payments?email=${user?.email}`);
     return res.data;
   });
 
   if (isLoading) return <Loader />;
   if (isError) return "Error......." + error.message;
 
-  // console.log(payments);
+  // console.log(payments, cart);
 
   const data = [
     { name: "Enrolled Class", value: payments.length },
     { name: "Selected Class", value: cart.length },
+  ];
+
+  const chartsData = [
+    {
+      name: "Selected & Enrolled Class",
+      selectedClass: cart.length,
+      enrolledClass: payments.length,
+    },
   ];
 
   const COLORS = ["#FFBB28", "#0088FE", "#FF8042", "#00C49F"];
@@ -66,14 +83,14 @@ const StudentHome = () => {
   return (
     <div className="dashboard-font">
       <div className="text-center mt-5 pb-3 mb-10 shadow-lg rounded-lg">
-        <h3 className="text-3xl font-bold mb-2">
+        <h3 className="text-xl md:text-3xl font-bold mb-2">
           Welcome,{" "}
           <span className="uppercase">{user.displayName || "User"}</span>{" "}
           Dashboard
         </h3>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1  xl:grid-cols-2 2xl:grid-cols-3 justify-items-center gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 justify-items-center gap-5">
         <div className="card w-full  bg-gradient-to-r from-[#4568DC] to-[#B06AB3] text-white">
           <div className="card-body">
             <span>
@@ -120,10 +137,10 @@ const StudentHome = () => {
         </div>
       </div>
 
-      <div className="my-10 grid grid-cols-1 lg:grid-cols-2 justify-items-center">
-        <div className="bg-gray-300 p-10 rounded-md">
-          <h3 className="text-xl font-bold mb-5">
-            Your Class Data Analytics
+      <div className="my-10 grid grid-cols-1 lg:grid-cols-2 justify-items-center gap-10">
+        <div className="bg-gradient-to-r from-[#0088FE] to-[#ffbb28] p-10 rounded-md">
+          <h3 className="text-xl text-white font-bold mb-5">
+            Your Class Data Analytics With PieChart
           </h3>
           <p>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis
@@ -132,6 +149,7 @@ const StudentHome = () => {
             ipsum suscipit?
           </p>
         </div>
+
         <div className="">
           <h1 className="text-xl font-semibold">
             Your information in Pie-Chart
@@ -159,14 +177,34 @@ const StudentHome = () => {
         </div>
       </div>
 
-      <div className="bg-gray-300 p-10 rounded-md mb-5">
-        <h3 className="text-xl font-semibold mb-3">Personal Feedback</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium
-          unde nobis et quod, eaque odio ratione eligendi ut officiis,
-          praesentium omnis repellendus minus asperiores aliquid. Explicabo
-          quasi totam aliquam incidunt!
-        </p>
+      <div className="hidden md:block my-14 bg-gray-100 p-3 rounded-lg">
+        <h3 className="text-xl font-bold mb-5 ml-10">
+          Your Data Analytics With LineChart
+        </h3>
+        <LineChart
+          width={700}
+          height={300}
+          data={chartsData}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line
+            type="monotone"
+            dataKey="selectedClass"
+            stroke="#8884d8"
+            activeDot={{ r: 8 }}
+          />
+          <Line type="monotone" dataKey="enrolledClass" stroke="#82ca9d" />
+        </LineChart>
       </div>
     </div>
   );

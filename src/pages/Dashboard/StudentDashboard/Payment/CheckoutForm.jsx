@@ -1,58 +1,60 @@
+import { useEffect, useState } from "react";
 import { Button, DialogActions } from "@mui/material";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { updateClassData } from "../../../../api/Class";
-import ClassCompo from "../../../../components/reusable/classCompo";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import "./CheckoutForm.css";
 
-const CheckOutForm = ({ handleClose, itemInfo }) => {
+const CheckOutForm = ({
+  handleClose,
+  itemInfo,
+  totalPrice,
+  selectedItemId,
+  cartItemId,
+  refetch,
+}) => {
   const stripe = useStripe();
   const elements = useElements();
   const { user } = useAuth();
   const [axiosSecure] = useAxiosSecure();
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
-  const [cardError, setCardError] = useState("");
   const [processing, setProcessing] = useState(false);
-  const navigate = useNavigate();
-  const [approved, refetch] = ClassCompo();
+  const [cardError, setCardError] = useState("");
 
-  // console.log(itemInfo);
-
+  // 1. get clientSecret from backend
   useEffect(() => {
-    if (itemInfo?.price > 0) {
+    if (totalPrice > 0) {
       axiosSecure
-        .post("/create-payment-intent", { price: itemInfo?.price })
+        .post("/create-payment-intent", { price: totalPrice })
         .then((res) => {
+          // console.log("{from 35}", res.data);
           setClientSecret(res.data.clientSecret);
         });
     }
-  }, [itemInfo, axiosSecure]);
+  }, [totalPrice, axiosSecure]);
+
+  // console.log(cartItemId);
 
   const handlePaymentSubmit = async (event) => {
     event.preventDefault();
-    if (!stripe || !elements) {
-      return;
-    }
+
+    if (!stripe || !elements) return;
+
+    // get a reference to a mounted care-element
     const card = elements.getElement(CardElement);
-    if (card == null) {
-      return;
-    }
+    if (card === null) return;
 
     // Use your card Element with other Stripe.js APIs
-    const { error } = await stripe.createPaymentMethod({
-      type: "card",
-      card,
-    });
+    const { error } = await stripe.createPaymentMethod({ type: "card", card });
+
     if (error) {
+      console.log("error-54", error);
       setCardError(error.message);
     } else {
       setCardError("");
-      // console.log("[PaymentMethod]", paymentMethod);
     }
 
     setProcessing(true);
@@ -62,60 +64,55 @@ const CheckOutForm = ({ handleClose, itemInfo }) => {
         payment_method: {
           card: card,
           billing_details: {
-            email: user?.email || "anonymous",
-            name: user?.displayName || "unknown",
+            email: user?.email || "unknown",
+            name: user?.displayName || "anonymous",
           },
         },
       });
 
-    if (confirmError) {
-      console.log(confirmError);
-      setCardError(confirmError.message);
-    }
+    if (confirmError) setCardError(confirmError.message);
+
     setProcessing(false);
     // console.log("[PaymentIntent]", paymentIntent);
 
     if (paymentIntent.status === "succeeded") {
       setTransactionId(paymentIntent.id);
-      // TODO: next steps
-      // save payment information to the server
-      const seatClass = approved.find((sId) => sId._id === itemInfo.classId);
 
+      // save payment information to the server
       const paymentData = {
-        ...itemInfo,
-        available_seat: seatClass?.available_seat - 1,
+        class_id: itemInfo.class_id,
+        name: itemInfo.name,
+        price: itemInfo.price,
         transactionId: paymentIntent.id,
+        instructor_name: itemInfo.instructor_name,
+        student_email: itemInfo.student_email,
         course_status: "service pending",
         date: new Date().toLocaleDateString(),
+        item_id: cartItemId,
       };
 
-      const newData = {
+      const updateClassInfo = {
         ...itemInfo,
-        status: seatClass?.status,
-        available_seat: seatClass?.available_seat - 1,
+        class_id: "",
+        student_email: "",
+        _id: itemInfo.class_id,
+        available_seat: itemInfo.available_seat - 1,
       };
 
       axiosSecure.post("/payments", paymentData).then((res) => {
-        // console.log("response", res.data);
+        // console.log(res.data);
         if (res.data.insertResult.insertedId) {
-          updateClassData(newData, seatClass?._id).then((data) => {
-            if (data.modifiedCount > 0) {
+          updateClassData(updateClassInfo, selectedItemId).then((data) => {
+            if (data.modifiedCount) {
+              toast.success("transaction completed successfully");
+              handleClose();
               refetch();
             }
           });
-          toast.success("transaction complete successfully");
-          navigate("/dashboard/selectedClass");
-          handleClose();
-          refetch();
-          console.log(paymentData);
         }
       });
     }
   };
-
-  //  TODO: MY MODAL IS NOT WORKING
-  // I post in facebook group about this topic but they delete my post.
-  // Why they delete my post I don't. But my code is working
 
   return (
     <>
@@ -137,11 +134,29 @@ const CheckOutForm = ({ handleClose, itemInfo }) => {
             },
           }}
         />
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+        <DialogActions className="mr-10 mb-5">
+          <Button
+            onClick={handleClose}
+            sx={{
+              border: "2px solid #4A07DA",
+              padding: "3px 15px",
+              margin: "0 15px",
+            }}
+          >
+            Cancel
+          </Button>
+
           <Button
             type="submit"
+            onClick={handleClose}
             autoFocus
+            sx={{
+              backgroundColor: "#5E21F7",
+              color: "white",
+              padding: "5px 15px",
+              margin: "0 15px",
+            }}
+            className="hover:btn-primary"
             disabled={!stripe || !clientSecret || processing}
           >
             Done Payment

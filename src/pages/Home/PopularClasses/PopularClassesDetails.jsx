@@ -14,24 +14,28 @@ const PopularClassesDetails = ({ classDetails }) => {
   const navigate = useNavigate();
   const {
     _id,
+    name,
     image,
     instructor_name,
-    name,
-    available_seat,
+    email,
     price,
+    available_seat,
     description,
   } = classDetails;
 
-  // console.log(isInstructor);
+  // console.log(classDetails);
 
   const handleAddToCart = () => {
     const selectedItem = {
-      classId: _id,
+      student_email: user.email,
+      class_id: _id,
       name,
-      email: user?.email,
       image,
+      instructor_name,
+      instructor_email: email,
       price,
       available_seat,
+      description,
     };
     if (user) {
       // const cartItem = { foodId: _id, name, image, price, email: user.email };
@@ -79,7 +83,7 @@ const PopularClassesDetails = ({ classDetails }) => {
                 {available_seat} seats
               </span>
             </div>
-            {role === "student" || undefined || null ? (
+            {role === "student" || role === undefined || role === null ? (
               <button
                 onClick={() => handleAddToCart(classDetails)}
                 className="btn btn-primary w-full mt-2"

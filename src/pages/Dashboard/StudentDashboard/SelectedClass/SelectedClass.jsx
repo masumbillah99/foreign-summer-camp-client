@@ -1,9 +1,16 @@
-import { FaTrashAlt } from "react-icons/fa";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { FaTrashAlt } from "react-icons/fa";
+import { toast } from "react-toastify";
 import useCart from "../../../../hooks/useCart";
-import React from "react";
-import { Button, Dialog, DialogTitle } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Typography,
+} from "@mui/material";
 import CheckOutForm from "../Payment/CheckoutForm";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -13,23 +20,26 @@ const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
 const SelectedClass = () => {
   const [cart, refetch] = useCart();
   const [open, setOpen] = React.useState(false);
+  const [price, setPrice] = useState(0);
+  const [selectedItemId, setSelectedItemId] = useState(null);
+  const [cartItemId, setCartItemId] = useState(null);
   const [fullWidth, setFullWidth] = React.useState(true);
   const [maxWidth, setMaxWidth] = React.useState("sm");
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (itemId, itemPrice, _id) => {
     setOpen(true);
+    setPrice(itemPrice);
+    setSelectedItemId(itemId);
+    setCartItemId(_id);
   };
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  // const openModal = () => {
-  //   setIsOpen(true);
-  // }
-
   // reduce total
-  const total = cart?.reduce((sum, item) => item.price + sum, 0);
+  // how does reduce works
+  const totalPrice = cart.reduce((sum, item) => item.price + sum, 0);
 
   const handleDelete = (item) => {
     fetch(`${import.meta.env.VITE_SERVER_URL}/carts/${item._id}`, {
@@ -38,11 +48,13 @@ const SelectedClass = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.deletedCount > 0) {
-          toast.success("Class cart deleted successfully");
+          toast.success("class deleted successfully");
           refetch();
         }
       });
   };
+
+  // console.log(totalPrice);
 
   return (
     <section className="mb-10">
@@ -54,7 +66,7 @@ const SelectedClass = () => {
       <div className="bg-gray-100 rounded-lg pb-5 px-5">
         <div className="uppercase font-semibold my-10 py-10 flex items-center justify-evenly">
           <h3>Total Classes: {cart.length}</h3>
-          <h3>Total Amount: ${total}</h3>
+          <h3>Total Amount: ${totalPrice}</h3>
         </div>
         <>
           {cart && cart.length > 0 ? (
@@ -92,8 +104,14 @@ const SelectedClass = () => {
                       <td className="text-xl font-semibold">$ {item.price}</td>
                       <Button
                         variant="outlined"
-                        onClick={handleClickOpen}
                         className="top-5"
+                        onClick={() =>
+                          handleClickOpen(
+                            item?.class_id,
+                            item?.price,
+                            item?._id
+                          )
+                        }
                       >
                         Payment
                       </Button>
@@ -107,13 +125,49 @@ const SelectedClass = () => {
                         aria-labelledby="alert-dialog-title"
                         aria-describedby="alert-dialog-description"
                       >
-                        <DialogTitle id="alert-dialog-title">
-                          {"Ready for payment"}
+                        <DialogTitle
+                          className="border"
+                          sx={{ fontWeight: "bold" }}
+                          id="alert-dialog-title"
+                        >
+                          {`Your Payable Amount: BDT ${price}`}
                         </DialogTitle>
+
+                        <DialogContent className="mt-3 text-left">
+                          <DialogContentText id="alert-dialog-description">
+                            We assure you that our payment system is highly
+                            secure. You can easily make payments through an easy
+                            process.
+                          </DialogContentText>
+                          <DialogContentText
+                            id="alert-dialog-description"
+                            sx={{ fontWeight: "600", margin: "7px 0" }}
+                          >
+                            If you don&apos;t have any card? You can use this
+                            demo card.
+                          </DialogContentText>
+                          <Typography className="text-primary">
+                            Card Number: 5555555555554444
+                          </Typography>
+                          <Typography className="text-primary">
+                            MM / YY: 12 / 25
+                          </Typography>
+                          <Typography className="text-primary">
+                            CVC: 123
+                          </Typography>
+                          <Typography className="text-primary">
+                            ZIP: 45612
+                          </Typography>
+                        </DialogContent>
+
                         <Elements stripe={stripePromise}>
                           <CheckOutForm
                             handleClose={handleClose}
                             itemInfo={item}
+                            totalPrice={price}
+                            selectedItemId={selectedItemId}
+                            cartItemId={cartItemId}
+                            refetch={refetch}
                           />
                         </Elements>
                       </Dialog>
@@ -132,18 +186,30 @@ const SelectedClass = () => {
               </table>
             </div>
           ) : (
-            <div className="w-2/3 py-10 mx-auto text-center">
-              <p className="text-xl font-bold mb-3">
-                No selected class data found
-              </p>
-              <Link className="btn btn-primary" to={"/allClasses"}>
-                Select Class
-              </Link>
+            <div className="w-2/3 mx-auto flex flex-col lg:flex-row items-center gap-10">
+              <div className="py-10 mx-auto text-center border p-5 rounded-lg">
+                <p className="text-xl font-bold mb-3">
+                  No selected class data found
+                </p>
+                <Link className="btn btn-primary" to={"/allClasses"}>
+                  Select Class
+                </Link>
+              </div>
+              <div className="py-10 mx-auto text-center border p-5 rounded-lg">
+                <p className="text-xl font-bold mb-3">
+                  See your all enroll class
+                </p>
+                <Link
+                  className="btn btn-primary"
+                  to={"/dashboard/enrolledClass"}
+                >
+                  My Enrolled Class
+                </Link>
+              </div>
             </div>
           )}
         </>
       </div>
-      <ToastContainer />
     </section>
   );
 };

@@ -41,7 +41,7 @@ const Footer = () => {
             <FaFacebook className="text-blue-900 text-lg" /> Facebook
           </Link>
           <Link
-            to="https://www.linkedin.com/in/masumbillah99/"
+            to="https://www.linkedin.com/in/mdmasumbillah99/"
             className="flex items-center gap-3 text-md"
             target="_blank"
           >
@@ -56,6 +56,18 @@ const Footer = () => {
           </Link>
         </div>
       </div>
+      <aside className="w-full mx-auto text-center">
+        <span className="badge badge-warning rounded-md">
+          Copyright © 2023 - All right reserved by{" "}
+          <Link
+            to="https://md-masumbillah.netlify.app"
+            target={"_blank"}
+            className="underline ml-1"
+          >
+            Developer Masum
+          </Link>
+        </span>
+      </aside>
     </footer>
   );
 };

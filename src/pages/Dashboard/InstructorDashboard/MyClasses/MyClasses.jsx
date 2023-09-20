@@ -36,7 +36,7 @@ const MyClasses = () => {
                   <p className="badge badge-warning mb-5">
                     Status: {detail.status}
                   </p>
-                  <button className="btn btn-success">update class</button>
+                  <button className="btn btn-success">update class info</button>
                 </div>
               </div>
             ))

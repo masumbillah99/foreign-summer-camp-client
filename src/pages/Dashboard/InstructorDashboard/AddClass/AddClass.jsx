@@ -15,7 +15,7 @@ const AddClass = () => {
     imageUpload(photo).then((imgData) => {
       const classData = {
         instructor_name: user.displayName,
-        email: user.email,
+        instructor_email: user.email,
         name: data.name,
         image: imgData.data.display_url,
         price: parseFloat(data.price),
@@ -42,9 +42,7 @@ const AddClass = () => {
   return (
     <div className="mb-10">
       <div className="text-center mt-5 pb-3 mb-10 shadow-lg rounded-lg">
-        <h1 className="text-3xl font-bold text-center">
-          Add A New Class
-        </h1>
+        <h1 className="text-3xl font-bold text-center">Add A New Class</h1>
       </div>
       <AddClassForm
         handleAddClass={handleAddClass}

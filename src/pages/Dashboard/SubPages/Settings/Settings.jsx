@@ -27,9 +27,8 @@ const Settings = () => {
 
   // console.log(user);
 
-  const handleUpdatePrivacy = () => {
+  const handleUpdatePrivacy = (event) => {
     event.preventDefault();
-    console.log(password, confirmPassword);
 
     if (password !== confirmPassword) {
       return toast.error("password does not match");
@@ -75,6 +74,7 @@ const Settings = () => {
             <input
               type="text"
               {...register("name", { required: true })}
+              defaultValue={user?.displayName}
               placeholder="your user name"
               className="input input-bordered input-error w-full mt-2 focus:outline-none"
             />

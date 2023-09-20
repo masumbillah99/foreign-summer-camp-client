@@ -32,7 +32,7 @@ const InstructorHome = () => {
   return (
     <div className="dashboard-font mb-7">
       <div className="text-center mt-5 pb-3 mb-10 shadow-lg rounded-lg">
-        <h3 className="text-3xl font-bold mb-2">
+        <h3 className="text-xl md:text-3xl font-bold mb-2">
           Welcome, {user.displayName || "User"} Dashboard
         </h3>
       </div>

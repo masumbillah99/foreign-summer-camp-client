@@ -9,9 +9,7 @@ const History = () => {
   const [axiosSecure] = useAxiosSecure();
 
   const { data: payments = [] } = useQuery(["payments"], async () => {
-    const res = await axiosSecure.get(
-      `${import.meta.env.VITE_SERVER_URL}/payments?email=${user?.email}`
-    );
+    const res = await axiosSecure.get(`/my-payments?email=${user?.email}`);
     return res.data;
   });
 

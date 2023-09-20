@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import Loader from "../../../../components/Loader/Loader";
 // import { useState } from "react";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
@@ -10,26 +11,15 @@ const EnrolledClass = () => {
   const [axiosSecure] = useAxiosSecure();
   // const [singleClass, setSingleClass] = useState([]);
 
-  const { data: payments = [] } = useQuery(["payments"], async () => {
-    const res = await axiosSecure.get(
-      `${import.meta.env.VITE_SERVER_URL}/payments?email=${user?.email}`
-    );
-    return res.data;
-  });
+  const { data: payments = [], isLoading } = useQuery(
+    ["payments"],
+    async () => {
+      const res = await axiosSecure.get(`/my-payments?email=${user?.email}`);
+      return res.data;
+    }
+  );
 
-  // console.log(payments);
-  // const getClassId = payments.map((item) => item);
-  // console.log({ getClassId });
-
-  // const { data: enrolledClass = [] } = useQuery(
-  //   ["enrolled-class"],
-  //   async () => {
-  //     const res = await axiosSecure.get(
-  //       `${import.meta.env.VITE_SERVER_URL}/enrolled-class/${classId}`
-  //     );
-  //     return res.data;
-  //   }
-  // );
+  if (isLoading) <Loader />;
 
   // console.log(payments);
 

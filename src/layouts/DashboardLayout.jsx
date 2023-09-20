@@ -167,17 +167,19 @@ const DashboardLayout = () => {
               </li>
             </>
           )}
-          <li>
-            <NavLink
-              to="/dashboard/reviews"
-              className={({ isActive }) =>
-                isActive ? "text-white" : "text-gray-400"
-              }
-            >
-              <MdReviews />
-              Give Review
-            </NavLink>
-          </li>
+          {!isAdmin && (
+            <li>
+              <NavLink
+                to="/dashboard/reviews"
+                className={({ isActive }) =>
+                  isActive ? "text-white" : "text-gray-400"
+                }
+              >
+                <MdReviews />
+                Give Review
+              </NavLink>
+            </li>
+          )}
           <hr className="px-5 my-7" />
           <li>
             <Link to="/" className="text-gray-400">

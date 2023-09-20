@@ -1,5 +1,5 @@
 const EnrollClass = ({ singleClass }) => {
-  const { name, price, date, classId, course_status } = singleClass;
+  const { name, price, date, class_id, course_status } = singleClass;
 
   return (
     <div className="card w-96 bg-base-100 shadow-xl shadow-gray-300">
@@ -15,7 +15,7 @@ const EnrollClass = ({ singleClass }) => {
         </p>
         <p>
           Course Id:
-          <span className="badge badge-warning ml-2">{classId}</span>
+          <span className="badge badge-warning ml-2">{class_id}</span>
         </p>
         <p>
           Status:{" "}
