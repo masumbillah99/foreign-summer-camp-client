@@ -1,4 +1,16 @@
-const AddClassForm = ({ handleAddClass, handleSubmit, register }) => {
+import Select from "react-select";
+
+const AddClassForm = ({
+  handleAddClass,
+  handleSubmit,
+  register,
+  categoryItem,
+  setCategoryItem,
+  categoryOptions,
+  courseFor,
+  setCourseFor,
+  courseForOptions,
+}) => {
   return (
     <div>
       <form
@@ -7,7 +19,7 @@ const AddClassForm = ({ handleAddClass, handleSubmit, register }) => {
       >
         <div className="flex flex-col lg:flex-row gap-5 mb-5">
           <div className="form-control w-full">
-            <label className="font-semibold mb-3">Class Name</label>
+            <label className="font-semibold mb-3">Course Name</label>
             <input
               type="text"
               {...register("name", { required: true })}
@@ -16,7 +28,7 @@ const AddClassForm = ({ handleAddClass, handleSubmit, register }) => {
             />
           </div>
           <div className="form-control w-full">
-            <label className="font-semibold mb-3">Class Cover</label>
+            <label className="font-semibold mb-3">Course Cover Photo</label>
             <input
               type="file"
               {...register("image", { required: true })}
@@ -26,15 +38,21 @@ const AddClassForm = ({ handleAddClass, handleSubmit, register }) => {
         </div>
         <div className="flex flex-col lg:flex-row gap-5 mb-5">
           <div className="form-control w-full">
-            <label className="font-semibold mb-3">Class Category</label>
-            <input
+            <label className="font-semibold mb-3">Course Category</label>
+            <Select
+              defaultValue={categoryItem}
+              onChange={setCategoryItem}
+              options={categoryOptions}
+              required
+            />
+            {/* <input
               {...register("category", { required: true })}
               className="input input-bordered input-primary focus:outline-none w-full"
               placeholder="class category"
-            />
+            /> */}
           </div>
           <div className="form-control w-full">
-            <label className="font-semibold mb-3">Class Duration</label>
+            <label className="font-semibold mb-3">Course Duration (hour)</label>
             <input
               type="duration"
               {...register("duration", { required: true })}
@@ -68,27 +86,27 @@ const AddClassForm = ({ handleAddClass, handleSubmit, register }) => {
         <div className="flex flex-col lg:flex-row gap-5 mb-5">
           <div className="form-control w-full">
             <label className="font-semibold mb-3">Who this course is for</label>
-            <input
-              type="text"
-              {...register("whoFor")}
-              className="input input-bordered input-primary focus:outline-none w-full"
-              placeholder="Available seats"
+            <Select
+              defaultValue={courseFor}
+              onChange={setCourseFor}
+              options={courseForOptions}
+              required
             />
           </div>
           <div className="form-control w-full">
             <label className="font-semibold mb-3">Coupon Code</label>
             <input
               type="text"
-              {...register("coupon")}
+              {...register("coupon", { required: true })}
               className="input input-bordered input-primary focus:outline-none w-full"
-              placeholder="coupon code for student"
+              placeholder="coupon code for student (SUMMERCAMP99)"
             />
           </div>
         </div>
 
         <div className="form-control">
           <textarea
-            {...register("description")}
+            {...register("description", { required: true })}
             placeholder="description about class"
             className="textarea textarea-bordered textarea-lg w-full h-40 focus:outline-none mb-5"
           ></textarea>

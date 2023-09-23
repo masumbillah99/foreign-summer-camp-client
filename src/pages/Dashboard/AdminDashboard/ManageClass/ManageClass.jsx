@@ -14,8 +14,19 @@ const ManageClass = () => {
     },
   });
 
-  const handleApproved = (classData, id) => {
-    const newData = { status: "approved" };
+  // console.log(allClassData);
+
+  const handleApproved = (id, classDetails) => {
+    const newData = {
+      status: "approved",
+      image: classDetails.image,
+      available_seat: classDetails.available_seat,
+      description: classDetails.description,
+      duration: classDetails.duration,
+      courseFor: classDetails.courseFor,
+      coupon: classDetails.coupon,
+    };
+
     updateClassData(newData, id).then((data) => {
       if (data.modifiedCount > 0) {
         toast.success("successfully approved class");
@@ -25,8 +36,16 @@ const ManageClass = () => {
     });
   };
 
-  const handleDenyRequest = (id) => {
-    const newData = { status: "denied" };
+  const handleDenyRequest = (id, classDetails) => {
+    const newData = {
+      status: "denied",
+      image: classDetails.image,
+      available_seat: classDetails.available_seat,
+      description: classDetails.description,
+      duration: classDetails.duration,
+      courseFor: classDetails.courseFor,
+      coupon: classDetails.coupon,
+    };
     updateClassData(newData, id).then((data) => {
       if (data.modifiedCount < 0) {
         toast.success("Class approved request canceled");

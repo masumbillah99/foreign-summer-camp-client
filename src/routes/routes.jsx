@@ -21,6 +21,7 @@ import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 import Reviews from "../pages/Dashboard/SubPages/Reviews/Reviews";
 import Settings from "../pages/Dashboard/SubPages/Settings/Settings";
+import MySingleClass from "../pages/Dashboard/InstructorDashboard/MySingleClass/MySingleClass";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,14 @@ const router = createBrowserRouter([
       {
         path: "myClasses",
         element: <MyClasses />,
+      },
+      {
+        path: "myClasses/:id",
+        element: <MySingleClass />,
+        loader: ({ params }) =>
+          fetch(
+            `${import.meta.env.VITE_SERVER_URL}/my-single-class/${params.id}`
+          ),
       },
 
       // TODO: admin private route

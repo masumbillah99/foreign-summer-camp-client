@@ -14,49 +14,54 @@ const PopularClassesDetails = ({ classDetails }) => {
   const navigate = useNavigate();
   const {
     _id,
+    instructor_name,
+    // instructor_email,
     name,
     image,
-    instructor_name,
-    email,
     price,
     available_seat,
     description,
   } = classDetails;
 
-  // console.log(classDetails);
+  // console.log(user);
 
   const handleAddToCart = () => {
     const selectedItem = {
-      student_email: user.email,
+      student_email: user?.email,
       class_id: _id,
+      instructor_name,
       name,
       image,
-      instructor_name,
-      instructor_email: email,
       price,
       available_seat,
+      duration: classDetails?.duration,
       description,
+      categories: classDetails?.categories,
+      courseFor: classDetails?.courseFor,
+      coupon: classDetails?.coupon,
+      status: classDetails?.status,
     };
-    if (user) {
-      // const cartItem = { foodId: _id, name, image, price, email: user.email };
-      fetch(`${import.meta.env.VITE_SERVER_URL}/carts`, {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(selectedItem),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.insertedId) {
-            toast.success("Class added on the cart");
-            refetch(); // refetch cart to update the number of items in the cart
-          }
-        });
-    } else {
-      toast.warn("Please login to add the class");
+    if (!user) {
+      toast.warn("Please login to enroll the Course");
       navigate("/login");
+      return;
     }
+
+    // const cartItem = { foodId: _id, name, image, price, email: user.email };
+    fetch(`${import.meta.env.VITE_SERVER_URL}/carts`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(selectedItem),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          toast.success("Course added on the cart");
+          refetch(); // refetch cart to update the number of items in the cart
+        }
+      });
   };
 
   return (

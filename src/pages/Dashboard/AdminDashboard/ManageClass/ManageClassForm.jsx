@@ -7,11 +7,20 @@ const ManageClassForm = ({
   handleDenyRequest,
   // handleFeedback,
 }) => {
-  const { _id, image, instructor_name, email, name, available_seat, price } =
-    classDetails;
-
   // todo handle feedback
-  const { register, handleSubmit } = useForm();
+  const { register } = useForm();
+
+  const {
+    _id,
+    image,
+    instructor_name,
+    instructor_email,
+    name,
+    available_seat,
+    price,
+  } = classDetails;
+
+  // console.log(classDetails);
 
   return (
     <div className="card bg-base-100 shadow-xl">
@@ -22,7 +31,7 @@ const ManageClassForm = ({
         <h2 className="card-title font-bold">{name}</h2>
         <h1 className="font-semibold">
           Instructor: {instructor_name}
-          <small className="font-normal ms-3">({email})</small>
+          <small className="font-normal ms-3">({instructor_email})</small>
         </h1>
         <div className="card-actions">
           <div className="text-xl text-primary">${price}</div>
@@ -42,13 +51,13 @@ const ManageClassForm = ({
           ) : (
             <>
               <button
-                onClick={() => handleDenyRequest(_id)}
+                onClick={() => handleDenyRequest(_id, classDetails)}
                 className="btn bg-red-500 hover:bg-red-700 text-white"
               >
                 Denied
               </button>
               <button
-                onClick={() => handleApproved(classDetails, _id)}
+                onClick={() => handleApproved(_id, classDetails)}
                 className="btn bg-green-700 hover:bg-green-800 text-white"
               >
                 Approved

@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
@@ -13,6 +14,8 @@ const MyClasses = () => {
       return res.data;
     },
   });
+
+  // console.log(myClassData);
 
   // TODO: enrolled students
 
@@ -30,13 +33,18 @@ const MyClasses = () => {
               >
                 <div className="card-body">
                   <h2 className="card-title font-bold">{detail.name}</h2>
-                  <p className="">Email: {detail.email}</p>
+                  <p className="">Email: {detail.instructor_email}</p>
                   <p className="">Available Seats: {detail.available_seat}</p>
                   <p className="">Price: ${detail.price}</p>
                   <p className="badge badge-warning mb-5">
                     Status: {detail.status}
                   </p>
-                  <button className="btn btn-success">update class info</button>
+                  <Link
+                    to={`/dashboard/myClasses/${detail._id}`}
+                    className="btn btn-success"
+                  >
+                    update class info
+                  </Link>
                 </div>
               </div>
             ))

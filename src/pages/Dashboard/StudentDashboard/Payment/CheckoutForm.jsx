@@ -36,7 +36,7 @@ const CheckOutForm = ({
     }
   }, [totalPrice, axiosSecure]);
 
-  // console.log(cartItemId);
+  // console.log(itemInfo);
 
   const handlePaymentSubmit = async (event) => {
     event.preventDefault();
@@ -88,15 +88,19 @@ const CheckOutForm = ({
         student_email: itemInfo.student_email,
         course_status: "service pending",
         date: new Date().toLocaleDateString(),
-        item_id: cartItemId,
+        _id: cartItemId,
       };
 
       const updateClassInfo = {
-        ...itemInfo,
+        status: itemInfo?.status,
+        image: itemInfo?.image,
+        coupon: itemInfo?.coupon,
+        duration: itemInfo?.duration,
+        courseFor: itemInfo?.courseFor,
+        description: itemInfo?.description,
+        available_seat: itemInfo?.available_seat - 1,
         class_id: "",
         student_email: "",
-        _id: itemInfo.class_id,
-        available_seat: itemInfo.available_seat - 1,
       };
 
       axiosSecure.post("/payments", paymentData).then((res) => {

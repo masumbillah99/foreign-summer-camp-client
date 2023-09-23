@@ -81,7 +81,7 @@ const InstructorHome = () => {
         </div>
       </div>
 
-      <div className="bg-slate-500 text-white mt-20 mx-10 p-10 py-20 rounded-lg">
+      <div className="bg-slate-500 text-white mt-20 xl:mx-10 p-10 py-20 rounded-lg">
         <p>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex eos,
           nihil illo autem quos quis mollitia a distinctio impedit, repudiandae
@@ -91,12 +91,7 @@ const InstructorHome = () => {
           veritatis, sunt accusantium dolore recusandae velit suscipit? Aliquid
           sapiente ipsa earum nostrum quo modi magni harum, atque obcaecati
           totam, tenetur veritatis incidunt sint quas at fugit laudantium dolore
-          quos suscipit. Eveniet, molestias? Repudiandae, magnam. Eius saepe
-          excepturi voluptate corporis animi sapiente cupiditate ratione
-          assumenda quaerat. Suscipit, minus omnis voluptates iusto cupiditate
-          quasi hic aut velit harum ex in repellat praesentium assumenda quod
-          similique nesciunt ducimus! Fugit ab, quos, odit et architecto,
-          expedita odio suscipit amet velit minima aliquid accusamus neque?
+          quos suscipit. Eveniet.
         </p>
       </div>
 

@@ -54,7 +54,7 @@ const SelectedClass = () => {
       });
   };
 
-  // console.log(totalPrice);
+  // console.log(cart);
 
   return (
     <section className="mb-10">
