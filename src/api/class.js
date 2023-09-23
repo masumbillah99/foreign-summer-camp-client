@@ -23,19 +23,22 @@ export const updateClassData = async (classData, id) => {
   return data;
 };
 
-// get all classes
-export const getAllClass = async () => {
-  const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/classes`);
+// delete a class
+export const deleteAClass = async (id) => {
+  const res = await fetch(
+    `${import.meta.env.VITE_SERVER_URL}/delete-single-class/${id}`,
+    {
+      method: "DELETE",
+    }
+  );
   const data = await res.json();
   return data;
 };
 
-// get single cart item
-export const getSingleCartItem = async (id) => {
-  const response = await fetch(
-    `${import.meta.env.VITE_SERVER_URL}/cart-item/${id}`
-  );
-  const data = await response.json();
+// get all classes
+export const getAllClass = async () => {
+  const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/classes`);
+  const data = await res.json();
   return data;
 };
 

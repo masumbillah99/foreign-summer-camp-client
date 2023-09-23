@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { updateClassData } from "../../../../api/Class";
+import { deleteAClass, updateClassData } from "../../../../api/Class";
 import ManageClassForm from "./ManageClassForm";
 
 const ManageClass = () => {
@@ -55,13 +55,23 @@ const ManageClass = () => {
   };
 
   // TODO : Handle feedback
-
   // const handleFeedback = (feedback, id) => {
   //   console.log(feedback);
   //   updateClassData(feedback, id).then((data) => {
   //     console.log(data);
   //   });
   // };
+
+  const handleDelete = (id) => {
+    deleteAClass(id)
+      .then((res) => {
+        if (res.deletedCount > 0) {
+          toast.success("successfully delete a class");
+          refetch();
+        }
+      })
+      .catch((err) => toast.error(err.message));
+  };
 
   return (
     <div className="my-10">
@@ -75,6 +85,7 @@ const ManageClass = () => {
             handleApproved={handleApproved}
             handleDenyRequest={handleDenyRequest}
             // handleFeedback={handleFeedback}
+            handleDelete={handleDelete}
             disable={disable}
           />
         ))}

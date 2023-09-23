@@ -4,12 +4,10 @@ import { toast } from "react-toastify";
 // import useAdmin from "../../../hooks/useAdmin";
 import useAuth from "../../../hooks/useAuth";
 import useCart from "../../../hooks/useCart";
-// import useInstructor from "../../../hooks/useInstructor";
 
 const PopularClassesDetails = ({ classDetails }) => {
   const { user, role } = useAuth();
   // const [isAdmin] = useAdmin();
-  // const [isInstructor] = useInstructor();
   const [refetch] = useCart();
   const navigate = useNavigate();
   const {

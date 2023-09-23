@@ -3,14 +3,11 @@ import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
 import logo from "../../../assets/logo.png";
 import useAdmin from "../../../hooks/useAdmin";
-// import useInstructor from "../../../hooks/useInstructor";
 import { becomeInstructorRole, becomeStudentRole } from "../../../api/utils";
-// import { FaUserCircle } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, logOutUser, role, setRole } = useAuth();
   const [isAdmin] = useAdmin();
-  // const [isInstructor] = useInstructor();
   // const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -79,27 +76,6 @@ const Navbar = () => {
           Instructors
         </NavLink>
       </li>
-
-      {/* <li>
-        <NavLink
-          to={`${
-            user
-              ? `/dashboard/${
-                  isAdmin
-                    ? "manageUser"
-                    : "studentHome" && isInstructor
-                    ? "instructorHome"
-                    : "studentHome"
-                }`
-              : "/login"
-          }`}
-          className={({ isActive }) =>
-            isActive ? "text-[#EEFF25]" : "text-gray-300"
-          }
-        >
-          dashboard
-        </NavLink>
-      </li> */}
 
       {user ? (
         <>

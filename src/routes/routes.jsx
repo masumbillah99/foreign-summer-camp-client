@@ -19,6 +19,7 @@ import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
+import InstructorRoute from "./InstructorRoute";
 import Reviews from "../pages/Dashboard/SubPages/Reviews/Reviews";
 import Settings from "../pages/Dashboard/SubPages/Settings/Settings";
 import MySingleClass from "../pages/Dashboard/InstructorDashboard/MySingleClass/MySingleClass";
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
   },
   { path: "/login", element: <Login /> },
   { path: "/register", element: <SignUp /> },
+  // dashboard routes (student, instructor, admin)
   {
     path: "dashboard",
     element: (
@@ -53,19 +55,35 @@ const router = createBrowserRouter([
       // instructor dashboard
       {
         path: "instructorHome",
-        element: <InstructorHome />,
+        element: (
+          <InstructorRoute>
+            <InstructorHome />
+          </InstructorRoute>
+        ),
       },
       {
         path: "addClass",
-        element: <AddClass />,
+        element: (
+          <InstructorRoute>
+            <AddClass />
+          </InstructorRoute>
+        ),
       },
       {
         path: "myClasses",
-        element: <MyClasses />,
+        element: (
+          <InstructorRoute>
+            <MyClasses />
+          </InstructorRoute>
+        ),
       },
       {
         path: "myClasses/:id",
-        element: <MySingleClass />,
+        element: (
+          <InstructorRoute>
+            <MySingleClass />
+          </InstructorRoute>
+        ),
         loader: ({ params }) =>
           fetch(
             `${import.meta.env.VITE_SERVER_URL}/my-single-class/${params.id}`

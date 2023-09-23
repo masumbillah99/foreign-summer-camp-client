@@ -1,7 +1,6 @@
 // import { useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../../../hooks/useAdmin";
-// import useInstructor from "../../../hooks/useInstructor";
 import { FaHistory, FaHome, FaShoppingCart, FaWallet } from "react-icons/fa";
 import { HiMail, HiShoppingCart } from "react-icons/hi";
 import { AiFillFileAdd, AiFillHome } from "react-icons/ai";
@@ -10,7 +9,6 @@ import useAuth from "../../../hooks/useAuth";
 
 const Sidebar = () => {
   const [isAdmin] = useAdmin();
-  // const [isInstructor] = useInstructor();
   const [cart] = useCart();
   const { role } = useAuth();
   // const [isActive, setActive] = useState(false);

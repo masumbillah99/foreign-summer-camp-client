@@ -24,32 +24,41 @@ const MyClasses = () => {
       <div className="text-center mt-5 pb-3 mb-10 shadow-lg rounded-lg">
         <h1 className="text-3xl font-bold text-center">My Add Classes</h1>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 justify-items-center gap-3">
-        {myClassData && myClassData.length > 0
-          ? myClassData.map((detail) => (
-              <div
-                className="card w-96 bg-[#2C72E5] text-neutral-content"
-                key={detail._id}
-              >
-                <div className="card-body">
-                  <h2 className="card-title font-bold">{detail.name}</h2>
-                  <p className="">Email: {detail.instructor_email}</p>
-                  <p className="">Available Seats: {detail.available_seat}</p>
-                  <p className="">Price: ${detail.price}</p>
-                  <p className="badge badge-warning mb-5">
-                    Status: {detail.status}
-                  </p>
-                  <Link
-                    to={`/dashboard/myClasses/${detail._id}`}
-                    className="btn btn-success"
-                  >
-                    update class info
-                  </Link>
-                </div>
+      {myClassData && myClassData.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 justify-items-center gap-3">
+          {myClassData.map((detail) => (
+            <div
+              className="card w-96 bg-[#2C72E5] text-neutral-content"
+              key={detail._id}
+            >
+              <div className="card-body">
+                <h2 className="card-title font-bold">{detail.name}</h2>
+                <p className="">Email: {detail.instructor_email}</p>
+                <p className="">Available Seats: {detail.available_seat}</p>
+                <p className="">Price: ${detail.price}</p>
+                <p className="badge badge-warning mb-5">
+                  Status: {detail.status}
+                </p>
+                <Link
+                  to={`/dashboard/myClasses/${detail._id}`}
+                  className="btn btn-success"
+                >
+                  update class info
+                </Link>
               </div>
-            ))
-          : "p"}
-      </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="py-10 mx-auto text-center bg-gray-100 rounded-lg pb-5 px-5">
+          <p className="text-xl font-bold mb-5">
+            You don&apos;t add any class yet. Add class first, go to -
+          </p>
+          <Link className="btn btn-primary" to={"/dashboard/addClass"}>
+            Add New Class
+          </Link>
+        </div>
+      )}
 
       {/* <div className="overflow-x-auto">
         {myClassData && myClassData.length > 0 ? (

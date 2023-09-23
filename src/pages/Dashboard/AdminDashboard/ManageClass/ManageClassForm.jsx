@@ -5,6 +5,7 @@ const ManageClassForm = ({
   classDetails,
   handleApproved,
   handleDenyRequest,
+  handleDelete,
   // handleFeedback,
 }) => {
   // todo handle feedback
@@ -93,6 +94,17 @@ const ManageClassForm = ({
             </div>
           </div>
         </div>
+        {classDetails.status === "pending" ||
+        classDetails.status === "denied" ? (
+          <button
+            onClick={() => handleDelete(_id)}
+            className="btn btn-neutral text-white"
+          >
+            Delete Class
+          </button>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
